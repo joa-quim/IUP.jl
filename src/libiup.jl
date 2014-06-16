@@ -5,17 +5,19 @@
 
 
 function IupVbox(c1::Ptr{Ihandle}, c2=C_NULL, c3=C_NULL, c4=C_NULL, c5=C_NULL, c6=C_NULL, c7=C_NULL, c8=C_NULL, c9=C_NULL,
-		c10=C_NULL, c11=C_NULL, c12=C_NULL, c13=C_NULL)
+		c10=C_NULL, c11=C_NULL, c12=C_NULL, c13=C_NULL, c14=C_NULL, c15=C_NULL)
 	ccall((:IupVbox, iup), Ptr{Ihandle}, (Ptr{Ihandle}, Ptr{Ihandle}, Ptr{Ihandle}, Ptr{Ihandle}, Ptr{Ihandle},
-		Ptr{Ihandle}, Ptr{Ihandle}, Ptr{Ihandle}, Ptr{Ihandle}, Ptr{Ihandle}, Ptr{Ihandle}, Ptr{Ihandle}, Ptr{Ihandle}),
-		c1, c2, c3, c4, c5, c6, c7, c8, c9, c10, c11, c12, c13)
+		Ptr{Ihandle}, Ptr{Ihandle}, Ptr{Ihandle}, Ptr{Ihandle}, Ptr{Ihandle}, Ptr{Ihandle}, Ptr{Ihandle},
+		Ptr{Ihandle}, Ptr{Ihandle}, Ptr{Ihandle}),
+		c1, c2, c3, c4, c5, c6, c7, c8, c9, c10, c11, c12, c13, c14, c15)
 end
 
 function IupHbox(c1::Ptr{Ihandle}, c2=C_NULL, c3=C_NULL, c4=C_NULL, c5=C_NULL, c6=C_NULL, c7=C_NULL, c8=C_NULL, c9=C_NULL,
-		c10=C_NULL, c11=C_NULL, c12=C_NULL, c13=C_NULL)
+		c10=C_NULL, c11=C_NULL, c12=C_NULL, c13=C_NULL, c14=C_NULL, c15=C_NULL)
 	ccall((:IupHbox, iup), Ptr{Ihandle}, (Ptr{Ihandle}, Ptr{Ihandle}, Ptr{Ihandle}, Ptr{Ihandle}, Ptr{Ihandle},
-		Ptr{Ihandle}, Ptr{Ihandle}, Ptr{Ihandle}, Ptr{Ihandle}, Ptr{Ihandle}, Ptr{Ihandle}, Ptr{Ihandle}, Ptr{Ihandle}),
-		c1, c2, c3, c4, c5, c6, c7, c8, c9, c10, c11, c12, c13)
+		Ptr{Ihandle}, Ptr{Ihandle}, Ptr{Ihandle}, Ptr{Ihandle}, Ptr{Ihandle}, Ptr{Ihandle}, Ptr{Ihandle},
+		Ptr{Ihandle}, Ptr{Ihandle}, Ptr{Ihandle}),
+		c1, c2, c3, c4, c5, c6, c7, c8, c9, c10, c11, c12, c13, c14, c15)
 end
 
 function IupCbox(c1=C_NULL, c2=C_NULL, c3=C_NULL, c4=C_NULL, c5=C_NULL, c6=C_NULL, c7=C_NULL, c8=C_NULL, c9=C_NULL,
@@ -26,10 +28,11 @@ function IupCbox(c1=C_NULL, c2=C_NULL, c3=C_NULL, c4=C_NULL, c5=C_NULL, c6=C_NUL
 end
 
 function IupMenu(c1::Ptr{Ihandle}, c2=C_NULL, c3=C_NULL, c4=C_NULL, c5=C_NULL, c6=C_NULL, c7=C_NULL, c8=C_NULL, c9=C_NULL,
-		c10=C_NULL, c11=C_NULL, c12=C_NULL, c13=C_NULL)
+		c10=C_NULL, c11=C_NULL, c12=C_NULL, c13=C_NULL, c14=C_NULL, c15=C_NULL)
 	ccall((:IupMenu, iup), Ptr{Ihandle}, (Ptr{Ihandle}, Ptr{Ihandle}, Ptr{Ihandle}, Ptr{Ihandle}, Ptr{Ihandle},
-		Ptr{Ihandle}, Ptr{Ihandle}, Ptr{Ihandle}, Ptr{Ihandle}, Ptr{Ihandle}, Ptr{Ihandle}, Ptr{Ihandle}, Ptr{Ihandle}),
-		c1, c2, c3, c4, c5, c6, c7, c8, c9, c10, c11, c12, c13)
+		Ptr{Ihandle}, Ptr{Ihandle}, Ptr{Ihandle}, Ptr{Ihandle}, Ptr{Ihandle}, Ptr{Ihandle}, Ptr{Ihandle},
+		Ptr{Ihandle}, Ptr{Ihandle}, Ptr{Ihandle}),
+		c1, c2, c3, c4, c5, c6, c7, c8, c9, c10, c11, c12, c13, c14, c15)
 end
 
 function IupGridBox(c1::Ptr{Ihandle}, c2=C_NULL, c3=C_NULL, c4=C_NULL, c5=C_NULL, c6=C_NULL, c7=C_NULL, c8=C_NULL, c9=C_NULL,
@@ -208,7 +211,7 @@ end
 function IupGetAttributes(ih::Ptr{Ihandle})
   ccall( (:IupGetAttributes, iup), Ptr{Uint8}, (Ptr{Ihandle},), ih)
 end
-function IupSetAttribute(ih::Ptr{Ihandle}, name::String, value::String="")
+function IupSetAttribute(ih::Ptr{Ihandle}, name::String, value=C_NULL)
 	ccall((:IupSetAttribute, iup), None, (Ptr{Ihandle}, Ptr{Uint8}, Ptr{Uint8}), ih, name, value)
 end
 function IupSetStrAttribute(ih::Ptr{Ihandle}, name::String, value::String)
