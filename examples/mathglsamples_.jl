@@ -9,8 +9,8 @@ export
 	mathglsamples
 
 include("../src/libiup_h.jl")
-include("../src/im_h.jl")
-include("../src/im.jl")
+include("../src/libim_h.jl")
+include("../src/libim.jl")
 include("../src/im_image_h.jl")
 include("../src/im_image.jl")
 include("../src/im_convert_h.jl")
