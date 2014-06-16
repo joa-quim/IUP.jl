@@ -4,13 +4,13 @@
 @windows? (const libim_image_ = "im") : (const libim_image_ = "libim")  # Name of IM shared lib.
 
 
-function imImageCreate(width::Cint, height::Cint, color_space::Cint, data_type::Cint)
+function imImageCreate(width::Int, height::Int, color_space::Int, data_type::Int)
   ccall( (:imImageCreate, libim_image_), Ptr{imImage}, (Cint, Cint, Cint, Cint), width, height, color_space, data_type)
 end
-function imImageInit(width::Cint, height::Cint, color_mode::Cint, data_type::Cint, data_buffer::Ptr{None}, palette::Ptr{Clong}, palette_count::Cint)
+function imImageInit(width::Int, height::Int, color_mode::Int, data_type::Int, data_buffer::Ptr{None}, palette::Ptr{Clong}, palette_count::Int)
   ccall( (:imImageInit, libim_image_), Ptr{imImage}, (Cint, Cint, Cint, Cint, Ptr{None}, Ptr{Clong}, Cint), width, height, color_mode, data_type, data_buffer, palette, palette_count)
 end
-function imImageCreateBased(image::Ptr{imImage}, width::Cint, height::Cint, color_space::Cint, data_type::Cint)
+function imImageCreateBased(image::Ptr{imImage}, width::Int, height::Int, color_space::Int, data_type::Int)
   ccall( (:imImageCreateBased, libim_image_), Ptr{imImage}, (Ptr{imImage}, Cint, Cint, Cint, Cint), image, width, height, color_space, data_type)
 end
 function imImageDestroy(image::Ptr{imImage})
@@ -25,7 +25,7 @@ end
 function imImageRemoveAlpha(image::Ptr{imImage})
   ccall( (:imImageRemoveAlpha, libim_image_), None, (Ptr{imImage},), image)
 end
-function imImageReshape(image::Ptr{imImage}, width::Cint, height::Cint)
+function imImageReshape(image::Ptr{imImage}, width::Int, height::Int)
   ccall( (:imImageReshape, libim_image_), None, (Ptr{imImage}, Cint, Cint), image, width, height)
 end
 function imImageCopy(src_image::Ptr{imImage}, dst_image::Ptr{imImage})
@@ -40,7 +40,7 @@ end
 function imImageMergeAttributes(src_image::Ptr{imImage}, dst_image::Ptr{imImage})
   ccall( (:imImageMergeAttributes, libim_image_), None, (Ptr{imImage}, Ptr{imImage}), src_image, dst_image)
 end
-function imImageCopyPlane(src_image::Ptr{imImage}, src_plane::Cint, dst_image::Ptr{imImage}, dst_plane::Cint)
+function imImageCopyPlane(src_image::Ptr{imImage}, src_plane::Int, dst_image::Ptr{imImage}, dst_plane::Int)
   ccall( (:imImageCopyPlane, libim_image_), None, (Ptr{imImage}, Cint, Ptr{imImage}, Cint), src_image, src_plane, dst_image, dst_plane)
 end
 function imImageDuplicate(image::Ptr{imImage})
@@ -49,7 +49,7 @@ end
 function imImageClone(image::Ptr{imImage})
   ccall( (:imImageClone, libim_image_), Ptr{imImage}, (Ptr{imImage},), image)
 end
-function imImageSetAttribute(image::Ptr{imImage}, attrib::String, data_type::Cint, count::Cint, data::Ptr{None})
+function imImageSetAttribute(image::Ptr{imImage}, attrib::String, data_type::Int, count::Int, data::Ptr{None})
   ccall( (:imImageSetAttribute, libim_image_), None, (Ptr{imImage}, Ptr{Uint8}, Cint, Cint, Ptr{None}), image, attrib, data_type, count, data)
 end
 function imImageGetAttribute(image::Ptr{imImage}, attrib::String, data_type::Ptr{Cint}, count::Ptr{Cint})
@@ -64,7 +64,7 @@ end
 function imImageIsBitmap(image::Ptr{imImage})
   ccall( (:imImageIsBitmap, libim_image_), Cint, (Ptr{imImage},), image)
 end
-function imImageSetPalette(image::Ptr{imImage}, palette::Ptr{Clong}, palette_count::Cint)
+function imImageSetPalette(image::Ptr{imImage}, palette::Ptr{Clong}, palette_count::Int)
   ccall( (:imImageSetPalette, libim_image_), None, (Ptr{imImage}, Ptr{Clong}, Cint), image, palette, palette_count)
 end
 function imImageMatchSize(image1::Ptr{imImage}, image2::Ptr{imImage})
@@ -97,31 +97,31 @@ end
 function imImageMakeGray(image::Ptr{imImage})
   ccall( (:imImageMakeGray, libim_image_), None, (Ptr{imImage},), image)
 end
-function imFileLoadImage(ifile::Ptr{Cint}, index::Cint, error::Ptr{Cint})
+function imFileLoadImage(ifile::Ptr{Cint}, index::Int, error::Ptr{Cint})
   ccall( (:imFileLoadImage, libim_image_), Ptr{imImage}, (Ptr{Cint}, Cint, Ptr{Cint}), ifile, index, error)
 end
-function imFileLoadImageFrame(ifile::Ptr{Cint}, index::Cint, image::Ptr{imImage}, error::Ptr{Cint})
+function imFileLoadImageFrame(ifile::Ptr{Cint}, index::Int, image::Ptr{imImage}, error::Ptr{Cint})
   ccall( (:imFileLoadImageFrame, libim_image_), None, (Ptr{Cint}, Cint, Ptr{imImage}, Ptr{Cint}), ifile, index, image, error)
 end
-function imFileLoadBitmap(ifile::Ptr{Cint}, index::Cint, error::Ptr{Cint})
+function imFileLoadBitmap(ifile::Ptr{Cint}, index::Int, error::Ptr{Cint})
   ccall( (:imFileLoadBitmap, libim_image_), Ptr{imImage}, (Ptr{Cint}, Cint, Ptr{Cint}), ifile, index, error)
 end
-function imFileLoadImageRegion(ifile::Ptr{Cint}, index::Cint, bitmap::Cint, error::Ptr{Cint}, xmin::Cint, xmax::Cint, ymin::Cint, ymax::Cint, width::Cint, height::Cint)
+function imFileLoadImageRegion(ifile::Ptr{Cint}, index::Int, bitmap::Int, error::Ptr{Cint}, xmin::Int, xmax::Int, ymin::Int, ymax::Int, width::Int, height::Int)
   ccall( (:imFileLoadImageRegion, libim_image_), Ptr{imImage}, (Ptr{Cint}, Cint, Cint, Ptr{Cint}, Cint, Cint, Cint, Cint, Cint, Cint), ifile, index, bitmap, error, xmin, xmax, ymin, ymax, width, height)
 end
-function imFileLoadBitmapFrame(ifile::Ptr{Cint}, index::Cint, image::Ptr{imImage}, error::Ptr{Cint})
+function imFileLoadBitmapFrame(ifile::Ptr{Cint}, index::Int, image::Ptr{imImage}, error::Ptr{Cint})
   ccall( (:imFileLoadBitmapFrame, libim_image_), None, (Ptr{Cint}, Cint, Ptr{imImage}, Ptr{Cint}), ifile, index, image, error)
 end
 function imFileSaveImage(ifile::Ptr{Cint}, image::Ptr{imImage})
   ccall( (:imFileSaveImage, libim_image_), Cint, (Ptr{Cint}, Ptr{imImage}), ifile, image)
 end
-function imFileImageLoad(file_name::String, index::Cint, error::Ptr{Cint})
+function imFileImageLoad(file_name::String, index::Int, error::Ptr{Cint})
   ccall( (:imFileImageLoad, libim_image_), Ptr{imImage}, (Ptr{Uint8}, Cint, Ptr{Cint}), file_name, index, error)
 end
-function imFileImageLoadBitmap(file_name::String, index::Cint, error::Ptr{Cint})
+function imFileImageLoadBitmap(file_name::String, index::Int, error::Ptr{Cint})
   ccall( (:imFileImageLoadBitmap, libim_image_), Ptr{imImage}, (Ptr{Uint8}, Cint, Ptr{Cint}), file_name, index, error)
 end
-function imFileImageLoadRegion(file_name::String, index::Cint, bitmap::Cint, error::Ptr{Cint}, xmin::Cint, xmax::Cint, ymin::Cint, ymax::Cint, width::Cint, height::Cint)
+function imFileImageLoadRegion(file_name::String, index::Int, bitmap::Int, error::Ptr{Cint}, xmin::Int, xmax::Int, ymin::Int, ymax::Int, width::Int, height::Int)
   ccall( (:imFileImageLoadRegion, libim_image_), Ptr{imImage}, (Ptr{Uint8}, Cint, Cint, Ptr{Cint}, Cint, Cint, Cint, Cint, Cint, Cint), file_name, index, bitmap, error, xmin, xmax, ymin, ymax, width, height)
 end
 function imFileImageSave(file_name::String, format::String, image::Ptr{imImage})

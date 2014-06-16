@@ -16,7 +16,7 @@ end
 function imFileClose(ifile::Ptr{imFile})
   ccall( (:imFileClose, libim_), None, (Ptr{imFile},), ifile)
 end
-function imFileHandle(ifile::Ptr{imFile}, index::Cint)
+function imFileHandle(ifile::Ptr{imFile}, index::Int)
   ccall( (:imFileHandle, libim_), Ptr{None}, (Ptr{imFile}, Cint), ifile, index)
 end
 function imFileGetInfo(ifile::Ptr{imFile}, format::String, compression::String, image_count::Ptr{Cint})
@@ -25,7 +25,7 @@ end
 function imFileSetInfo(ifile::Ptr{imFile}, compression::String)
   ccall( (:imFileSetInfo, libim_), None, (Ptr{imFile}, Ptr{Uint8}), ifile, compression)
 end
-function imFileSetAttribute(ifile::Ptr{imFile}, attrib::String, data_type::Cint, count::Cint, data::Ptr{None})
+function imFileSetAttribute(ifile::Ptr{imFile}, attrib::String, data_type::Int, count::Int, data::Ptr{None})
   ccall( (:imFileSetAttribute, libim_), None, (Ptr{imFile}, Ptr{Uint8}, Cint, Cint, Ptr{None}), ifile, attrib, data_type, count, data)
 end
 function imFileGetAttribute(ifile::Ptr{imFile}, attrib::String, data_type::Ptr{Cint}, count::Ptr{Cint})
@@ -37,16 +37,16 @@ end
 function imFileGetPalette(ifile::Ptr{imFile}, palette::Ptr{Clong}, palette_count::Ptr{Cint})
   ccall( (:imFileGetPalette, libim_), None, (Ptr{imFile}, Ptr{Clong}, Ptr{Cint}), ifile, palette, palette_count)
 end
-function imFileSetPalette(ifile::Ptr{imFile}, palette::Ptr{Clong}, palette_count::Cint)
+function imFileSetPalette(ifile::Ptr{imFile}, palette::Ptr{Clong}, palette_count::Int)
   ccall( (:imFileSetPalette, libim_), None, (Ptr{imFile}, Ptr{Clong}, Cint), ifile, palette, palette_count)
 end
-function imFileReadImageInfo(ifile::Ptr{imFile}, index::Cint, width::Ptr{Cint}, height::Ptr{Cint}, file_color_mode::Ptr{Cint}, file_data_type::Ptr{Cint})
+function imFileReadImageInfo(ifile::Ptr{imFile}, index::Int, width::Ptr{Cint}, height::Ptr{Cint}, file_color_mode::Ptr{Cint}, file_data_type::Ptr{Cint})
   ccall( (:imFileReadImageInfo, libim_), Cint, (Ptr{imFile}, Cint, Ptr{Cint}, Ptr{Cint}, Ptr{Cint}, Ptr{Cint}), ifile, index, width, height, file_color_mode, file_data_type)
 end
-function imFileWriteImageInfo(ifile::Ptr{imFile}, width::Cint, height::Cint, user_color_mode::Cint, user_data_type::Cint)
+function imFileWriteImageInfo(ifile::Ptr{imFile}, width::Int, height::Int, user_color_mode::Int, user_data_type::Int)
   ccall( (:imFileWriteImageInfo, libim_), Cint, (Ptr{imFile}, Cint, Cint, Cint, Cint), ifile, width, height, user_color_mode, user_data_type)
 end
-function imFileReadImageData(ifile::Ptr{imFile}, data::Ptr{None}, convert2bitmap::Cint, color_mode_flags::Cint)
+function imFileReadImageData(ifile::Ptr{imFile}, data::Ptr{None}, convert2bitmap::Int, color_mode_flags::Int)
   ccall( (:imFileReadImageData, libim_), Cint, (Ptr{imFile}, Ptr{None}, Cint, Cint), ifile, data, convert2bitmap, color_mode_flags)
 end
 function imFileWriteImageData(ifile::Ptr{imFile}, data::Ptr{None})
@@ -67,10 +67,10 @@ end
 function imFormatInfoExtra(format::String, extra::String)
   ccall( (:imFormatInfoExtra, libim_), Cint, (Ptr{Uint8}, Ptr{Uint8}), format, extra)
 end
-function imFormatCompressions(format::String, comp::Ptr{Ptr{Uint8}}, comp_count::Ptr{Cint}, color_mode::Cint, data_type::Cint)
+function imFormatCompressions(format::String, comp::Ptr{Ptr{Uint8}}, comp_count::Ptr{Cint}, color_mode::Int, data_type::Int)
   ccall( (:imFormatCompressions, libim_), Cint, (Ptr{Uint8}, Ptr{Ptr{Uint8}}, Ptr{Cint}, Cint, Cint), format, comp, comp_count, color_mode, data_type)
 end
-function imFormatCanWriteImage(format::String, compression::String, color_mode::Cint, data_type::Cint)
+function imFormatCanWriteImage(format::String, compression::String, color_mode::Int, data_type::Int)
   ccall( (:imFormatCanWriteImage, libim_), Cint, (Ptr{Uint8}, Ptr{Uint8}, Cint, Cint), format, compression, color_mode, data_type)
 end
 function imEncodeColor(red::Cuchar, green::Cuchar, blue::Cuchar)
@@ -88,34 +88,34 @@ end
 function imLoadRGB(filename::String, red::Ptr{Cuchar}, green::Ptr{Cuchar}, blue::Ptr{Cuchar})
   ccall( (:imLoadRGB, libim_), Cint, (Ptr{Uint8}, Ptr{Cuchar}, Ptr{Cuchar}, Ptr{Cuchar}), filename, red, green, blue)
 end
-function imSaveRGB(width::Cint, height::Cint, format::Cint, red::Ptr{Cuchar}, green::Ptr{Cuchar}, blue::Ptr{Cuchar}, filename::String)
+function imSaveRGB(width::Int, height::Int, format::Int, red::Ptr{Cuchar}, green::Ptr{Cuchar}, blue::Ptr{Cuchar}, filename::String)
   ccall( (:imSaveRGB, libim_), Cint, (Cint, Cint, Cint, Ptr{Cuchar}, Ptr{Cuchar}, Ptr{Cuchar}, Ptr{Uint8}), width, height, format, red, green, blue, filename)
 end
 function imLoadMap(filename::String, map::Ptr{Cuchar}, palette::Ptr{Clong})
   ccall( (:imLoadMap, libim_), Cint, (Ptr{Uint8}, Ptr{Cuchar}, Ptr{Clong}), filename, map, palette)
 end
-function imSaveMap(width::Cint, height::Cint, format::Cint, map::Ptr{Cuchar}, palette_count::Cint, palette::Ptr{Clong}, filename::String)
+function imSaveMap(width::Int, height::Int, format::Int, map::Ptr{Cuchar}, palette_count::Int, palette::Ptr{Clong}, filename::String)
   ccall( (:imSaveMap, libim_), Cint, (Cint, Cint, Cint, Ptr{Cuchar}, Cint, Ptr{Clong}, Ptr{Uint8}), width, height, format, map, palette_count, palette, filename)
 end
-function imRGB2Map(width::Cint, height::Cint, red::Ptr{Cuchar}, green::Ptr{Cuchar}, blue::Ptr{Cuchar}, map::Ptr{Cuchar}, palette_count::Cint, palette::Ptr{Clong})
+function imRGB2Map(width::Int, height::Int, red::Ptr{Cuchar}, green::Ptr{Cuchar}, blue::Ptr{Cuchar}, map::Ptr{Cuchar}, palette_count::Int, palette::Ptr{Clong})
   ccall( (:imRGB2Map, libim_), None, (Cint, Cint, Ptr{Cuchar}, Ptr{Cuchar}, Ptr{Cuchar}, Ptr{Cuchar}, Cint, Ptr{Clong}), width, height, red, green, blue, map, palette_count, palette)
 end
-function imMap2RGB(width::Cint, height::Cint, map::Ptr{Cuchar}, palette_count::Cint, colors::Ptr{Clong}, red::Ptr{Cuchar}, green::Ptr{Cuchar}, blue::Ptr{Cuchar})
+function imMap2RGB(width::Int, height::Int, map::Ptr{Cuchar}, palette_count::Int, colors::Ptr{Clong}, red::Ptr{Cuchar}, green::Ptr{Cuchar}, blue::Ptr{Cuchar})
   ccall( (:imMap2RGB, libim_), None, (Cint, Cint, Ptr{Cuchar}, Cint, Ptr{Clong}, Ptr{Cuchar}, Ptr{Cuchar}, Ptr{Cuchar}), width, height, map, palette_count, colors, red, green, blue)
 end
-function imRGB2Gray(width::Cint, height::Cint, red::Ptr{Cuchar}, green::Ptr{Cuchar}, blue::Ptr{Cuchar}, map::Ptr{Cuchar}, grays::Ptr{Clong})
+function imRGB2Gray(width::Int, height::Int, red::Ptr{Cuchar}, green::Ptr{Cuchar}, blue::Ptr{Cuchar}, map::Ptr{Cuchar}, grays::Ptr{Clong})
   ccall( (:imRGB2Gray, libim_), None, (Cint, Cint, Ptr{Cuchar}, Ptr{Cuchar}, Ptr{Cuchar}, Ptr{Cuchar}, Ptr{Clong}), width, height, red, green, blue, map, grays)
 end
-function imMap2Gray(width::Cint, height::Cint, map::Ptr{Cuchar}, palette_count::Cint, colors::Ptr{Clong}, grey_map::Ptr{Cuchar}, grays::Ptr{Clong})
+function imMap2Gray(width::Int, height::Int, map::Ptr{Cuchar}, palette_count::Int, colors::Ptr{Clong}, grey_map::Ptr{Cuchar}, grays::Ptr{Clong})
   ccall( (:imMap2Gray, libim_), None, (Cint, Cint, Ptr{Cuchar}, Cint, Ptr{Clong}, Ptr{Cuchar}, Ptr{Clong}), width, height, map, palette_count, colors, grey_map, grays)
 end
-function imResize(src_width::Cint, src_height::Cint, src_map::Ptr{Cuchar}, dst_width::Cint, dst_height::Cint, dst_map::Ptr{Cuchar})
+function imResize(src_width::Int, src_height::Int, src_map::Ptr{Cuchar}, dst_width::Int, dst_height::Int, dst_map::Ptr{Cuchar})
   ccall( (:imResize, libim_), None, (Cint, Cint, Ptr{Cuchar}, Cint, Cint, Ptr{Cuchar}), src_width, src_height, src_map, dst_width, dst_height, dst_map)
 end
-function imStretch(src_width::Cint, src_height::Cint, src_map::Ptr{Cuchar}, dst_width::Cint, dst_height::Cint, dst_map::Ptr{Cuchar})
+function imStretch(src_width::Int, src_height::Int, src_map::Ptr{Cuchar}, dst_width::Int, dst_height::Int, dst_map::Ptr{Cuchar})
   ccall( (:imStretch, libim_), None, (Cint, Cint, Ptr{Cuchar}, Cint, Cint, Ptr{Cuchar}), src_width, src_height, src_map, dst_width, dst_height, dst_map)
 end
-function imRegisterCallback(cb::imCallback, cb_id::Cint, format::Cint)
+function imRegisterCallback(cb::imCallback, cb_id::Int, format::Int)
   ccall( (:imRegisterCallback, libim_), Cint, (imCallback, Cint, Cint), cb, cb_id, format)
 end
 
