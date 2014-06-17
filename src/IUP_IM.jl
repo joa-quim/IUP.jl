@@ -138,11 +138,14 @@ export
 	IM_COMPRESSED,
 	IM_RES_NONE,
 	IM_RES_DPI,
-	IM_RES_DPC
+	IM_RES_DPC,
+	# From im_image_h.jl
+	imImage	# A composite type
 
 include("libim_h.jl")
 include("libim.jl")
 include("im_image_h.jl")
 include("im_image.jl")
+
 
 end  # module
