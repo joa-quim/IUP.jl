@@ -332,12 +332,17 @@ export
 	wdVectorCharSize,
 	wdVectorText,
 	wdMultiLineVectorText,
-	wdGetVectorTextBound
+	wdGetVectorTextBound,
+	#
+	# From cdiup.jl
+	#
+	cdContextIup
 
 
 include("libcd_h.jl")
 include("libcd.jl")
-include("libwd_h.jl")
-include("libwd.jl")
+include("cdiup.jl")
+include("wd_h.jl")
+include("wd.jl")
 
 end  # module
