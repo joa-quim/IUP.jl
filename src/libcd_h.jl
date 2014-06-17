@@ -10,6 +10,13 @@ const CD_VERSION_DATE = "2013/11/22"
 # Skipping MacroDefinition: cdRed(_)(unsignedchar)(((_)>>16)&0xFF)
 # Skipping MacroDefinition: cdGreen(_)(unsignedchar)(((_)>>8)&0xFF)
 # Skipping MacroDefinition: cdBlue(_)(unsignedchar)(((_)>>0)&0xFF)
+# begin enum ANONYMOUS_19
+const CD_PLAIN = 0
+const CD_BOLD = 1
+const CD_ITALIC = 2
+const CD_UNDERLINE = 4
+const CD_STRIKEOUT = 8
+# end enum ANONYMOUS_19
 const CD_QUERY = -1
 const CD_POLYCUSTOM = 10
 const CD_BOLD_ITALIC = (CD_BOLD|CD_ITALIC)
@@ -86,12 +93,31 @@ const CD_DEG2RAD = 0.01745329252
 # Skipping MacroDefinition: cdPutImageRGBA(iw,ih,r,g,b,a,x,y,w,h)cdPutImageRectRGBA((iw),(ih),(r),(g),(b),(a),(x),(y),(w),(h),0,0,0,0)
 # Skipping MacroDefinition: cdPutImageMap(iw,ih,index,colors,x,y,w,h)cdPutImageRectMap((iw),(ih),(index),(colors),(x),(y),(w),(h),0,0,0,0)
 # Skipping MacroDefinition: cdPutImage(image,x,y)cdPutImageRect((image),(x),(y),0,0,0,0)
+# begin enum ANONYMOUS_4
+const CD_CLIPOFF = 0
+const CD_CLIPAREA = 1
+const CD_CLIPPOLYGON = 2
+const CD_CLIPREGION = 3
+# end enum ANONYMOUS_4
+# begin enum ANONYMOUS_18
+const CD_NORTH = 0
+const CD_SOUTH = 1
+const CD_EAST = 2
+const CD_WEST = 3
+const CD_NORTH_EAST = 4
+const CD_NORTH_WEST = 5
+const CD_SOUTH_EAST = 6
+const CD_SOUTH_WEST = 7
+const CD_CENTER = 8
+const CD_BASE_LEFT = 9
+const CD_BASE_CENTER = 10
+const CD_BASE_RIGHT = 11
+# end enum ANONYMOUS_18
 const CD_CLIPON = CD_CLIPAREA
 const CD_CENTER_BASE = CD_BASE_CENTER
 const CD_LEFT_BASE = CD_BASE_LEFT
 const CD_RIGHT_BASE = CD_BASE_RIGHT
 const CD_ITALIC_BOLD = CD_BOLD_ITALIC
-const cdScrollImage = cdScrollArea
 # Skipping MacroDefinition: cdCanvas2Raster(x,y){(void)x;cdUpdateYAxis(y);}
 typealias cdContext Void
 typealias cdCanvas Void
@@ -111,13 +137,11 @@ type cdBitmap
 end
 typealias cdCallback Ptr{Void}
 # begin enum ANONYMOUS_1
-typealias ANONYMOUS_1 Uint32
 const CD_RGB = 0
 const CD_MAP = 1
 const CD_RGBA = 256
 # end enum ANONYMOUS_1
 # begin enum ANONYMOUS_2
-typealias ANONYMOUS_2 Uint32
 const CD_IRED = 0
 const CD_IGREEN = 1
 const CD_IBLUE = 2
@@ -126,26 +150,16 @@ const CD_INDEX = 4
 const CD_COLORS = 5
 # end enum ANONYMOUS_2
 # begin enum ANONYMOUS_3
-typealias ANONYMOUS_3 Cint
 const CD_ERROR = -1
 const CD_OK = 0
 # end enum ANONYMOUS_3
-# begin enum ANONYMOUS_4
-typealias ANONYMOUS_4 Uint32
-const CD_CLIPOFF = 0
-const CD_CLIPAREA = 1
-const CD_CLIPPOLYGON = 2
-const CD_CLIPREGION = 3
-# end enum ANONYMOUS_4
 # begin enum ANONYMOUS_5
-typealias ANONYMOUS_5 Uint32
 const CD_UNION = 0
 const CD_INTERSECT = 1
 const CD_DIFFERENCE = 2
 const CD_NOTINTERSECT = 3
 # end enum ANONYMOUS_5
 # begin enum ANONYMOUS_6
-typealias ANONYMOUS_6 Uint32
 const CD_FILL = 0
 const CD_OPEN_LINES = 1
 const CD_CLOSED_LINES = 2
@@ -155,7 +169,6 @@ const CD_REGION = 5
 const CD_PATH = 6
 # end enum ANONYMOUS_6
 # begin enum ANONYMOUS_7
-typealias ANONYMOUS_7 Uint32
 const CD_PATH_NEW = 0
 const CD_PATH_MOVETO = 1
 const CD_PATH_LINETO = 2
@@ -168,40 +181,33 @@ const CD_PATH_FILLSTROKE = 8
 const CD_PATH_CLIP = 9
 # end enum ANONYMOUS_7
 # begin enum ANONYMOUS_8
-typealias ANONYMOUS_8 Uint32
 const CD_EVENODD = 0
 const CD_WINDING = 1
 # end enum ANONYMOUS_8
 # begin enum ANONYMOUS_9
-typealias ANONYMOUS_9 Uint32
 const CD_MITER = 0
 const CD_BEVEL = 1
 const CD_ROUND = 2
 # end enum ANONYMOUS_9
 # begin enum ANONYMOUS_10
-typealias ANONYMOUS_10 Uint32
 const CD_CAPFLAT = 0
 const CD_CAPSQUARE = 1
 const CD_CAPROUND = 2
 # end enum ANONYMOUS_10
 # begin enum ANONYMOUS_11
-typealias ANONYMOUS_11 Uint32
 const CD_OPAQUE = 0
 const CD_TRANSPARENT = 1
 # end enum ANONYMOUS_11
 # begin enum ANONYMOUS_12
-typealias ANONYMOUS_12 Uint32
 const CD_REPLACE = 0
 const CD_XOR = 1
 const CD_NOT_XOR = 2
 # end enum ANONYMOUS_12
 # begin enum ANONYMOUS_13
-typealias ANONYMOUS_13 Uint32
 const CD_POLITE = 0
 const CD_FORCE = 1
 # end enum ANONYMOUS_13
 # begin enum ANONYMOUS_14
-typealias ANONYMOUS_14 Uint32
 const CD_CONTINUOUS = 0
 const CD_DASHED = 1
 const CD_DOTTED = 2
@@ -210,7 +216,6 @@ const CD_DASH_DOT_DOT = 4
 const CD_CUSTOM = 5
 # end enum ANONYMOUS_14
 # begin enum ANONYMOUS_15
-typealias ANONYMOUS_15 Uint32
 const CD_PLUS = 0
 const CD_STAR = 1
 const CD_CIRCLE = 2
@@ -222,7 +227,6 @@ const CD_HOLLOW_BOX = 7
 const CD_HOLLOW_DIAMOND = 8
 # end enum ANONYMOUS_15
 # begin enum ANONYMOUS_16
-typealias ANONYMOUS_16 Uint32
 const CD_HORIZONTAL = 0
 const CD_VERTICAL = 1
 const CD_FDIAGONAL = 2
@@ -231,44 +235,18 @@ const CD_CROSS = 4
 const CD_DIAGCROSS = 5
 # end enum ANONYMOUS_16
 # begin enum ANONYMOUS_17
-typealias ANONYMOUS_17 Uint32
 const CD_SOLID = 0
 const CD_HATCH = 1
 const CD_STIPPLE = 2
 const CD_PATTERN = 3
 const CD_HOLLOW = 4
 # end enum ANONYMOUS_17
-# begin enum ANONYMOUS_18
-typealias ANONYMOUS_18 Uint32
-const CD_NORTH = 0
-const CD_SOUTH = 1
-const CD_EAST = 2
-const CD_WEST = 3
-const CD_NORTH_EAST = 4
-const CD_NORTH_WEST = 5
-const CD_SOUTH_EAST = 6
-const CD_SOUTH_WEST = 7
-const CD_CENTER = 8
-const CD_BASE_LEFT = 9
-const CD_BASE_CENTER = 10
-const CD_BASE_RIGHT = 11
-# end enum ANONYMOUS_18
-# begin enum ANONYMOUS_19
-typealias ANONYMOUS_19 Uint32
-const CD_PLAIN = 0
-const CD_BOLD = 1
-const CD_ITALIC = 2
-const CD_UNDERLINE = 4
-const CD_STRIKEOUT = 8
-# end enum ANONYMOUS_19
 # begin enum ANONYMOUS_20
-typealias ANONYMOUS_20 Uint32
 const CD_SMALL = 8
 const CD_STANDARD = 12
 const CD_LARGE = 18
 # end enum ANONYMOUS_20
 # begin enum ANONYMOUS_21
-typealias ANONYMOUS_21 Uint32
 const CD_CTX_WINDOW = 0
 const CD_CTX_DEVICE = 1
 const CD_CTX_IMAGE = 2
@@ -276,7 +254,6 @@ const CD_CTX_FILE = 3
 # end enum ANONYMOUS_21
 typealias cdSizeCB Ptr{Void}
 # begin enum ANONYMOUS_22
-typealias ANONYMOUS_22 Uint32
 const CD_A0 = 0
 const CD_A1 = 1
 const CD_A2 = 2
@@ -287,7 +264,6 @@ const CD_LETTER = 6
 const CD_LEGAL = 7
 # end enum ANONYMOUS_22
 # begin enum ANONYMOUS_23
-typealias ANONYMOUS_23 Uint32
 const CD_SYSTEM = 0
 const CD_COURIER = 1
 const CD_TIMES_ROMAN = 2
