@@ -28,7 +28,7 @@ end
 function cdCanvasDeactivate(canvas::Ptr{cdCanvas})
   ccall( (:cdCanvasDeactivate, libcd_), None, (Ptr{cdCanvas},), canvas)
 end
-function cdUseContextPlus(use::Cint)
+function cdUseContextPlus(use::Integer)
   ccall( (:cdUseContextPlus, libcd_), Cint, (Cint,), use)
 end
 function cdInitContextPlus()
@@ -37,7 +37,7 @@ end
 function cdFinishContextPlus()
   ccall( (:cdFinishContextPlus, libcd_), None, (), )
 end
-function cdContextRegisterCallback(context::Ptr{cdContext}, cb::Cint, func::cdCallback)
+function cdContextRegisterCallback(context::Ptr{cdContext}, cb::Integer, func::cdCallback)
   ccall( (:cdContextRegisterCallback, libcd_), Cint, (Ptr{cdContext}, Cint, cdCallback), context, cb, func)
 end
 function cdContextCaps(context::Ptr{cdContext})
@@ -49,7 +49,7 @@ end
 function cdContextType(context::Ptr{cdContext})
   ccall( (:cdContextType, libcd_), Cint, (Ptr{cdContext},), context)
 end
-function cdCanvasSimulate(canvas::Ptr{cdCanvas}, mode::Cint)
+function cdCanvasSimulate(canvas::Ptr{cdCanvas}, mode::Integer)
   ccall( (:cdCanvasSimulate, libcd_), Cint, (Ptr{cdCanvas}, Cint), canvas, mode)
 end
 function cdCanvasFlush(canvas::Ptr{cdCanvas})
@@ -73,7 +73,7 @@ end
 function cdCanvasGetAttribute(canvas::Ptr{cdCanvas}, name::Ptr{Uint8})
   ccall( (:cdCanvasGetAttribute, libcd_), Ptr{Uint8}, (Ptr{cdCanvas}, Ptr{Uint8}), canvas, name)
 end
-function cdCanvasPlay(canvas::Ptr{cdCanvas}, context::Ptr{cdContext}, xmin::Cint, xmax::Cint, ymin::Cint, ymax::Cint, data::Ptr{None})
+function cdCanvasPlay(canvas::Ptr{cdCanvas}, context::Ptr{cdContext}, xmin::Integer, xmax::Integer, ymin::Integer, ymax::Integer, data::Ptr{None})
   ccall( (:cdCanvasPlay, libcd_), Cint, (Ptr{cdCanvas}, Ptr{cdContext}, Cint, Cint, Cint, Cint, Ptr{None}), canvas, context, xmin, xmax, ymin, ymax, data)
 end
 function cdCanvasGetSize(canvas::Ptr{cdCanvas}, width::Ptr{Cint}, height::Ptr{Cint}, width_mm::Ptr{Cdouble}, height_mm::Ptr{Cdouble})
@@ -85,7 +85,7 @@ end
 function cdfCanvasUpdateYAxis(canvas::Ptr{cdCanvas}, y::Ptr{Cdouble})
   ccall( (:cdfCanvasUpdateYAxis, libcd_), Cdouble, (Ptr{cdCanvas}, Ptr{Cdouble}), canvas, y)
 end
-function cdCanvasInvertYAxis(canvas::Ptr{cdCanvas}, y::Cint)
+function cdCanvasInvertYAxis(canvas::Ptr{cdCanvas}, y::Integer)
   ccall( (:cdCanvasInvertYAxis, libcd_), Cint, (Ptr{cdCanvas}, Cint), canvas, y)
 end
 function cdfCanvasInvertYAxis(canvas::Ptr{cdCanvas}, y::Cdouble)
@@ -94,7 +94,7 @@ end
 function cdCanvasMM2Pixel(canvas::Ptr{cdCanvas}, mm_dx::Cdouble, mm_dy::Cdouble, dx::Ptr{Cint}, dy::Ptr{Cint})
   ccall( (:cdCanvasMM2Pixel, libcd_), None, (Ptr{cdCanvas}, Cdouble, Cdouble, Ptr{Cint}, Ptr{Cint}), canvas, mm_dx, mm_dy, dx, dy)
 end
-function cdCanvasPixel2MM(canvas::Ptr{cdCanvas}, dx::Cint, dy::Cint, mm_dx::Ptr{Cdouble}, mm_dy::Ptr{Cdouble})
+function cdCanvasPixel2MM(canvas::Ptr{cdCanvas}, dx::Integer, dy::Integer, mm_dx::Ptr{Cdouble}, mm_dy::Ptr{Cdouble})
   ccall( (:cdCanvasPixel2MM, libcd_), None, (Ptr{cdCanvas}, Cint, Cint, Ptr{Cdouble}, Ptr{Cdouble}), canvas, dx, dy, mm_dx, mm_dy)
 end
 function cdfCanvasMM2Pixel(canvas::Ptr{cdCanvas}, mm_dx::Cdouble, mm_dy::Cdouble, dx::Ptr{Cdouble}, dy::Ptr{Cdouble})
@@ -103,7 +103,7 @@ end
 function cdfCanvasPixel2MM(canvas::Ptr{cdCanvas}, dx::Cdouble, dy::Cdouble, mm_dx::Ptr{Cdouble}, mm_dy::Ptr{Cdouble})
   ccall( (:cdfCanvasPixel2MM, libcd_), None, (Ptr{cdCanvas}, Cdouble, Cdouble, Ptr{Cdouble}, Ptr{Cdouble}), canvas, dx, dy, mm_dx, mm_dy)
 end
-function cdCanvasOrigin(canvas::Ptr{cdCanvas}, x::Cint, y::Cint)
+function cdCanvasOrigin(canvas::Ptr{cdCanvas}, x::Integer, y::Integer)
   ccall( (:cdCanvasOrigin, libcd_), None, (Ptr{cdCanvas}, Cint, Cint), canvas, x, y)
 end
 function cdfCanvasOrigin(canvas::Ptr{cdCanvas}, x::Cdouble, y::Cdouble)
@@ -133,16 +133,16 @@ end
 function cdCanvasTransformTranslate(canvas::Ptr{cdCanvas}, dx::Cdouble, dy::Cdouble)
   ccall( (:cdCanvasTransformTranslate, libcd_), None, (Ptr{cdCanvas}, Cdouble, Cdouble), canvas, dx, dy)
 end
-function cdCanvasTransformPoint(canvas::Ptr{cdCanvas}, x::Cint, y::Cint, tx::Ptr{Cint}, ty::Ptr{Cint})
+function cdCanvasTransformPoint(canvas::Ptr{cdCanvas}, x::Integer, y::Integer, tx::Ptr{Cint}, ty::Ptr{Cint})
   ccall( (:cdCanvasTransformPoint, libcd_), None, (Ptr{cdCanvas}, Cint, Cint, Ptr{Cint}, Ptr{Cint}), canvas, x, y, tx, ty)
 end
 function cdfCanvasTransformPoint(canvas::Ptr{cdCanvas}, x::Cdouble, y::Cdouble, tx::Ptr{Cdouble}, ty::Ptr{Cdouble})
   ccall( (:cdfCanvasTransformPoint, libcd_), None, (Ptr{cdCanvas}, Cdouble, Cdouble, Ptr{Cdouble}, Ptr{Cdouble}), canvas, x, y, tx, ty)
 end
-function cdCanvasClip(canvas::Ptr{cdCanvas}, mode::Cint)
+function cdCanvasClip(canvas::Ptr{cdCanvas}, mode::Integer)
   ccall( (:cdCanvasClip, libcd_), Cint, (Ptr{cdCanvas}, Cint), canvas, mode)
 end
-function cdCanvasClipArea(canvas::Ptr{cdCanvas}, xmin::Cint, xmax::Cint, ymin::Cint, ymax::Cint)
+function cdCanvasClipArea(canvas::Ptr{cdCanvas}, xmin::Integer, xmax::Integer, ymin::Integer, ymax::Integer)
   ccall( (:cdCanvasClipArea, libcd_), None, (Ptr{cdCanvas}, Cint, Cint, Cint, Cint), canvas, xmin, xmax, ymin, ymax)
 end
 function cdCanvasGetClipArea(canvas::Ptr{cdCanvas}, xmin::Ptr{Cint}, xmax::Ptr{Cint}, ymin::Ptr{Cint}, ymax::Ptr{Cint})
@@ -154,55 +154,55 @@ end
 function cdfCanvasGetClipArea(canvas::Ptr{cdCanvas}, xmin::Ptr{Cdouble}, xmax::Ptr{Cdouble}, ymin::Ptr{Cdouble}, ymax::Ptr{Cdouble})
   ccall( (:cdfCanvasGetClipArea, libcd_), Cint, (Ptr{cdCanvas}, Ptr{Cdouble}, Ptr{Cdouble}, Ptr{Cdouble}, Ptr{Cdouble}), canvas, xmin, xmax, ymin, ymax)
 end
-function cdCanvasIsPointInRegion(canvas::Ptr{cdCanvas}, x::Cint, y::Cint)
+function cdCanvasIsPointInRegion(canvas::Ptr{cdCanvas}, x::Integer, y::Integer)
   ccall( (:cdCanvasIsPointInRegion, libcd_), Cint, (Ptr{cdCanvas}, Cint, Cint), canvas, x, y)
 end
-function cdCanvasOffsetRegion(canvas::Ptr{cdCanvas}, x::Cint, y::Cint)
+function cdCanvasOffsetRegion(canvas::Ptr{cdCanvas}, x::Integer, y::Integer)
   ccall( (:cdCanvasOffsetRegion, libcd_), None, (Ptr{cdCanvas}, Cint, Cint), canvas, x, y)
 end
 function cdCanvasGetRegionBox(canvas::Ptr{cdCanvas}, xmin::Ptr{Cint}, xmax::Ptr{Cint}, ymin::Ptr{Cint}, ymax::Ptr{Cint})
   ccall( (:cdCanvasGetRegionBox, libcd_), None, (Ptr{cdCanvas}, Ptr{Cint}, Ptr{Cint}, Ptr{Cint}, Ptr{Cint}), canvas, xmin, xmax, ymin, ymax)
 end
-function cdCanvasRegionCombineMode(canvas::Ptr{cdCanvas}, mode::Cint)
+function cdCanvasRegionCombineMode(canvas::Ptr{cdCanvas}, mode::Integer)
   ccall( (:cdCanvasRegionCombineMode, libcd_), Cint, (Ptr{cdCanvas}, Cint), canvas, mode)
 end
-function cdCanvasPixel(canvas::Ptr{cdCanvas}, x::Cint, y::Cint, color::Clong)
+function cdCanvasPixel(canvas::Ptr{cdCanvas}, x::Integer, y::Integer, color::Clong)
   ccall( (:cdCanvasPixel, libcd_), None, (Ptr{cdCanvas}, Cint, Cint, Clong), canvas, x, y, color)
 end
-function cdCanvasMark(canvas::Ptr{cdCanvas}, x::Cint, y::Cint)
+function cdCanvasMark(canvas::Ptr{cdCanvas}, x::Integer, y::Integer)
   ccall( (:cdCanvasMark, libcd_), None, (Ptr{cdCanvas}, Cint, Cint), canvas, x, y)
 end
-function cdCanvasBegin(canvas::Ptr{cdCanvas}, mode::Cint)
+function cdCanvasBegin(canvas::Ptr{cdCanvas}, mode::Integer)
   ccall( (:cdCanvasBegin, libcd_), None, (Ptr{cdCanvas}, Cint), canvas, mode)
 end
-function cdCanvasPathSet(canvas::Ptr{cdCanvas}, action::Cint)
+function cdCanvasPathSet(canvas::Ptr{cdCanvas}, action::Integer)
   ccall( (:cdCanvasPathSet, libcd_), None, (Ptr{cdCanvas}, Cint), canvas, action)
 end
 function cdCanvasEnd(canvas::Ptr{cdCanvas})
   ccall( (:cdCanvasEnd, libcd_), None, (Ptr{cdCanvas},), canvas)
 end
-function cdCanvasLine(canvas::Ptr{cdCanvas}, x1::Cint, y1::Cint, x2::Cint, y2::Cint)
+function cdCanvasLine(canvas::Ptr{cdCanvas}, x1::Integer, y1::Integer, x2::Integer, y2::Integer)
   ccall( (:cdCanvasLine, libcd_), None, (Ptr{cdCanvas}, Cint, Cint, Cint, Cint), canvas, x1, y1, x2, y2)
 end
-function cdCanvasVertex(canvas::Ptr{cdCanvas}, x::Cint, y::Cint)
+function cdCanvasVertex(canvas::Ptr{cdCanvas}, x::Integer, y::Integer)
   ccall( (:cdCanvasVertex, libcd_), None, (Ptr{cdCanvas}, Cint, Cint), canvas, x, y)
 end
-function cdCanvasRect(canvas::Ptr{cdCanvas}, xmin::Cint, xmax::Cint, ymin::Cint, ymax::Cint)
+function cdCanvasRect(canvas::Ptr{cdCanvas}, xmin::Integer, xmax::Integer, ymin::Integer, ymax::Integer)
   ccall( (:cdCanvasRect, libcd_), None, (Ptr{cdCanvas}, Cint, Cint, Cint, Cint), canvas, xmin, xmax, ymin, ymax)
 end
-function cdCanvasBox(canvas::Ptr{cdCanvas}, xmin::Cint, xmax::Cint, ymin::Cint, ymax::Cint)
+function cdCanvasBox(canvas::Ptr{cdCanvas}, xmin::Integer, xmax::Integer, ymin::Integer, ymax::Integer)
   ccall( (:cdCanvasBox, libcd_), None, (Ptr{cdCanvas}, Cint, Cint, Cint, Cint), canvas, xmin, xmax, ymin, ymax)
 end
-function cdCanvasArc(canvas::Ptr{cdCanvas}, xc::Cint, yc::Cint, w::Cint, h::Cint, angle1::Cdouble, angle2::Cdouble)
+function cdCanvasArc(canvas::Ptr{cdCanvas}, xc::Integer, yc::Integer, w::Integer, h::Integer, angle1::Cdouble, angle2::Cdouble)
   ccall( (:cdCanvasArc, libcd_), None, (Ptr{cdCanvas}, Cint, Cint, Cint, Cint, Cdouble, Cdouble), canvas, xc, yc, w, h, angle1, angle2)
 end
-function cdCanvasSector(canvas::Ptr{cdCanvas}, xc::Cint, yc::Cint, w::Cint, h::Cint, angle1::Cdouble, angle2::Cdouble)
+function cdCanvasSector(canvas::Ptr{cdCanvas}, xc::Integer, yc::Integer, w::Integer, h::Integer, angle1::Cdouble, angle2::Cdouble)
   ccall( (:cdCanvasSector, libcd_), None, (Ptr{cdCanvas}, Cint, Cint, Cint, Cint, Cdouble, Cdouble), canvas, xc, yc, w, h, angle1, angle2)
 end
-function cdCanvasChord(canvas::Ptr{cdCanvas}, xc::Cint, yc::Cint, w::Cint, h::Cint, angle1::Cdouble, angle2::Cdouble)
+function cdCanvasChord(canvas::Ptr{cdCanvas}, xc::Integer, yc::Integer, w::Integer, h::Integer, angle1::Cdouble, angle2::Cdouble)
   ccall( (:cdCanvasChord, libcd_), None, (Ptr{cdCanvas}, Cint, Cint, Cint, Cint, Cdouble, Cdouble), canvas, xc, yc, w, h, angle1, angle2)
 end
-function cdCanvasText(canvas::Ptr{cdCanvas}, x::Cint, y::Cint, s::Ptr{Uint8})
+function cdCanvasText(canvas::Ptr{cdCanvas}, x::Integer, y::Integer, s::Ptr{Uint8})
   ccall( (:cdCanvasText, libcd_), None, (Ptr{cdCanvas}, Cint, Cint, Ptr{Uint8}), canvas, x, y, s)
 end
 function cdfCanvasLine(canvas::Ptr{cdCanvas}, x1::Cdouble, y1::Cdouble, x2::Cdouble, y2::Cdouble)
@@ -241,49 +241,49 @@ end
 function cdCanvasForeground(canvas::Ptr{cdCanvas}, color::Clong)
   ccall( (:cdCanvasForeground, libcd_), Clong, (Ptr{cdCanvas}, Clong), canvas, color)
 end
-function cdCanvasBackOpacity(canvas::Ptr{cdCanvas}, opacity::Cint)
+function cdCanvasBackOpacity(canvas::Ptr{cdCanvas}, opacity::Integer)
   ccall( (:cdCanvasBackOpacity, libcd_), Cint, (Ptr{cdCanvas}, Cint), canvas, opacity)
 end
-function cdCanvasWriteMode(canvas::Ptr{cdCanvas}, mode::Cint)
+function cdCanvasWriteMode(canvas::Ptr{cdCanvas}, mode::Integer)
   ccall( (:cdCanvasWriteMode, libcd_), Cint, (Ptr{cdCanvas}, Cint), canvas, mode)
 end
-function cdCanvasLineStyle(canvas::Ptr{cdCanvas}, style::Cint)
+function cdCanvasLineStyle(canvas::Ptr{cdCanvas}, style::Integer)
   ccall( (:cdCanvasLineStyle, libcd_), Cint, (Ptr{cdCanvas}, Cint), canvas, style)
 end
-function cdCanvasLineStyleDashes(canvas::Ptr{cdCanvas}, dashes::Ptr{Cint}, count::Cint)
+function cdCanvasLineStyleDashes(canvas::Ptr{cdCanvas}, dashes::Ptr{Cint}, count::Integer)
   ccall( (:cdCanvasLineStyleDashes, libcd_), None, (Ptr{cdCanvas}, Ptr{Cint}, Cint), canvas, dashes, count)
 end
-function cdCanvasLineWidth(canvas::Ptr{cdCanvas}, width::Cint)
+function cdCanvasLineWidth(canvas::Ptr{cdCanvas}, width::Integer)
   ccall( (:cdCanvasLineWidth, libcd_), Cint, (Ptr{cdCanvas}, Cint), canvas, width)
 end
-function cdCanvasLineJoin(canvas::Ptr{cdCanvas}, join::Cint)
+function cdCanvasLineJoin(canvas::Ptr{cdCanvas}, join::Integer)
   ccall( (:cdCanvasLineJoin, libcd_), Cint, (Ptr{cdCanvas}, Cint), canvas, join)
 end
-function cdCanvasLineCap(canvas::Ptr{cdCanvas}, cap::Cint)
+function cdCanvasLineCap(canvas::Ptr{cdCanvas}, cap::Integer)
   ccall( (:cdCanvasLineCap, libcd_), Cint, (Ptr{cdCanvas}, Cint), canvas, cap)
 end
-function cdCanvasInteriorStyle(canvas::Ptr{cdCanvas}, style::Cint)
+function cdCanvasInteriorStyle(canvas::Ptr{cdCanvas}, style::Integer)
   ccall( (:cdCanvasInteriorStyle, libcd_), Cint, (Ptr{cdCanvas}, Cint), canvas, style)
 end
-function cdCanvasHatch(canvas::Ptr{cdCanvas}, style::Cint)
+function cdCanvasHatch(canvas::Ptr{cdCanvas}, style::Integer)
   ccall( (:cdCanvasHatch, libcd_), Cint, (Ptr{cdCanvas}, Cint), canvas, style)
 end
-function cdCanvasStipple(canvas::Ptr{cdCanvas}, w::Cint, h::Cint, stipple::Ptr{Cuchar})
+function cdCanvasStipple(canvas::Ptr{cdCanvas}, w::Integer, h::Integer, stipple::Ptr{Cuchar})
   ccall( (:cdCanvasStipple, libcd_), None, (Ptr{cdCanvas}, Cint, Cint, Ptr{Cuchar}), canvas, w, h, stipple)
 end
 function cdCanvasGetStipple(canvas::Ptr{cdCanvas}, n::Ptr{Cint}, m::Ptr{Cint})
   ccall( (:cdCanvasGetStipple, libcd_), Ptr{Cuchar}, (Ptr{cdCanvas}, Ptr{Cint}, Ptr{Cint}), canvas, n, m)
 end
-function cdCanvasPattern(canvas::Ptr{cdCanvas}, w::Cint, h::Cint, pattern::Ptr{Clong})
+function cdCanvasPattern(canvas::Ptr{cdCanvas}, w::Integer, h::Integer, pattern::Ptr{Clong})
   ccall( (:cdCanvasPattern, libcd_), None, (Ptr{cdCanvas}, Cint, Cint, Ptr{Clong}), canvas, w, h, pattern)
 end
 function cdCanvasGetPattern(canvas::Ptr{cdCanvas}, n::Ptr{Cint}, m::Ptr{Cint})
   ccall( (:cdCanvasGetPattern, libcd_), Ptr{Clong}, (Ptr{cdCanvas}, Ptr{Cint}, Ptr{Cint}), canvas, n, m)
 end
-function cdCanvasFillMode(canvas::Ptr{cdCanvas}, mode::Cint)
+function cdCanvasFillMode(canvas::Ptr{cdCanvas}, mode::Integer)
   ccall( (:cdCanvasFillMode, libcd_), Cint, (Ptr{cdCanvas}, Cint), canvas, mode)
 end
-function cdCanvasFont(canvas::Ptr{cdCanvas}, type_face::Ptr{Uint8}, style::Cint, size::Cint)
+function cdCanvasFont(canvas::Ptr{cdCanvas}, type_face::Ptr{Uint8}, style::Integer, size::Integer)
   ccall( (:cdCanvasFont, libcd_), Cint, (Ptr{cdCanvas}, Ptr{Uint8}, Cint, Cint), canvas, type_face, style, size)
 end
 function cdCanvasGetFont(canvas::Ptr{cdCanvas}, type_face::Ptr{Uint8}, style::Ptr{Cint}, size::Ptr{Cint})
@@ -292,37 +292,37 @@ end
 function cdCanvasNativeFont(canvas::Ptr{cdCanvas}, font::Ptr{Uint8})
   ccall( (:cdCanvasNativeFont, libcd_), Ptr{Uint8}, (Ptr{cdCanvas}, Ptr{Uint8}), canvas, font)
 end
-function cdCanvasTextAlignment(canvas::Ptr{cdCanvas}, alignment::Cint)
+function cdCanvasTextAlignment(canvas::Ptr{cdCanvas}, alignment::Integer)
   ccall( (:cdCanvasTextAlignment, libcd_), Cint, (Ptr{cdCanvas}, Cint), canvas, alignment)
 end
 function cdCanvasTextOrientation(canvas::Ptr{cdCanvas}, angle::Cdouble)
   ccall( (:cdCanvasTextOrientation, libcd_), Cdouble, (Ptr{cdCanvas}, Cdouble), canvas, angle)
 end
-function cdCanvasMarkType(canvas::Ptr{cdCanvas}, _type::Cint)
+function cdCanvasMarkType(canvas::Ptr{cdCanvas}, _type::Integer)
   ccall( (:cdCanvasMarkType, libcd_), Cint, (Ptr{cdCanvas}, Cint), canvas, _type)
 end
-function cdCanvasMarkSize(canvas::Ptr{cdCanvas}, size::Cint)
+function cdCanvasMarkSize(canvas::Ptr{cdCanvas}, size::Integer)
   ccall( (:cdCanvasMarkSize, libcd_), Cint, (Ptr{cdCanvas}, Cint), canvas, size)
 end
-function cdCanvasVectorText(canvas::Ptr{cdCanvas}, x::Cint, y::Cint, s::Ptr{Uint8})
+function cdCanvasVectorText(canvas::Ptr{cdCanvas}, x::Integer, y::Integer, s::Ptr{Uint8})
   ccall( (:cdCanvasVectorText, libcd_), None, (Ptr{cdCanvas}, Cint, Cint, Ptr{Uint8}), canvas, x, y, s)
 end
-function cdCanvasMultiLineVectorText(canvas::Ptr{cdCanvas}, x::Cint, y::Cint, s::Ptr{Uint8})
+function cdCanvasMultiLineVectorText(canvas::Ptr{cdCanvas}, x::Integer, y::Integer, s::Ptr{Uint8})
   ccall( (:cdCanvasMultiLineVectorText, libcd_), None, (Ptr{cdCanvas}, Cint, Cint, Ptr{Uint8}), canvas, x, y, s)
 end
 function cdCanvasVectorFont(canvas::Ptr{cdCanvas}, filename::Ptr{Uint8})
   ccall( (:cdCanvasVectorFont, libcd_), Ptr{Uint8}, (Ptr{cdCanvas}, Ptr{Uint8}), canvas, filename)
 end
-function cdCanvasVectorTextDirection(canvas::Ptr{cdCanvas}, x1::Cint, y1::Cint, x2::Cint, y2::Cint)
+function cdCanvasVectorTextDirection(canvas::Ptr{cdCanvas}, x1::Integer, y1::Integer, x2::Integer, y2::Integer)
   ccall( (:cdCanvasVectorTextDirection, libcd_), None, (Ptr{cdCanvas}, Cint, Cint, Cint, Cint), canvas, x1, y1, x2, y2)
 end
 function cdCanvasVectorTextTransform(canvas::Ptr{cdCanvas}, matrix::Ptr{Cdouble})
   ccall( (:cdCanvasVectorTextTransform, libcd_), Ptr{Cdouble}, (Ptr{cdCanvas}, Ptr{Cdouble}), canvas, matrix)
 end
-function cdCanvasVectorTextSize(canvas::Ptr{cdCanvas}, size_x::Cint, size_y::Cint, s::Ptr{Uint8})
+function cdCanvasVectorTextSize(canvas::Ptr{cdCanvas}, size_x::Integer, size_y::Integer, s::Ptr{Uint8})
   ccall( (:cdCanvasVectorTextSize, libcd_), None, (Ptr{cdCanvas}, Cint, Cint, Ptr{Uint8}), canvas, size_x, size_y, s)
 end
-function cdCanvasVectorCharSize(canvas::Ptr{cdCanvas}, size::Cint)
+function cdCanvasVectorCharSize(canvas::Ptr{cdCanvas}, size::Integer)
   ccall( (:cdCanvasVectorCharSize, libcd_), Cint, (Ptr{cdCanvas}, Cint), canvas, size)
 end
 function cdCanvasVectorFontSize(canvas::Ptr{cdCanvas}, size_x::Cdouble, size_y::Cdouble)
@@ -334,10 +334,10 @@ end
 function cdCanvasGetVectorTextSize(canvas::Ptr{cdCanvas}, s::Ptr{Uint8}, x::Ptr{Cint}, y::Ptr{Cint})
   ccall( (:cdCanvasGetVectorTextSize, libcd_), None, (Ptr{cdCanvas}, Ptr{Uint8}, Ptr{Cint}, Ptr{Cint}), canvas, s, x, y)
 end
-function cdCanvasGetVectorTextBounds(canvas::Ptr{cdCanvas}, s::Ptr{Uint8}, x::Cint, y::Cint, rect::Ptr{Cint})
+function cdCanvasGetVectorTextBounds(canvas::Ptr{cdCanvas}, s::Ptr{Uint8}, x::Integer, y::Integer, rect::Ptr{Cint})
   ccall( (:cdCanvasGetVectorTextBounds, libcd_), None, (Ptr{cdCanvas}, Ptr{Uint8}, Cint, Cint, Ptr{Cint}), canvas, s, x, y, rect)
 end
-function cdCanvasGetVectorTextBox(canvas::Ptr{cdCanvas}, x::Cint, y::Cint, s::Ptr{Uint8}, xmin::Ptr{Cint}, xmax::Ptr{Cint}, ymin::Ptr{Cint}, ymax::Ptr{Cint})
+function cdCanvasGetVectorTextBox(canvas::Ptr{cdCanvas}, x::Integer, y::Integer, s::Ptr{Uint8}, xmin::Ptr{Cint}, xmax::Ptr{Cint}, ymin::Ptr{Cint}, ymax::Ptr{Cint})
   ccall( (:cdCanvasGetVectorTextBox, libcd_), None, (Ptr{cdCanvas}, Cint, Cint, Ptr{Uint8}, Ptr{Cint}, Ptr{Cint}, Ptr{Cint}, Ptr{Cint}), canvas, x, y, s, xmin, xmax, ymin, ymax)
 end
 function cdfCanvasVectorTextDirection(canvas::Ptr{cdCanvas}, x1::Cdouble, y1::Cdouble, x2::Cdouble, y2::Cdouble)
@@ -370,61 +370,67 @@ end
 function cdCanvasGetTextSize(canvas::Ptr{cdCanvas}, s::Ptr{Uint8}, width::Ptr{Cint}, height::Ptr{Cint})
   ccall( (:cdCanvasGetTextSize, libcd_), None, (Ptr{cdCanvas}, Ptr{Uint8}, Ptr{Cint}, Ptr{Cint}), canvas, s, width, height)
 end
-function cdCanvasGetTextBox(canvas::Ptr{cdCanvas}, x::Cint, y::Cint, s::Ptr{Uint8}, xmin::Ptr{Cint}, xmax::Ptr{Cint}, ymin::Ptr{Cint}, ymax::Ptr{Cint})
+function cdCanvasGetTextBox(canvas::Ptr{cdCanvas}, x::Integer, y::Integer, s::Ptr{Uint8}, xmin::Ptr{Cint}, xmax::Ptr{Cint}, ymin::Ptr{Cint}, ymax::Ptr{Cint})
   ccall( (:cdCanvasGetTextBox, libcd_), None, (Ptr{cdCanvas}, Cint, Cint, Ptr{Uint8}, Ptr{Cint}, Ptr{Cint}, Ptr{Cint}, Ptr{Cint}), canvas, x, y, s, xmin, xmax, ymin, ymax)
 end
-function cdCanvasGetTextBounds(canvas::Ptr{cdCanvas}, x::Cint, y::Cint, s::Ptr{Uint8}, rect::Ptr{Cint})
+function cdCanvasGetTextBounds(canvas::Ptr{cdCanvas}, x::Integer, y::Integer, s::Ptr{Uint8}, rect::Ptr{Cint})
   ccall( (:cdCanvasGetTextBounds, libcd_), None, (Ptr{cdCanvas}, Cint, Cint, Ptr{Uint8}, Ptr{Cint}), canvas, x, y, s, rect)
 end
 function cdCanvasGetColorPlanes(canvas::Ptr{cdCanvas})
   ccall( (:cdCanvasGetColorPlanes, libcd_), Cint, (Ptr{cdCanvas},), canvas)
 end
-function cdCanvasPalette(canvas::Ptr{cdCanvas}, n::Cint, palette::Ptr{Clong}, mode::Cint)
+function cdCanvasPalette(canvas::Ptr{cdCanvas}, n::Integer, palette::Ptr{Clong}, mode::Integer)
   ccall( (:cdCanvasPalette, libcd_), None, (Ptr{cdCanvas}, Cint, Ptr{Clong}, Cint), canvas, n, palette, mode)
 end
-function cdCanvasGetImageRGB(canvas::Ptr{cdCanvas}, r::Ptr{Cuchar}, g::Ptr{Cuchar}, b::Ptr{Cuchar}, x::Cint, y::Cint, w::Cint, h::Cint)
+function cdCanvasGetImageRGB(canvas::Ptr{cdCanvas}, r::Ptr{Cuchar}, g::Ptr{Cuchar}, b::Ptr{Cuchar}, x::Integer, y::Integer, w::Integer, h::Integer)
   ccall( (:cdCanvasGetImageRGB, libcd_), None, (Ptr{cdCanvas}, Ptr{Cuchar}, Ptr{Cuchar}, Ptr{Cuchar}, Cint, Cint, Cint, Cint), canvas, r, g, b, x, y, w, h)
 end
-function cdCanvasPutImageRectRGB(canvas::Ptr{cdCanvas}, iw::Cint, ih::Cint, r::Ptr{Cuchar}, g::Ptr{Cuchar}, b::Ptr{Cuchar}, x::Cint, y::Cint, w::Cint, h::Cint, xmin::Cint, xmax::Cint, ymin::Cint, ymax::Cint)
-  ccall( (:cdCanvasPutImageRectRGB, libcd_), None, (Ptr{cdCanvas}, Cint, Cint, Ptr{Cuchar}, Ptr{Cuchar}, Ptr{Cuchar}, Cint, Cint, Cint, Cint, Cint, Cint, Cint, Cint), canvas, iw, ih, r, g, b, x, y, w, h, xmin, xmax, ymin, ymax)
+function cdCanvasPutImageRectRGB(canvas::Ptr{cdCanvas}, iw::Integer, ih::Integer, r::Ptr{Cuchar}, g::Ptr{Cuchar}, b::Ptr{Cuchar},
+		x::Integer, y::Integer, w::Integer, h::Integer, xmin::Integer, xmax::Integer, ymin::Integer, ymax::Integer)
+	ccall( (:cdCanvasPutImageRectRGB, libcd_), None, (Ptr{cdCanvas}, Cint, Cint, Ptr{Cuchar}, Ptr{Cuchar}, Ptr{Cuchar},
+		Cint, Cint, Cint, Cint, Cint, Cint, Cint, Cint), canvas, iw, ih, r, g, b, x, y, w, h, xmin, xmax, ymin, ymax)
 end
-function cdCanvasPutImageRectRGBA(canvas::Ptr{cdCanvas}, iw::Cint, ih::Cint, r::Ptr{Cuchar}, g::Ptr{Cuchar}, b::Ptr{Cuchar}, a::Ptr{Cuchar}, x::Cint, y::Cint, w::Cint, h::Cint, xmin::Cint, xmax::Cint, ymin::Cint, ymax::Cint)
-  ccall( (:cdCanvasPutImageRectRGBA, libcd_), None, (Ptr{cdCanvas}, Cint, Cint, Ptr{Cuchar}, Ptr{Cuchar}, Ptr{Cuchar}, Ptr{Cuchar}, Cint, Cint, Cint, Cint, Cint, Cint, Cint, Cint), canvas, iw, ih, r, g, b, a, x, y, w, h, xmin, xmax, ymin, ymax)
+function cdCanvasPutImageRectRGBA(canvas::Ptr{cdCanvas}, iw::Integer, ih::Integer, r::Ptr{Cuchar}, g::Ptr{Cuchar}, b::Ptr{Cuchar},
+		a::Ptr{Cuchar}, x::Integer, y::Integer, w::Integer, h::Integer, xmin::Integer, xmax::Integer, ymin::Integer, ymax::Integer)
+	ccall( (:cdCanvasPutImageRectRGBA, libcd_), None, (Ptr{cdCanvas}, Cint, Cint, Ptr{Cuchar}, Ptr{Cuchar}, Ptr{Cuchar}, Ptr{Cuchar},
+		Cint, Cint, Cint, Cint, Cint, Cint, Cint, Cint), canvas, iw, ih, r, g, b, a, x, y, w, h, xmin, xmax, ymin, ymax)
 end
-function cdCanvasPutImageRectMap(canvas::Ptr{cdCanvas}, iw::Cint, ih::Cint, index::Ptr{Cuchar}, colors::Ptr{Clong}, x::Cint, y::Cint, w::Cint, h::Cint, xmin::Cint, xmax::Cint, ymin::Cint, ymax::Cint)
-  ccall( (:cdCanvasPutImageRectMap, libcd_), None, (Ptr{cdCanvas}, Cint, Cint, Ptr{Cuchar}, Ptr{Clong}, Cint, Cint, Cint, Cint, Cint, Cint, Cint, Cint), canvas, iw, ih, index, colors, x, y, w, h, xmin, xmax, ymin, ymax)
+function cdCanvasPutImageRectMap(canvas::Ptr{cdCanvas}, iw::Integer, ih::Integer, index::Ptr{Cuchar}, colors::Ptr{Clong}, x::Integer,
+		y::Integer, w::Integer, h::Integer, xmin::Integer, xmax::Integer, ymin::Integer, ymax::Integer)
+	ccall( (:cdCanvasPutImageRectMap, libcd_), None, (Ptr{cdCanvas}, Cint, Cint, Ptr{Cuchar}, Ptr{Clong},
+		Cint, Cint, Cint, Cint, Cint, Cint, Cint, Cint), canvas, iw, ih, index, colors, x, y, w, h, xmin, xmax, ymin, ymax)
 end
-function cdCanvasCreateImage(canvas::Ptr{cdCanvas}, w::Cint, h::Cint)
+function cdCanvasCreateImage(canvas::Ptr{cdCanvas}, w::Integer, h::Integer)
   ccall( (:cdCanvasCreateImage, libcd_), Ptr{cdImage}, (Ptr{cdCanvas}, Cint, Cint), canvas, w, h)
 end
 function cdKillImage(image::Ptr{cdImage})
   ccall( (:cdKillImage, libcd_), None, (Ptr{cdImage},), image)
 end
-function cdCanvasGetImage(canvas::Ptr{cdCanvas}, image::Ptr{cdImage}, x::Cint, y::Cint)
+function cdCanvasGetImage(canvas::Ptr{cdCanvas}, image::Ptr{cdImage}, x::Integer, y::Integer)
   ccall( (:cdCanvasGetImage, libcd_), None, (Ptr{cdCanvas}, Ptr{cdImage}, Cint, Cint), canvas, image, x, y)
 end
-function cdCanvasPutImageRect(canvas::Ptr{cdCanvas}, image::Ptr{cdImage}, x::Cint, y::Cint, xmin::Cint, xmax::Cint, ymin::Cint, ymax::Cint)
+function cdCanvasPutImageRect(canvas::Ptr{cdCanvas}, image::Ptr{cdImage}, x::Integer, y::Integer, xmin::Integer, xmax::Integer, ymin::Integer, ymax::Integer)
   ccall( (:cdCanvasPutImageRect, libcd_), None, (Ptr{cdCanvas}, Ptr{cdImage}, Cint, Cint, Cint, Cint, Cint, Cint), canvas, image, x, y, xmin, xmax, ymin, ymax)
 end
-function cdCanvasScrollArea(canvas::Ptr{cdCanvas}, xmin::Cint, xmax::Cint, ymin::Cint, ymax::Cint, dx::Cint, dy::Cint)
+function cdCanvasScrollArea(canvas::Ptr{cdCanvas}, xmin::Integer, xmax::Integer, ymin::Integer, ymax::Integer, dx::Integer, dy::Integer)
   ccall( (:cdCanvasScrollArea, libcd_), None, (Ptr{cdCanvas}, Cint, Cint, Cint, Cint, Cint, Cint), canvas, xmin, xmax, ymin, ymax, dx, dy)
 end
-function cdCreateBitmap(w::Cint, h::Cint, _type::Cint)
+function cdCreateBitmap(w::Integer, h::Integer, _type::Integer)
   ccall( (:cdCreateBitmap, libcd_), Ptr{cdBitmap}, (Cint, Cint, Cint), w, h, _type)
 end
 function cdKillBitmap(bitmap::Ptr{cdBitmap})
   ccall( (:cdKillBitmap, libcd_), None, (Ptr{cdBitmap},), bitmap)
 end
-function cdBitmapGetData(bitmap::Ptr{cdBitmap}, dataptr::Cint)
+function cdBitmapGetData(bitmap::Ptr{cdBitmap}, dataptr::Integer)
   ccall( (:cdBitmapGetData, libcd_), Ptr{Cuchar}, (Ptr{cdBitmap}, Cint), bitmap, dataptr)
 end
-function cdBitmapSetRect(bitmap::Ptr{cdBitmap}, xmin::Cint, xmax::Cint, ymin::Cint, ymax::Cint)
+function cdBitmapSetRect(bitmap::Ptr{cdBitmap}, xmin::Integer, xmax::Integer, ymin::Integer, ymax::Integer)
   ccall( (:cdBitmapSetRect, libcd_), None, (Ptr{cdBitmap}, Cint, Cint, Cint, Cint), bitmap, xmin, xmax, ymin, ymax)
 end
-function cdCanvasPutBitmap(canvas::Ptr{cdCanvas}, bitmap::Ptr{cdBitmap}, x::Cint, y::Cint, w::Cint, h::Cint)
+function cdCanvasPutBitmap(canvas::Ptr{cdCanvas}, bitmap::Ptr{cdBitmap}, x::Integer, y::Integer, w::Integer, h::Integer)
   ccall( (:cdCanvasPutBitmap, libcd_), None, (Ptr{cdCanvas}, Ptr{cdBitmap}, Cint, Cint, Cint, Cint), canvas, bitmap, x, y, w, h)
 end
-function cdCanvasGetBitmap(canvas::Ptr{cdCanvas}, bitmap::Ptr{cdBitmap}, x::Cint, y::Cint)
+function cdCanvasGetBitmap(canvas::Ptr{cdCanvas}, bitmap::Ptr{cdBitmap}, x::Integer, y::Integer)
   ccall( (:cdCanvasGetBitmap, libcd_), None, (Ptr{cdCanvas}, Ptr{cdBitmap}, Cint, Cint), canvas, bitmap, x, y)
 end
 function cdBitmapRGB2Map(bitmap_rgb::Ptr{cdBitmap}, bitmap_map::Ptr{cdBitmap})
@@ -442,7 +448,7 @@ end
 function cdEncodeAlpha(color::Clong, alpha::Cuchar)
   ccall( (:cdEncodeAlpha, libcd_), Clong, (Clong, Cuchar), color, alpha)
 end
-function cdRGB2Map(width::Cint, height::Cint, red::Ptr{Cuchar}, green::Ptr{Cuchar}, blue::Ptr{Cuchar}, index::Ptr{Cuchar}, pal_size::Cint, color::Ptr{Clong})
+function cdRGB2Map(width::Integer, height::Integer, red::Ptr{Cuchar}, green::Ptr{Cuchar}, blue::Ptr{Cuchar}, index::Ptr{Cuchar}, pal_size::Integer, color::Ptr{Clong})
   ccall( (:cdRGB2Map, libcd_), None, (Cint, Cint, Ptr{Cuchar}, Ptr{Cuchar}, Ptr{Cuchar}, Ptr{Cuchar}, Cint, Ptr{Clong}), width, height, red, green, blue, index, pal_size, color)
 end
 function cdActivate(canvas::Ptr{cdCanvas})
@@ -451,7 +457,7 @@ end
 function cdActiveCanvas()
   ccall( (:cdActiveCanvas, libcd_), Ptr{cdCanvas}, (), )
 end
-function cdSimulate(mode::Cint)
+function cdSimulate(mode::Integer)
   ccall( (:cdSimulate, libcd_), Cint, (Cint,), mode)
 end
 function cdFlush()
@@ -475,10 +481,10 @@ end
 function cdGetContext(canvas::Ptr{cdCanvas})
   ccall( (:cdGetContext, libcd_), Ptr{cdContext}, (Ptr{cdCanvas},), canvas)
 end
-function cdRegisterCallback(context::Ptr{cdContext}, cb::Cint, func::cdCallback)
+function cdRegisterCallback(context::Ptr{cdContext}, cb::Integer, func::cdCallback)
   ccall( (:cdRegisterCallback, libcd_), Cint, (Ptr{cdContext}, Cint, cdCallback), context, cb, func)
 end
-function cdPlay(context::Ptr{cdContext}, xmin::Cint, xmax::Cint, ymin::Cint, ymax::Cint, data::Ptr{None})
+function cdPlay(context::Ptr{cdContext}, xmin::Integer, xmax::Integer, ymin::Integer, ymax::Integer, data::Ptr{None})
   ccall( (:cdPlay, libcd_), Cint, (Ptr{cdContext}, Cint, Cint, Cint, Cint, Ptr{None}), context, xmin, xmax, ymin, ymax, data)
 end
 function cdGetCanvasSize(width::Ptr{Cint}, height::Ptr{Cint}, width_mm::Ptr{Cdouble}, height_mm::Ptr{Cdouble})
@@ -490,70 +496,70 @@ end
 function cdMM2Pixel(mm_dx::Cdouble, mm_dy::Cdouble, dx::Ptr{Cint}, dy::Ptr{Cint})
   ccall( (:cdMM2Pixel, libcd_), None, (Cdouble, Cdouble, Ptr{Cint}, Ptr{Cint}), mm_dx, mm_dy, dx, dy)
 end
-function cdPixel2MM(dx::Cint, dy::Cint, mm_dx::Ptr{Cdouble}, mm_dy::Ptr{Cdouble})
+function cdPixel2MM(dx::Integer, dy::Integer, mm_dx::Ptr{Cdouble}, mm_dy::Ptr{Cdouble})
   ccall( (:cdPixel2MM, libcd_), None, (Cint, Cint, Ptr{Cdouble}, Ptr{Cdouble}), dx, dy, mm_dx, mm_dy)
 end
-function cdOrigin(x::Cint, y::Cint)
+function cdOrigin(x::Integer, y::Integer)
   ccall( (:cdOrigin, libcd_), None, (Cint, Cint), x, y)
 end
-function cdClip(mode::Cint)
+function cdClip(mode::Integer)
   ccall( (:cdClip, libcd_), Cint, (Cint,), mode)
 end
 function cdGetClipPoly(n::Ptr{Cint})
   ccall( (:cdGetClipPoly, libcd_), Ptr{Cint}, (Ptr{Cint},), n)
 end
-function cdClipArea(xmin::Cint, xmax::Cint, ymin::Cint, ymax::Cint)
+function cdClipArea(xmin::Integer, xmax::Integer, ymin::Integer, ymax::Integer)
   ccall( (:cdClipArea, libcd_), None, (Cint, Cint, Cint, Cint), xmin, xmax, ymin, ymax)
 end
 function cdGetClipArea(xmin::Ptr{Cint}, xmax::Ptr{Cint}, ymin::Ptr{Cint}, ymax::Ptr{Cint})
   ccall( (:cdGetClipArea, libcd_), Cint, (Ptr{Cint}, Ptr{Cint}, Ptr{Cint}, Ptr{Cint}), xmin, xmax, ymin, ymax)
 end
-function cdPointInRegion(x::Cint, y::Cint)
+function cdPointInRegion(x::Integer, y::Integer)
   ccall( (:cdPointInRegion, libcd_), Cint, (Cint, Cint), x, y)
 end
-function cdOffsetRegion(x::Cint, y::Cint)
+function cdOffsetRegion(x::Integer, y::Integer)
   ccall( (:cdOffsetRegion, libcd_), None, (Cint, Cint), x, y)
 end
 function cdRegionBox(xmin::Ptr{Cint}, xmax::Ptr{Cint}, ymin::Ptr{Cint}, ymax::Ptr{Cint})
   ccall( (:cdRegionBox, libcd_), None, (Ptr{Cint}, Ptr{Cint}, Ptr{Cint}, Ptr{Cint}), xmin, xmax, ymin, ymax)
 end
-function cdRegionCombineMode(mode::Cint)
+function cdRegionCombineMode(mode::Integer)
   ccall( (:cdRegionCombineMode, libcd_), Cint, (Cint,), mode)
 end
-function cdPixel(x::Cint, y::Cint, color::Clong)
+function cdPixel(x::Integer, y::Integer, color::Clong)
   ccall( (:cdPixel, libcd_), None, (Cint, Cint, Clong), x, y, color)
 end
-function cdMark(x::Cint, y::Cint)
+function cdMark(x::Integer, y::Integer)
   ccall( (:cdMark, libcd_), None, (Cint, Cint), x, y)
 end
-function cdLine(x1::Cint, y1::Cint, x2::Cint, y2::Cint)
+function cdLine(x1::Integer, y1::Integer, x2::Integer, y2::Integer)
   ccall( (:cdLine, libcd_), None, (Cint, Cint, Cint, Cint), x1, y1, x2, y2)
 end
-function cdBegin(mode::Cint)
+function cdBegin(mode::Integer)
   ccall( (:cdBegin, libcd_), None, (Cint,), mode)
 end
-function cdVertex(x::Cint, y::Cint)
+function cdVertex(x::Integer, y::Integer)
   ccall( (:cdVertex, libcd_), None, (Cint, Cint), x, y)
 end
 function cdEnd()
   ccall( (:cdEnd, libcd_), None, (), )
 end
-function cdRect(xmin::Cint, xmax::Cint, ymin::Cint, ymax::Cint)
+function cdRect(xmin::Integer, xmax::Integer, ymin::Integer, ymax::Integer)
   ccall( (:cdRect, libcd_), None, (Cint, Cint, Cint, Cint), xmin, xmax, ymin, ymax)
 end
-function cdBox(xmin::Cint, xmax::Cint, ymin::Cint, ymax::Cint)
+function cdBox(xmin::Integer, xmax::Integer, ymin::Integer, ymax::Integer)
   ccall( (:cdBox, libcd_), None, (Cint, Cint, Cint, Cint), xmin, xmax, ymin, ymax)
 end
-function cdArc(xc::Cint, yc::Cint, w::Cint, h::Cint, angle1::Cdouble, angle2::Cdouble)
+function cdArc(xc::Integer, yc::Integer, w::Integer, h::Integer, angle1::Cdouble, angle2::Cdouble)
   ccall( (:cdArc, libcd_), None, (Cint, Cint, Cint, Cint, Cdouble, Cdouble), xc, yc, w, h, angle1, angle2)
 end
-function cdSector(xc::Cint, yc::Cint, w::Cint, h::Cint, angle1::Cdouble, angle2::Cdouble)
+function cdSector(xc::Integer, yc::Integer, w::Integer, h::Integer, angle1::Cdouble, angle2::Cdouble)
   ccall( (:cdSector, libcd_), None, (Cint, Cint, Cint, Cint, Cdouble, Cdouble), xc, yc, w, h, angle1, angle2)
 end
-function cdChord(xc::Cint, yc::Cint, w::Cint, h::Cint, angle1::Cdouble, angle2::Cdouble)
+function cdChord(xc::Integer, yc::Integer, w::Integer, h::Integer, angle1::Cdouble, angle2::Cdouble)
   ccall( (:cdChord, libcd_), None, (Cint, Cint, Cint, Cint, Cdouble, Cdouble), xc, yc, w, h, angle1, angle2)
 end
-function cdText(x::Cint, y::Cint, s::Ptr{Uint8})
+function cdText(x::Integer, y::Integer, s::Ptr{Uint8})
   ccall( (:cdText, libcd_), None, (Cint, Cint, Ptr{Uint8}), x, y, s)
 end
 function cdBackground(color::Clong)
@@ -562,49 +568,49 @@ end
 function cdForeground(color::Clong)
   ccall( (:cdForeground, libcd_), Clong, (Clong,), color)
 end
-function cdBackOpacity(opacity::Cint)
+function cdBackOpacity(opacity::Integer)
   ccall( (:cdBackOpacity, libcd_), Cint, (Cint,), opacity)
 end
-function cdWriteMode(mode::Cint)
+function cdWriteMode(mode::Integer)
   ccall( (:cdWriteMode, libcd_), Cint, (Cint,), mode)
 end
-function cdLineStyle(style::Cint)
+function cdLineStyle(style::Integer)
   ccall( (:cdLineStyle, libcd_), Cint, (Cint,), style)
 end
-function cdLineStyleDashes(dashes::Ptr{Cint}, count::Cint)
+function cdLineStyleDashes(dashes::Ptr{Cint}, count::Integer)
   ccall( (:cdLineStyleDashes, libcd_), None, (Ptr{Cint}, Cint), dashes, count)
 end
-function cdLineWidth(width::Cint)
+function cdLineWidth(width::Integer)
   ccall( (:cdLineWidth, libcd_), Cint, (Cint,), width)
 end
-function cdLineJoin(join::Cint)
+function cdLineJoin(join::Integer)
   ccall( (:cdLineJoin, libcd_), Cint, (Cint,), join)
 end
-function cdLineCap(cap::Cint)
+function cdLineCap(cap::Integer)
   ccall( (:cdLineCap, libcd_), Cint, (Cint,), cap)
 end
-function cdInteriorStyle(style::Cint)
+function cdInteriorStyle(style::Integer)
   ccall( (:cdInteriorStyle, libcd_), Cint, (Cint,), style)
 end
-function cdHatch(style::Cint)
+function cdHatch(style::Integer)
   ccall( (:cdHatch, libcd_), Cint, (Cint,), style)
 end
-function cdStipple(w::Cint, h::Cint, stipple::Ptr{Cuchar})
+function cdStipple(w::Integer, h::Integer, stipple::Ptr{Cuchar})
   ccall( (:cdStipple, libcd_), None, (Cint, Cint, Ptr{Cuchar}), w, h, stipple)
 end
 function cdGetStipple(n::Ptr{Cint}, m::Ptr{Cint})
   ccall( (:cdGetStipple, libcd_), Ptr{Cuchar}, (Ptr{Cint}, Ptr{Cint}), n, m)
 end
-function cdPattern(w::Cint, h::Cint, pattern::Ptr{Clong})
+function cdPattern(w::Integer, h::Integer, pattern::Ptr{Clong})
   ccall( (:cdPattern, libcd_), None, (Cint, Cint, Ptr{Clong}), w, h, pattern)
 end
 function cdGetPattern(n::Ptr{Cint}, m::Ptr{Cint})
   ccall( (:cdGetPattern, libcd_), Ptr{Clong}, (Ptr{Cint}, Ptr{Cint}), n, m)
 end
-function cdFillMode(mode::Cint)
+function cdFillMode(mode::Integer)
   ccall( (:cdFillMode, libcd_), Cint, (Cint,), mode)
 end
-function cdFont(type_face::Cint, style::Cint, size::Cint)
+function cdFont(type_face::Integer, style::Integer, size::Integer)
   ccall( (:cdFont, libcd_), None, (Cint, Cint, Cint), type_face, style, size)
 end
 function cdGetFont(type_face::Ptr{Cint}, style::Ptr{Cint}, size::Ptr{Cint})
@@ -613,43 +619,43 @@ end
 function cdNativeFont(font::Ptr{Uint8})
   ccall( (:cdNativeFont, libcd_), Ptr{Uint8}, (Ptr{Uint8},), font)
 end
-function cdTextAlignment(alignment::Cint)
+function cdTextAlignment(alignment::Integer)
   ccall( (:cdTextAlignment, libcd_), Cint, (Cint,), alignment)
 end
 function cdTextOrientation(angle::Cdouble)
   ccall( (:cdTextOrientation, libcd_), Cdouble, (Cdouble,), angle)
 end
-function cdMarkType(_type::Cint)
+function cdMarkType(_type::Integer)
   ccall( (:cdMarkType, libcd_), Cint, (Cint,), _type)
 end
-function cdMarkSize(size::Cint)
+function cdMarkSize(size::Integer)
   ccall( (:cdMarkSize, libcd_), Cint, (Cint,), size)
 end
-function cdVectorText(x::Cint, y::Cint, s::Ptr{Uint8})
+function cdVectorText(x::Integer, y::Integer, s::Ptr{Uint8})
   ccall( (:cdVectorText, libcd_), None, (Cint, Cint, Ptr{Uint8}), x, y, s)
 end
-function cdMultiLineVectorText(x::Cint, y::Cint, s::Ptr{Uint8})
+function cdMultiLineVectorText(x::Integer, y::Integer, s::Ptr{Uint8})
   ccall( (:cdMultiLineVectorText, libcd_), None, (Cint, Cint, Ptr{Uint8}), x, y, s)
 end
 function cdVectorFont(filename::Ptr{Uint8})
   ccall( (:cdVectorFont, libcd_), Ptr{Uint8}, (Ptr{Uint8},), filename)
 end
-function cdVectorTextDirection(x1::Cint, y1::Cint, x2::Cint, y2::Cint)
+function cdVectorTextDirection(x1::Integer, y1::Integer, x2::Integer, y2::Integer)
   ccall( (:cdVectorTextDirection, libcd_), None, (Cint, Cint, Cint, Cint), x1, y1, x2, y2)
 end
 function cdVectorTextTransform(matrix::Ptr{Cdouble})
   ccall( (:cdVectorTextTransform, libcd_), Ptr{Cdouble}, (Ptr{Cdouble},), matrix)
 end
-function cdVectorTextSize(size_x::Cint, size_y::Cint, s::Ptr{Uint8})
+function cdVectorTextSize(size_x::Integer, size_y::Integer, s::Ptr{Uint8})
   ccall( (:cdVectorTextSize, libcd_), None, (Cint, Cint, Ptr{Uint8}), size_x, size_y, s)
 end
-function cdVectorCharSize(size::Cint)
+function cdVectorCharSize(size::Integer)
   ccall( (:cdVectorCharSize, libcd_), Cint, (Cint,), size)
 end
 function cdGetVectorTextSize(s::Ptr{Uint8}, x::Ptr{Cint}, y::Ptr{Cint})
   ccall( (:cdGetVectorTextSize, libcd_), None, (Ptr{Uint8}, Ptr{Cint}, Ptr{Cint}), s, x, y)
 end
-function cdGetVectorTextBounds(s::Ptr{Uint8}, x::Cint, y::Cint, rect::Ptr{Cint})
+function cdGetVectorTextBounds(s::Ptr{Uint8}, x::Integer, y::Integer, rect::Ptr{Cint})
   ccall( (:cdGetVectorTextBounds, libcd_), None, (Ptr{Uint8}, Cint, Cint, Ptr{Cint}), s, x, y, rect)
 end
 function cdFontDim(max_width::Ptr{Cint}, height::Ptr{Cint}, ascent::Ptr{Cint}, descent::Ptr{Cint})
@@ -658,46 +664,46 @@ end
 function cdTextSize(s::Ptr{Uint8}, width::Ptr{Cint}, height::Ptr{Cint})
   ccall( (:cdTextSize, libcd_), None, (Ptr{Uint8}, Ptr{Cint}, Ptr{Cint}), s, width, height)
 end
-function cdTextBox(x::Cint, y::Cint, s::Ptr{Uint8}, xmin::Ptr{Cint}, xmax::Ptr{Cint}, ymin::Ptr{Cint}, ymax::Ptr{Cint})
+function cdTextBox(x::Integer, y::Integer, s::Ptr{Uint8}, xmin::Ptr{Cint}, xmax::Ptr{Cint}, ymin::Ptr{Cint}, ymax::Ptr{Cint})
   ccall( (:cdTextBox, libcd_), None, (Cint, Cint, Ptr{Uint8}, Ptr{Cint}, Ptr{Cint}, Ptr{Cint}, Ptr{Cint}), x, y, s, xmin, xmax, ymin, ymax)
 end
-function cdTextBounds(x::Cint, y::Cint, s::Ptr{Uint8}, rect::Ptr{Cint})
+function cdTextBounds(x::Integer, y::Integer, s::Ptr{Uint8}, rect::Ptr{Cint})
   ccall( (:cdTextBounds, libcd_), None, (Cint, Cint, Ptr{Uint8}, Ptr{Cint}), x, y, s, rect)
 end
 function cdGetColorPlanes()
   ccall( (:cdGetColorPlanes, libcd_), Cint, (), )
 end
-function cdPalette(n::Cint, palette::Ptr{Clong}, mode::Cint)
+function cdPalette(n::Integer, palette::Ptr{Clong}, mode::Integer)
   ccall( (:cdPalette, libcd_), None, (Cint, Ptr{Clong}, Cint), n, palette, mode)
 end
-function cdGetImageRGB(r::Ptr{Cuchar}, g::Ptr{Cuchar}, b::Ptr{Cuchar}, x::Cint, y::Cint, w::Cint, h::Cint)
+function cdGetImageRGB(r::Ptr{Cuchar}, g::Ptr{Cuchar}, b::Ptr{Cuchar}, x::Integer, y::Integer, w::Integer, h::Integer)
   ccall( (:cdGetImageRGB, libcd_), None, (Ptr{Cuchar}, Ptr{Cuchar}, Ptr{Cuchar}, Cint, Cint, Cint, Cint), r, g, b, x, y, w, h)
 end
-function cdPutImageRectRGB(iw::Cint, ih::Cint, r::Ptr{Cuchar}, g::Ptr{Cuchar}, b::Ptr{Cuchar}, x::Cint, y::Cint, w::Cint, h::Cint, xmin::Cint, xmax::Cint, ymin::Cint, ymax::Cint)
+function cdPutImageRectRGB(iw::Integer, ih::Integer, r::Ptr{Cuchar}, g::Ptr{Cuchar}, b::Ptr{Cuchar}, x::Integer, y::Integer, w::Integer, h::Integer, xmin::Integer, xmax::Integer, ymin::Integer, ymax::Integer)
   ccall( (:cdPutImageRectRGB, libcd_), None, (Cint, Cint, Ptr{Cuchar}, Ptr{Cuchar}, Ptr{Cuchar}, Cint, Cint, Cint, Cint, Cint, Cint, Cint, Cint), iw, ih, r, g, b, x, y, w, h, xmin, xmax, ymin, ymax)
 end
-function cdPutImageRectRGBA(iw::Cint, ih::Cint, r::Ptr{Cuchar}, g::Ptr{Cuchar}, b::Ptr{Cuchar}, a::Ptr{Cuchar}, x::Cint, y::Cint, w::Cint, h::Cint, xmin::Cint, xmax::Cint, ymin::Cint, ymax::Cint)
+function cdPutImageRectRGBA(iw::Integer, ih::Integer, r::Ptr{Cuchar}, g::Ptr{Cuchar}, b::Ptr{Cuchar}, a::Ptr{Cuchar}, x::Integer, y::Integer, w::Integer, h::Integer, xmin::Integer, xmax::Integer, ymin::Integer, ymax::Integer)
   ccall( (:cdPutImageRectRGBA, libcd_), None, (Cint, Cint, Ptr{Cuchar}, Ptr{Cuchar}, Ptr{Cuchar}, Ptr{Cuchar}, Cint, Cint, Cint, Cint, Cint, Cint, Cint, Cint), iw, ih, r, g, b, a, x, y, w, h, xmin, xmax, ymin, ymax)
 end
-function cdPutImageRectMap(iw::Cint, ih::Cint, index::Ptr{Cuchar}, colors::Ptr{Clong}, x::Cint, y::Cint, w::Cint, h::Cint, xmin::Cint, xmax::Cint, ymin::Cint, ymax::Cint)
+function cdPutImageRectMap(iw::Integer, ih::Integer, index::Ptr{Cuchar}, colors::Ptr{Clong}, x::Integer, y::Integer, w::Integer, h::Integer, xmin::Integer, xmax::Integer, ymin::Integer, ymax::Integer)
   ccall( (:cdPutImageRectMap, libcd_), None, (Cint, Cint, Ptr{Cuchar}, Ptr{Clong}, Cint, Cint, Cint, Cint, Cint, Cint, Cint, Cint), iw, ih, index, colors, x, y, w, h, xmin, xmax, ymin, ymax)
 end
-function cdCreateImage(w::Cint, h::Cint)
+function cdCreateImage(w::Integer, h::Integer)
   ccall( (:cdCreateImage, libcd_), Ptr{cdImage}, (Cint, Cint), w, h)
 end
-function cdGetImage(image::Ptr{cdImage}, x::Cint, y::Cint)
+function cdGetImage(image::Ptr{cdImage}, x::Integer, y::Integer)
   ccall( (:cdGetImage, libcd_), None, (Ptr{cdImage}, Cint, Cint), image, x, y)
 end
-function cdPutImageRect(image::Ptr{cdImage}, x::Cint, y::Cint, xmin::Cint, xmax::Cint, ymin::Cint, ymax::Cint)
+function cdPutImageRect(image::Ptr{cdImage}, x::Integer, y::Integer, xmin::Integer, xmax::Integer, ymin::Integer, ymax::Integer)
   ccall( (:cdPutImageRect, libcd_), None, (Ptr{cdImage}, Cint, Cint, Cint, Cint, Cint, Cint), image, x, y, xmin, xmax, ymin, ymax)
 end
-function cdScrollArea(xmin::Cint, xmax::Cint, ymin::Cint, ymax::Cint, dx::Cint, dy::Cint)
+function cdScrollArea(xmin::Integer, xmax::Integer, ymin::Integer, ymax::Integer, dx::Integer, dy::Integer)
   ccall( (:cdScrollArea, libcd_), None, (Cint, Cint, Cint, Cint, Cint, Cint), xmin, xmax, ymin, ymax, dx, dy)
 end
-function cdPutBitmap(bitmap::Ptr{cdBitmap}, x::Cint, y::Cint, w::Cint, h::Cint)
+function cdPutBitmap(bitmap::Ptr{cdBitmap}, x::Integer, y::Integer, w::Integer, h::Integer)
   ccall( (:cdPutBitmap, libcd_), None, (Ptr{cdBitmap}, Cint, Cint, Cint, Cint), bitmap, x, y, w, h)
 end
-function cdGetBitmap(bitmap::Ptr{cdBitmap}, x::Cint, y::Cint)
+function cdGetBitmap(bitmap::Ptr{cdBitmap}, x::Integer, y::Integer)
   ccall( (:cdGetBitmap, libcd_), None, (Ptr{cdBitmap}, Cint, Cint), bitmap, x, y)
 end
 
