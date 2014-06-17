@@ -353,7 +353,8 @@ include("im_image_h.jl")
 # Works only for data_type IM_BYTE, and color spaces: IM_RGB, IM_MAP, IMGRAY and IM_BINARY.
 function imcdCanvasPutImage(_canvas, _image, _x, _y, _w, _h, _xmin, _xmax, _ymin, _ymax)
 	# When _image is a Ptr{imImage} the code errors uncomprehensibly. The printls()s show that
-	#println("typeof(_image): ", _image)
+	#println("_image: ", _image)
+	#println("typeof(_image): ", typeof(_image))
 	#println("isa(_image, Ptr{imImage}): ", isa(_image, Ptr{imImage}))
 	if (isa(_image, Ptr{imImage}))
 		_image = unsafe_load(_image)
