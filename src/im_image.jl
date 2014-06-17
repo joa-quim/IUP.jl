@@ -14,7 +14,10 @@ function imImageCreateBased(image::Ptr{imImage}, width::Int, height::Int, color_
   ccall( (:imImageCreateBased, libim_image_), Ptr{imImage}, (Ptr{imImage}, Cint, Cint, Cint, Cint), image, width, height, color_space, data_type)
 end
 function imImageDestroy(image::Ptr{imImage})
-  ccall( (:imImageDestroy, libim_image_), None, (Ptr{imImage},), image)
+	ccall( (:imImageDestroy, libim_image_), None, (Ptr{imImage},), image)
+end
+function imImageDestroy(image::Ptr{None})
+	ccall((:imImageDestroy, libim_image_), None, (Ptr{imImage},), image)
 end
 function imImageAddAlpha(image::Ptr{imImage})
   ccall( (:imImageAddAlpha, libim_image_), None, (Ptr{imImage},), image)
