@@ -336,7 +336,9 @@ export
 	#
 	# From cdiup.jl
 	#
-	cdContextIup
+	cdContextIup,
+	# local
+	imcdCanvasPutImage
 
 
 include("libcd_h.jl")
@@ -344,5 +346,39 @@ include("libcd.jl")
 include("cdiup.jl")
 include("wd_h.jl")
 include("wd.jl")
+include("im_image_h.jl")
 
+# ----------------------------------------------------------------------------------------
+# Utility function to draw the image in a CD library canvas (from im_image.h)
+# Works only for data_type IM_BYTE, and color spaces: IM_RGB, IM_MAP, IMGRAY and IM_BINARY.
+function imcdCanvasPutImage(_canvas, _image, _x, _y, _w, _h, _xmin, _xmax, _ymin, _ymax)
+	# When _image is a Ptr{imImage} the code errors uncomprehensibly. The printls()s show that
+	#println("typeof(_image): ", _image)
+	#println("isa(_image, Ptr{imImage}): ", isa(_image, Ptr{imImage}))
+	if (isa(_image, Ptr{imImage}))
+		_image = unsafe_load(_image)
+	end
+	const IM_RGB = 0		# Redefining here to not have to import it from libim.h (Ghrrr)
+	if (_image.color_space == IM_RGB)
+		data = [convert(Ptr{Uint8}, unsafe_load(_image.data,1)),
+			convert(Ptr{Uint8}, unsafe_load(_image.data,2)),
+			convert(Ptr{Uint8}, unsafe_load(_image.data,3))]
+
+		if (_image.has_alpha != 0)
+			data = [data, convert(Ptr{Uint8}, unsafe_load(_image.data,4))]
+			cdCanvasPutImageRectRGBA(_canvas, _image.width, _image.height,
+					data[1], data[2], data[3], data[4],
+					_x, _y, _w, _h, _xmin, _xmax, _ymin, _ymax)
+		else
+			cdCanvasPutImageRectRGB(_canvas, _image.width, _image.height,
+					data[1], data[2], data[3],
+					_x, _y, _w, _h, _xmin, _xmax, _ymin, _ymax)
+		end
+	else
+		data = [convert(Ptr{Uint8}, unsafe_load(_image.data,1))]
+		cdCanvasPutImageRectMap(_canvas, _image.width, _image.height,
+					data[0], _image.palette,
+					_x, _y, _w, _h, _xmin, _xmax, _ymin, _ymax)
+	end
+end
 end  # module
