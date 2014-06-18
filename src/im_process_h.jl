@@ -96,15 +96,6 @@ const IM_GAMUT_BRIGHTCONT = 10
 typealias imToneGamutFlags Uint32
 const IM_GAMUT_MINMAX = 256
 # end enum imToneGamutFlags
-type _imStats
-    max::Cfloat
-    min::Cfloat
-    positive::Culong
-    negative::Culong
-    zeros::Culong
-    mean::Cfloat
-    stddev::Cfloat
-end
 type imStats
     max::Cfloat
     min::Cfloat

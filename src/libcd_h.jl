@@ -123,12 +123,6 @@ typealias cdContext Void
 typealias cdCanvas Void
 typealias cdState Void
 typealias cdImage Void
-type _cdBitmap
-    w::Cint
-    h::Cint
-    _type::Cint
-    data::Ptr{None}
-end
 type cdBitmap
     w::Cint
     h::Cint
