@@ -1104,7 +1104,6 @@ typealias Ihandle Void
 typealias Icallback Ptr{Void}
 typealias Iparamcb Ptr{Void}
 # begin enum ANONYMOUS_1
-typealias ANONYMOUS_1 Uint32
 const IUP_SHOW = 0
 const IUP_RESTORE = 1
 const IUP_MINIMIZE = 2
@@ -1112,7 +1111,6 @@ const IUP_MAXIMIZE = 3
 const IUP_HIDE = 4
 # end enum ANONYMOUS_1
 # begin enum ANONYMOUS_2
-typealias ANONYMOUS_2 Uint32
 const IUP_SBUP = 0
 const IUP_SBDN = 1
 const IUP_SBPGUP = 2
@@ -1127,7 +1125,6 @@ const IUP_SBPOSH = 10
 const IUP_SBDRAGH = 11
 # end enum ANONYMOUS_2
 # begin enum ANONYMOUS_3
-typealias ANONYMOUS_3 Uint32
 const IUP_RECBINARY = 0
 const IUP_RECTEXT = 1
 # end enum ANONYMOUS_3
