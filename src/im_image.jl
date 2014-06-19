@@ -16,9 +16,6 @@ end
 function imImageDestroy(image::Ptr{imImage})
 	ccall( (:imImageDestroy, libim_image_), None, (Ptr{imImage},), image)
 end
-function imImageDestroy(image::Ptr{None})
-	ccall((:imImageDestroy, libim_image_), None, (Ptr{imImage},), image)
-end
 function imImageAddAlpha(image::Ptr{imImage})
   ccall( (:imImageAddAlpha, libim_image_), None, (Ptr{imImage},), image)
 end
