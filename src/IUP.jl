@@ -12,6 +12,7 @@ export
 	IupHbox,
 	IupImage, IupImageRGBA, IupItem,
 	IupLabel, IupList,
+	IupLoad,
 	IupMainLoop, IupMap, IupMatrix,
 	IupMenu,
 	IupMessage,

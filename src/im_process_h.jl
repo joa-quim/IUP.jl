@@ -6,38 +6,6 @@ const OBJC_NEW_PROPERTIES = 1
 # Skipping MacroDefinition: imImageEqualize(_image)imProcessEqualizeHistogram(_image,_image)
 # Skipping MacroDefinition: imImageNegative(_image)imProcessNegative(_image,_image)
 # Skipping MacroDefinition: imImageAutoLevel(_image,_percent)imProcessExpandHistogram(_image,_image,_percent)
-type _imImage
-    width::Cint
-    height::Cint
-    color_space::Cint
-    data_type::Cint
-    has_alpha::Cint
-    depth::Cint
-    line_size::Cint
-    plane_size::Cint
-    size::Cint
-    count::Cint
-    data::Ptr{Ptr{None}}
-    palette::Ptr{Clong}
-    palette_count::Cint
-    attrib_table::Ptr{None}
-end
-type imImage
-    width::Cint
-    height::Cint
-    color_space::Cint
-    data_type::Cint
-    has_alpha::Cint
-    depth::Cint
-    line_size::Cint
-    plane_size::Cint
-    size::Cint
-    count::Cint
-    data::Ptr{Ptr{None}}
-    palette::Ptr{Clong}
-    palette_count::Cint
-    attrib_table::Ptr{None}
-end
 typealias imUnaryPointOpFunc Ptr{Void}
 typealias imUnaryPointColorOpFunc Ptr{Void}
 typealias imMultiPointOpFunc Ptr{Void}
