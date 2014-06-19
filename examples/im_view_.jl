@@ -132,7 +132,7 @@ end
 # --------------------------------------------------------------------------------
 function ShowImage(file_name::String, iup_dialog::Ptr{Ihandle})
 	image = IupGetAttribute(iup_dialog, "imImage")
-	image = convert(Ptr{None}, image)		# If I use Ptr{imImage} it Booms???
+	image = convert(Ptr{imImage}, image)		# If I use Ptr{imImage} it Booms???
 	if (image != C_NULL)
 		imImageDestroy(image)
 	end
@@ -181,7 +181,7 @@ end
 # --------------------------------------------------------------------------------
 function cbDialogClose(iup_dialog::Ptr{Ihandle})
 	cd_canvas = convert(Ptr{cdCanvas}, IupGetAttribute(iup_dialog, "cdCanvas"))
-	image = convert(Ptr{None}, IupGetAttribute(iup_dialog, "imImage"))
+	image = convert(Ptr{imImage}, IupGetAttribute(iup_dialog, "imImage"))
 
 	if (cd_canvas != C_NULL) cdKillCanvas(cd_canvas)	end
 	if (image != C_NULL) imImageDestroy(image)		end
