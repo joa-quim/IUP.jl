@@ -5,6 +5,7 @@ export
 	cdVersion,
 	cdVersionDate,
 	cdVersionNumber,
+	cdCanvas,
 	cdCreateCanvas,
 	cdKillCanvas,
 	cdCanvasGetContext,

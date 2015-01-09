@@ -1386,7 +1386,6 @@ const CD_CTXPLUS_PRINTER = 3
 const CD_CTXPLUS_EMF = 4
 const CD_CTXPLUS_CLIPBOARD = 5
 # end enum ANONYMOUS_2
-typealias cdState cdCanvas
 type cdBitmap
     w::Cint
     h::Cint

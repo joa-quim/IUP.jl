@@ -311,13 +311,13 @@ function cdCanvasClear(canvas::Ptr{cdCanvas})
   ccall( (:cdCanvasClear, libcd_), None, (Ptr{cdCanvas},), canvas)
 end
 function cdCanvasSaveState(canvas::Ptr{cdCanvas})
-  ccall( (:cdCanvasSaveState, libcd_), Ptr{cdState}, (Ptr{cdCanvas},), canvas)
+  ccall( (:cdCanvasSaveState, libcd_), Ptr{cdCanvas}, (Ptr{cdCanvas},), canvas)
 end
-function cdCanvasRestoreState(canvas::Ptr{cdCanvas}, state::Ptr{cdState})
-  ccall( (:cdCanvasRestoreState, libcd_), None, (Ptr{cdCanvas}, Ptr{cdState}), canvas, state)
+function cdCanvasRestoreState(canvas::Ptr{cdCanvas}, state::Ptr{cdCanvas})
+  ccall( (:cdCanvasRestoreState, libcd_), None, (Ptr{cdCanvas}, Ptr{cdCanvas}), canvas, state)
 end
-function cdReleaseState(state::Ptr{cdState})
-  ccall( (:cdReleaseState, libcd_), None, (Ptr{cdState},), state)
+function cdReleaseState(state::Ptr{cdCanvas})
+  ccall( (:cdReleaseState, libcd_), None, (Ptr{cdCanvas},), state)
 end
 function cdCanvasSetAttribute(canvas::Ptr{cdCanvas}, name, data)
   ccall( (:cdCanvasSetAttribute, libcd_), None, (Ptr{cdCanvas}, Ptr{Uint8}, Ptr{Uint8}), canvas, name, data)
@@ -713,10 +713,10 @@ function cdClear()
   ccall( (:cdClear, libcd_), None, (), )
 end
 function cdSaveState()
-  ccall( (:cdSaveState, libcd_), Ptr{cdState}, (), )
+  ccall( (:cdSaveState, libcd_), Ptr{cdCanvas}, (), )
 end
-function cdRestoreState(state::Ptr{cdState})
-  ccall( (:cdRestoreState, libcd_), None, (Ptr{cdState},), state)
+function cdRestoreState(state::Ptr{cdCanvas})
+  ccall( (:cdRestoreState, libcd_), None, (Ptr{cdCanvas},), state)
 end
 function cdSetAttribute(name::Ptr{Uint8}, data::Ptr{Uint8})
   ccall( (:cdSetAttribute, libcd_), None, (Ptr{Uint8}, Ptr{Uint8}), name, data)

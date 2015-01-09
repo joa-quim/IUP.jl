@@ -1,6 +1,7 @@
 module IUP
 
 export
+	Ihandle,
 	IupAlarm,
 	IupBackgroundBox,
 	IupButton,
@@ -35,7 +36,6 @@ export
 
 include("libiup_h.jl")
 include("libiup.jl")
-include("iupcontrols_h.jl")
 include("iupcontrols.jl")
 
 end  # module
