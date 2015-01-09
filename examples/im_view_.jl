@@ -25,7 +25,6 @@ export
   im_view
 
 include("../src/libiup_h.jl")
-include("../src/libcd_h.jl")
 include("../src/im_process_h.jl")
 
 #= ---------------------------------------------------------------------------------
@@ -131,14 +130,14 @@ end
 
 # --------------------------------------------------------------------------------
 function ShowImage(file_name::String, iup_dialog::Ptr{Ihandle})
-	image = IupGetAttribute(iup_dialog, "imImage")
+	image = IupGetAttribute(iup_dialog, "imImage")		# typeof(image) => Ptr{Uint8}
 	image = convert(Ptr{imImage}, image)		# If I use Ptr{imImage} it Booms???
 	if (image != C_NULL)
 		imImageDestroy(image)
 	end
 	IupSetAttribute(iup_dialog, "imImage")
 
-	error=convert(Ptr{Cint}, [int32(0)])
+	error = convert(Ptr{Cint}, [int32(0)])
 	image = imFileImageLoadBitmap(file_name, 0, error)
 	error = unsafe_load(error)
 	if (error != 0)	PrintError(error)	end
