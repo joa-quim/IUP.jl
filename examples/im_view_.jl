@@ -64,6 +64,25 @@ function im_view()
 
 	IupOpen() 		#Initializes IUP
 	dlg = CreateDialog()
+
+ 	mainMenu = CreateMainMenu()
+	# Associates handle "mainMenu" with mainMenu
+	IupSetHandle("mainMenu", mainMenu)
+	IupSetAttribute(dlg, "MENU","mainMenu")
+
+	imlabCreateButtonImages()
+	btOpen = IupButton("", "imImgWinOpen" )
+	IupSetAttribute(btOpen,"TIP","Loads an image file from disk.")
+	IupSetAttribute(btOpen,"IMAGE","imImgWinOpenButton")
+	hbToolBar = IupHbox(
+		IupSetAttributes(IupFill(),"SIZE=5, EXPAND=NO"),	# Blank space before first icon
+		btOpen,
+		IupSetAttributes(IupFill(),"SIZE=5, EXPAND=NO"),
+		IupSetAttributes(IupFill(),"SIZE=200, EXPAND=NO"),
+		IupSetAttributes(IupFill(),"EXPAND=YES"),
+	)
+	IupSetAttribute(hbToolBar, "FLAT", "YES");
+
 	IupShow(dlg);
 
 	file_name = "*.*"
@@ -204,6 +223,102 @@ function CreateDialog()
 	IupSetAttribute(iup_dialog, "SIZE", "HALFxHALF")      # initial size
 
 	return iup_dialog
+end
+
+# ---------------------------------------------------------------------------------------------
+function CreateMainMenu()
+	item_help = IupItem ("Help", "item_help_act")
+	menu_help  = IupMenu (item_help);
+	submenu_help  = IupSubmenu ("Help", menu_help)
+
+	# Creates main menu with file menu
+	mainMenu = IupMenu(submenu_help)
+
+	return mainMenu
+
+end
+
+# ----------------------------------------------------------------------------------------------
+function imlabCreateButtonImages()
+	new_bits = uint8([
+		2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2
+		,3,2,2,1,3,2,2,1,2,2,2,2,2,2,2,2
+		,1,3,2,1,4,2,1,3,2,2,2,2,2,2,2,2
+		,2,1,3,1,3,1,3,0,0,0,0,0,0,0,0,2
+		,2,3,1,3,4,1,1,1,1,4,4,4,4,4,0,2
+		,1,1,1,4,3,3,4,4,4,4,4,4,4,4,0,2
+		,2,2,4,1,4,4,1,4,4,4,4,4,4,4,0,2
+		,1,2,2,1,3,4,4,4,4,4,4,4,4,4,0,2
+		,2,2,2,1,4,4,4,4,4,4,4,4,4,4,0,2
+		,2,2,2,0,4,4,4,4,4,4,4,4,4,4,0,2
+		,2,2,2,0,4,4,4,4,4,4,4,4,4,4,0,2
+		,2,2,2,0,4,4,4,4,4,4,4,4,4,4,0,2
+		,2,2,2,0,4,4,4,4,4,4,4,4,4,4,0,2
+		,2,2,2,0,4,4,4,4,4,4,4,4,4,4,0,2
+		,2,2,2,0,4,4,4,4,4,4,4,4,4,4,0,2
+		,2,2,2,0,0,0,0,0,0,0,0,0,0,0,0,2
+	])
+
+	new_colors = [                                      
+		"0 0 0",
+		"132 132 132",
+		"BGCOLOR",
+		"255 255 0",
+		"255 255 255",
+		""
+	]
+
+	open_bits = uint8([
+		1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
+		1,1,1,1,1,1,1,1,1,1,0,0,0,1,1,1,
+		1,1,1,1,1,1,1,1,1,0,1,1,1,0,1,0,
+		1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,
+		1,1,0,0,0,1,1,1,1,1,1,1,1,0,0,0,
+		1,0,1,3,1,0,0,0,0,0,0,0,1,1,1,1,
+		1,0,3,1,3,1,3,1,3,1,3,0,1,1,1,1,
+		1,0,1,3,1,3,1,3,1,3,1,0,1,1,1,1,
+		1,0,3,1,3,1,0,0,0,0,0,0,0,0,0,0,
+		1,0,1,3,1,0,2,2,2,2,2,2,2,2,2,0,
+		1,0,3,1,0,2,2,2,2,2,2,2,2,2,0,1,
+		1,0,1,0,2,2,2,2,2,2,2,2,2,0,1,1,
+		1,0,0,2,2,2,2,2,2,2,2,2,0,1,1,1,
+		1,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,
+		1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
+		1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
+	])
+
+	open_colors = [
+		"0 0 0",
+		"BGCOLOR",
+		"128 128 0",
+		"255 255 0",
+		""
+	]
+
+	CreateButtonImage(16,16, new_bits, new_colors, "imImgWinNewButton");
+	CreateButtonImage(16,16, open_bits, open_colors, "imImgWinOpenButton");
+end
+
+# ----------------------------------------------------------------------------------------------
+function CreateButtonImage(w::Int, h::Int, bits, colors, name::String)
+	global total_images, images
+
+	color_str = ["0","1","2","3","4","5","6","7","8","9","10","11","12","13","14","15"]
+	i = 1
+
+	iup_image = IupImage(w, h, bits)
+	IupSetHandle(name, iup_image)
+
+	while (colors[i] != "")
+		if (i > 16)
+			aux_color_str = @sprintf("%d", i)
+			IupStoreAttribute(iup_image, aux_color_str, colors[i]); 
+		else
+			IupStoreAttribute(iup_image, color_str[i], colors[i]); 
+		end
+		i += 1
+	end
+
 end
 
 
