@@ -11,6 +11,7 @@ export
 	IupGetAttribute, IupGetClassName, IupGetDialog, IupGetFloat, IupGetFile, IupGetGlobal, IupGetHandle, IupGetInt,
 	IupGetInt2, IupGridBox, IupGetParam,
 	IupHbox,
+	IupHide,
 	IupImage, IupImageRGBA, IupItem,
 	IupLabel, IupList,
 	IupLoad,

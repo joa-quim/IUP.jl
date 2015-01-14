@@ -134,7 +134,8 @@ function cbCanvasRepaint(iup_canvas::Ptr{Ihandle})
 	end
 
 	img = unsafe_load(image)		# Need to get access to the composite type, not to its pointer
-	imcdCanvasPutImage(cd_canvas, img, 0, 0, img.width, img.height, 0, 0, 0, 0)
+#	imcdCanvasPutImage(cd_canvas, img, 0, 0, img.width, img.height, 0, 0, 0, 0)
+	imcdCanvasPutImage(cd_canvas, img, 20,20,int64(img.width/2), int64(img.height/2),  0, 0, 0, 0)
 
 	#=data = [convert(Ptr{Uint8}, unsafe_load(img.data,1)),
 			convert(Ptr{Uint8}, unsafe_load(img.data,2)),

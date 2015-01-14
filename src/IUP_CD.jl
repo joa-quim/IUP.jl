@@ -338,6 +338,8 @@ export
 	# From cdiup.jl
 	#
 	cdContextIup,
+	# From cdxdbuf
+	cdContextDBuffer,
 	# local
 	imcdCanvasPutImage
 

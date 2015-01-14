@@ -265,8 +265,8 @@ end
 function cdVersionNumber()
   ccall( (:cdVersionNumber, libcd_), Cint, (), )
 end
-function cdCreateCanvas(context::Ptr{cdContext}, data::Ptr{None})
-  ccall( (:cdCreateCanvas, libcd_), Ptr{cdCanvas}, (Ptr{cdContext}, Ptr{None}), context, data)
+function cdCreateCanvas(context::Ptr{cdContext}, data::Ptr{Void})
+  ccall( (:cdCreateCanvas, libcd_), Ptr{cdCanvas}, (Ptr{cdContext}, Ptr{Void}), context, data)
 end
 function cdKillCanvas(canvas::Ptr{cdCanvas})
   ccall( (:cdKillCanvas, libcd_), None, (Ptr{cdCanvas},), canvas)
@@ -947,3 +947,6 @@ function cdGetBitmap(bitmap::Ptr{cdBitmap}, x::Integer, y::Integer)
   ccall( (:cdGetBitmap, libcd_), None, (Ptr{cdBitmap}, Cint, Cint), bitmap, x, y)
 end
 
+function cdContextDBuffer()
+    ccall( (:cdContextDBuffer, libcd_), Ptr{cdContext}, (),)
+end
