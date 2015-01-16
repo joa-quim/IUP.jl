@@ -2,9 +2,6 @@ module IUP_CD
 
 export
 	# From libcd.jl
-	cdVersion,
-	cdVersionDate,
-	cdVersionNumber,
 	cdCanvas,
 	cdCreateCanvas,
 	cdKillCanvas,
@@ -18,6 +15,7 @@ export
 	cdContextCaps,
 	cdContextIsPlus,
 	cdContextType,
+	cdContext,
 	cdCanvasSimulate,
 	cdCanvasFlush,
 	cdCanvasClear,
@@ -210,16 +208,11 @@ export
 	cdTextOrientation,
 	cdMarkType,
 	cdMarkSize,
-	cdVectorText,
 	cdMultiLineVectorText,
-	cdVectorFont,
-	cdVectorTextDirection,
-	cdVectorTextTransform,
-	cdVectorTextSize,
-	cdVectorCharSize,
 	cdGetVectorTextSize,
 	cdGetVectorTextBounds,
 	cdFontDim,
+	cdImage,
 	cdTextSize,
 	cdTextBox,
 	cdTextBounds,
@@ -235,6 +228,15 @@ export
 	cdScrollArea,
 	cdPutBitmap,
 	cdGetBitmap,
+	cdVersion,
+	cdVersionDate,
+	cdVersionNumber,	
+	cdVectorText,
+	cdVectorFont,
+	cdVectorTextDirection,
+	cdVectorTextTransform,
+	cdVectorTextSize,
+	cdVectorCharSize,
 	#
 	# From wd.jl
 	#
@@ -342,7 +344,6 @@ export
 	cdContextDBuffer,
 	# local
 	imcdCanvasPutImage
-
 
 include("libcd_h.jl")
 include("libcd.jl")
