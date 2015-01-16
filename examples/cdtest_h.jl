@@ -20,20 +20,6 @@ const META = 13
 # end enum ANONYMOUS_1
 # begin enum tPrim
 typealias tPrim Uint32
-const LINE = 0
-const RECT = 1
-const BOX = 2
-const ARC = 3
-const SECTOR = 4
-const CHORD = 5
-const PIXEL = 6
-const MARK = 7
-const TEXT = 8
-const POLY = 9
-const CLIP = 10
-const IMAGE = 11
-const RGB = 12
-const META = 13
 # begin enum ANONYMOUS_2
 const BACKGROUND = 0
 const FOREGROUND = 1
@@ -50,18 +36,6 @@ const CLOSE = 2
 const CENTER = 3
 const REPAINT = 4
 # end enum ANONYMOUS_4
-# begin enum tRubber
-typealias tRubber Uint32
-const NEWPOINT = 0
-const MOVE = 1
-const CLOSE = 2
-const CENTER = 3
-const REPAINT = 4
-# end enum tRubber
-# begin enum ANONYMOUS_5
-const FALSE = 0
-const TRUE = 1
-# end enum ANONYMOUS_5
 # begin enum tBoolean
 typealias tBoolean Uint32
 # end enum tBoolean
@@ -1118,7 +1092,6 @@ type tCTC
     sim::Cint
     stretch_play::Cint
 #    head::Ptr{tList}
-
 end
 
 type tCTC_t
