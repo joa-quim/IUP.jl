@@ -3,155 +3,155 @@
 
 @windows? (const libwd_ = "cd") : (const libwd_ = "libcd")  # Name of IUP shared lib.
 
-function wdCanvasWindow(canvas::Ptr{Cint}, xmin::Cdouble, xmax::Cdouble, ymin::Cdouble, ymax::Cdouble)
-  ccall( (:wdCanvasWindow, libwd_), None, (Ptr{Cint}, Cdouble, Cdouble, Cdouble, Cdouble), canvas, xmin, xmax, ymin, ymax)
+function wdCanvasWindow(canvas::Ptr{cdCanvas}, xmin::Cdouble, xmax::Cdouble, ymin::Cdouble, ymax::Cdouble)
+  ccall( (:wdCanvasWindow, libwd_), None, (Ptr{cdCanvas}, Cdouble, Cdouble, Cdouble, Cdouble), canvas, xmin, xmax, ymin, ymax)
 end
-function wdCanvasGetWindow(canvas::Ptr{Cint}, xmin::Ptr{Cdouble}, xmax::Ptr{Cdouble}, ymin::Ptr{Cdouble}, ymax::Ptr{Cdouble})
-  ccall( (:wdCanvasGetWindow, libwd_), None, (Ptr{Cint}, Ptr{Cdouble}, Ptr{Cdouble}, Ptr{Cdouble}, Ptr{Cdouble}), canvas, xmin, xmax, ymin, ymax)
+function wdCanvasGetWindow(canvas::Ptr{cdCanvas}, xmin::Ptr{Cdouble}, xmax::Ptr{Cdouble}, ymin::Ptr{Cdouble}, ymax::Ptr{Cdouble})
+  ccall( (:wdCanvasGetWindow, libwd_), None, (Ptr{cdCanvas}, Ptr{Cdouble}, Ptr{Cdouble}, Ptr{Cdouble}, Ptr{Cdouble}), canvas, xmin, xmax, ymin, ymax)
 end
-function wdCanvasViewport(canvas::Ptr{Cint}, xmin::Cint, xmax::Cint, ymin::Cint, ymax::Cint)
-  ccall( (:wdCanvasViewport, libwd_), None, (Ptr{Cint}, Cint, Cint, Cint, Cint), canvas, xmin, xmax, ymin, ymax)
+function wdCanvasViewport(canvas::Ptr{cdCanvas}, xmin::Integer, xmax::Integer, ymin::Integer, ymax::Integer)
+  ccall( (:wdCanvasViewport, libwd_), None, (Ptr{cdCanvas}, Cint, Cint, Cint, Cint), canvas, xmin, xmax, ymin, ymax)
 end
-function wdCanvasGetViewport(canvas::Ptr{Cint}, xmin::Ptr{Cint}, xmax::Ptr{Cint}, ymin::Ptr{Cint}, ymax::Ptr{Cint})
-  ccall( (:wdCanvasGetViewport, libwd_), None, (Ptr{Cint}, Ptr{Cint}, Ptr{Cint}, Ptr{Cint}, Ptr{Cint}), canvas, xmin, xmax, ymin, ymax)
+function wdCanvasGetViewport(canvas::Ptr{cdCanvas}, xmin::Ptr{Cint}, xmax::Ptr{Cint}, ymin::Ptr{Cint}, ymax::Ptr{Cint})
+  ccall( (:wdCanvasGetViewport, libwd_), None, (Ptr{cdCanvas}, Ptr{Cint}, Ptr{Cint}, Ptr{Cint}, Ptr{Cint}), canvas, xmin, xmax, ymin, ymax)
 end
-function wdCanvasWorld2Canvas(canvas::Ptr{Cint}, xw::Cdouble, yw::Cdouble, xv::Ptr{Cint}, yv::Ptr{Cint})
-  ccall( (:wdCanvasWorld2Canvas, libwd_), None, (Ptr{Cint}, Cdouble, Cdouble, Ptr{Cint}, Ptr{Cint}), canvas, xw, yw, xv, yv)
+function wdCanvasWorld2Canvas(canvas::Ptr{cdCanvas}, xw::Cdouble, yw::Cdouble, xv::Ptr{Cint}, yv::Ptr{Cint})
+  ccall( (:wdCanvasWorld2Canvas, libwd_), None, (Ptr{cdCanvas}, Cdouble, Cdouble, Ptr{Cint}, Ptr{Cint}), canvas, xw, yw, xv, yv)
 end
-function wdCanvasWorld2CanvasSize(canvas::Ptr{Cint}, hw::Cdouble, vw::Cdouble, hv::Ptr{Cint}, vv::Ptr{Cint})
-  ccall( (:wdCanvasWorld2CanvasSize, libwd_), None, (Ptr{Cint}, Cdouble, Cdouble, Ptr{Cint}, Ptr{Cint}), canvas, hw, vw, hv, vv)
+function wdCanvasWorld2CanvasSize(canvas::Ptr{cdCanvas}, hw::Cdouble, vw::Cdouble, hv::Ptr{Cint}, vv::Ptr{Cint})
+  ccall( (:wdCanvasWorld2CanvasSize, libwd_), None, (Ptr{cdCanvas}, Cdouble, Cdouble, Ptr{Cint}, Ptr{Cint}), canvas, hw, vw, hv, vv)
 end
-function wdCanvasCanvas2World(canvas::Ptr{Cint}, xv::Cint, yv::Cint, xw::Ptr{Cdouble}, yw::Ptr{Cdouble})
-  ccall( (:wdCanvasCanvas2World, libwd_), None, (Ptr{Cint}, Cint, Cint, Ptr{Cdouble}, Ptr{Cdouble}), canvas, xv, yv, xw, yw)
+function wdCanvasCanvas2World(canvas::Ptr{cdCanvas}, xv::Integer, yv::Integer, xw::Ptr{Cdouble}, yw::Ptr{Cdouble})
+  ccall( (:wdCanvasCanvas2World, libwd_), None, (Ptr{cdCanvas}, Cint, Cint, Ptr{Cdouble}, Ptr{Cdouble}), canvas, xv, yv, xw, yw)
 end
-function wdCanvasSetTransform(canvas::Ptr{Cint}, sx::Cdouble, sy::Cdouble, tx::Cdouble, ty::Cdouble)
-  ccall( (:wdCanvasSetTransform, libwd_), None, (Ptr{Cint}, Cdouble, Cdouble, Cdouble, Cdouble), canvas, sx, sy, tx, ty)
+function wdCanvasSetTransform(canvas::Ptr{cdCanvas}, sx::Cdouble, sy::Cdouble, tx::Cdouble, ty::Cdouble)
+  ccall( (:wdCanvasSetTransform, libwd_), None, (Ptr{cdCanvas}, Cdouble, Cdouble, Cdouble, Cdouble), canvas, sx, sy, tx, ty)
 end
-function wdCanvasGetTransform(canvas::Ptr{Cint}, sx::Ptr{Cdouble}, sy::Ptr{Cdouble}, tx::Ptr{Cdouble}, ty::Ptr{Cdouble})
-  ccall( (:wdCanvasGetTransform, libwd_), None, (Ptr{Cint}, Ptr{Cdouble}, Ptr{Cdouble}, Ptr{Cdouble}, Ptr{Cdouble}), canvas, sx, sy, tx, ty)
+function wdCanvasGetTransform(canvas::Ptr{cdCanvas}, sx::Ptr{Cdouble}, sy::Ptr{Cdouble}, tx::Ptr{Cdouble}, ty::Ptr{Cdouble})
+  ccall( (:wdCanvasGetTransform, libwd_), None, (Ptr{cdCanvas}, Ptr{Cdouble}, Ptr{Cdouble}, Ptr{Cdouble}, Ptr{Cdouble}), canvas, sx, sy, tx, ty)
 end
-function wdCanvasTranslate(canvas::Ptr{Cint}, dtx::Cdouble, dty::Cdouble)
-  ccall( (:wdCanvasTranslate, libwd_), None, (Ptr{Cint}, Cdouble, Cdouble), canvas, dtx, dty)
+function wdCanvasTranslate(canvas::Ptr{cdCanvas}, dtx::Cdouble, dty::Cdouble)
+  ccall( (:wdCanvasTranslate, libwd_), None, (Ptr{cdCanvas}, Cdouble, Cdouble), canvas, dtx, dty)
 end
-function wdCanvasScale(canvas::Ptr{Cint}, dsx::Cdouble, dsy::Cdouble)
-  ccall( (:wdCanvasScale, libwd_), None, (Ptr{Cint}, Cdouble, Cdouble), canvas, dsx, dsy)
+function wdCanvasScale(canvas::Ptr{cdCanvas}, dsx::Cdouble, dsy::Cdouble)
+  ccall( (:wdCanvasScale, libwd_), None, (Ptr{cdCanvas}, Cdouble, Cdouble), canvas, dsx, dsy)
 end
-function wdCanvasClipArea(canvas::Ptr{Cint}, xmin::Cdouble, xmax::Cdouble, ymin::Cdouble, ymax::Cdouble)
-  ccall( (:wdCanvasClipArea, libwd_), None, (Ptr{Cint}, Cdouble, Cdouble, Cdouble, Cdouble), canvas, xmin, xmax, ymin, ymax)
+function wdCanvasClipArea(canvas::Ptr{cdCanvas}, xmin::Cdouble, xmax::Cdouble, ymin::Cdouble, ymax::Cdouble)
+  ccall( (:wdCanvasClipArea, libwd_), None, (Ptr{cdCanvas}, Cdouble, Cdouble, Cdouble, Cdouble), canvas, xmin, xmax, ymin, ymax)
 end
-function wdCanvasGetClipArea(canvas::Ptr{Cint}, xmin::Ptr{Cdouble}, xmax::Ptr{Cdouble}, ymin::Ptr{Cdouble}, ymax::Ptr{Cdouble})
-  ccall( (:wdCanvasGetClipArea, libwd_), Cint, (Ptr{Cint}, Ptr{Cdouble}, Ptr{Cdouble}, Ptr{Cdouble}, Ptr{Cdouble}), canvas, xmin, xmax, ymin, ymax)
+function wdCanvasGetClipArea(canvas::Ptr{cdCanvas}, xmin::Ptr{Cdouble}, xmax::Ptr{Cdouble}, ymin::Ptr{Cdouble}, ymax::Ptr{Cdouble})
+  ccall( (:wdCanvasGetClipArea, libwd_), Cint, (Ptr{cdCanvas}, Ptr{Cdouble}, Ptr{Cdouble}, Ptr{Cdouble}, Ptr{Cdouble}), canvas, xmin, xmax, ymin, ymax)
 end
-function wdCanvasIsPointInRegion(canvas::Ptr{Cint}, x::Cdouble, y::Cdouble)
-  ccall( (:wdCanvasIsPointInRegion, libwd_), Cint, (Ptr{Cint}, Cdouble, Cdouble), canvas, x, y)
+function wdCanvasIsPointInRegion(canvas::Ptr{cdCanvas}, x::Cdouble, y::Cdouble)
+  ccall( (:wdCanvasIsPointInRegion, libwd_), Cint, (Ptr{cdCanvas}, Cdouble, Cdouble), canvas, x, y)
 end
-function wdCanvasOffsetRegion(canvas::Ptr{Cint}, x::Cdouble, y::Cdouble)
-  ccall( (:wdCanvasOffsetRegion, libwd_), None, (Ptr{Cint}, Cdouble, Cdouble), canvas, x, y)
+function wdCanvasOffsetRegion(canvas::Ptr{cdCanvas}, x::Cdouble, y::Cdouble)
+  ccall( (:wdCanvasOffsetRegion, libwd_), None, (Ptr{cdCanvas}, Cdouble, Cdouble), canvas, x, y)
 end
-function wdCanvasGetRegionBox(canvas::Ptr{Cint}, xmin::Ptr{Cdouble}, xmax::Ptr{Cdouble}, ymin::Ptr{Cdouble}, ymax::Ptr{Cdouble})
-  ccall( (:wdCanvasGetRegionBox, libwd_), None, (Ptr{Cint}, Ptr{Cdouble}, Ptr{Cdouble}, Ptr{Cdouble}, Ptr{Cdouble}), canvas, xmin, xmax, ymin, ymax)
+function wdCanvasGetRegionBox(canvas::Ptr{cdCanvas}, xmin::Ptr{Cdouble}, xmax::Ptr{Cdouble}, ymin::Ptr{Cdouble}, ymax::Ptr{Cdouble})
+  ccall( (:wdCanvasGetRegionBox, libwd_), None, (Ptr{cdCanvas}, Ptr{Cdouble}, Ptr{Cdouble}, Ptr{Cdouble}, Ptr{Cdouble}), canvas, xmin, xmax, ymin, ymax)
 end
-function wdCanvasHardcopy(canvas::Ptr{Cint}, ctx::Ptr{Cint}, data::Ptr{None}, draw_func::Ptr{Void})
-  ccall( (:wdCanvasHardcopy, libwd_), None, (Ptr{Cint}, Ptr{Cint}, Ptr{None}, Ptr{Void}), canvas, ctx, data, draw_func)
+function wdCanvasHardcopy(canvas::Ptr{cdCanvas}, ctx::Ptr{Cint}, data::Ptr{None}, draw_func::Ptr{Void})
+  ccall( (:wdCanvasHardcopy, libwd_), None, (Ptr{cdCanvas}, Ptr{Cint}, Ptr{None}, Ptr{Void}), canvas, ctx, data, draw_func)
 end
-function wdCanvasPixel(canvas::Ptr{Cint}, x::Cdouble, y::Cdouble, color::Clong)
-  ccall( (:wdCanvasPixel, libwd_), None, (Ptr{Cint}, Cdouble, Cdouble, Clong), canvas, x, y, color)
+function wdCanvasPixel(canvas::Ptr{cdCanvas}, x::Cdouble, y::Cdouble, color::Clong)
+  ccall( (:wdCanvasPixel, libwd_), None, (Ptr{cdCanvas}, Cdouble, Cdouble, Clong), canvas, x, y, color)
 end
-function wdCanvasMark(canvas::Ptr{Cint}, x::Cdouble, y::Cdouble)
-  ccall( (:wdCanvasMark, libwd_), None, (Ptr{Cint}, Cdouble, Cdouble), canvas, x, y)
+function wdCanvasMark(canvas::Ptr{cdCanvas}, x::Cdouble, y::Cdouble)
+  ccall( (:wdCanvasMark, libwd_), None, (Ptr{cdCanvas}, Cdouble, Cdouble), canvas, x, y)
 end
-function wdCanvasLine(canvas::Ptr{Cint}, x1::Cdouble, y1::Cdouble, x2::Cdouble, y2::Cdouble)
-  ccall( (:wdCanvasLine, libwd_), None, (Ptr{Cint}, Cdouble, Cdouble, Cdouble, Cdouble), canvas, x1, y1, x2, y2)
+function wdCanvasLine(canvas::Ptr{cdCanvas}, x1::Cdouble, y1::Cdouble, x2::Cdouble, y2::Cdouble)
+  ccall( (:wdCanvasLine, libwd_), None, (Ptr{cdCanvas}, Cdouble, Cdouble, Cdouble, Cdouble), canvas, x1, y1, x2, y2)
 end
-function wdCanvasVertex(canvas::Ptr{Cint}, x::Cdouble, y::Cdouble)
-  ccall( (:wdCanvasVertex, libwd_), None, (Ptr{Cint}, Cdouble, Cdouble), canvas, x, y)
+function wdCanvasVertex(canvas::Ptr{cdCanvas}, x::Cdouble, y::Cdouble)
+  ccall( (:wdCanvasVertex, libwd_), None, (Ptr{cdCanvas}, Cdouble, Cdouble), canvas, x, y)
 end
-function wdCanvasRect(canvas::Ptr{Cint}, xmin::Cdouble, xmax::Cdouble, ymin::Cdouble, ymax::Cdouble)
-  ccall( (:wdCanvasRect, libwd_), None, (Ptr{Cint}, Cdouble, Cdouble, Cdouble, Cdouble), canvas, xmin, xmax, ymin, ymax)
+function wdCanvasRect(canvas::Ptr{cdCanvas}, xmin::Cdouble, xmax::Cdouble, ymin::Cdouble, ymax::Cdouble)
+  ccall( (:wdCanvasRect, libwd_), None, (Ptr{cdCanvas}, Cdouble, Cdouble, Cdouble, Cdouble), canvas, xmin, xmax, ymin, ymax)
 end
-function wdCanvasBox(canvas::Ptr{Cint}, xmin::Cdouble, xmax::Cdouble, ymin::Cdouble, ymax::Cdouble)
-  ccall( (:wdCanvasBox, libwd_), None, (Ptr{Cint}, Cdouble, Cdouble, Cdouble, Cdouble), canvas, xmin, xmax, ymin, ymax)
+function wdCanvasBox(canvas::Ptr{cdCanvas}, xmin::Cdouble, xmax::Cdouble, ymin::Cdouble, ymax::Cdouble)
+  ccall( (:wdCanvasBox, libwd_), None, (Ptr{cdCanvas}, Cdouble, Cdouble, Cdouble, Cdouble), canvas, xmin, xmax, ymin, ymax)
 end
-function wdCanvasArc(canvas::Ptr{Cint}, xc::Cdouble, yc::Cdouble, w::Cdouble, h::Cdouble, angle1::Cdouble, angle2::Cdouble)
-  ccall( (:wdCanvasArc, libwd_), None, (Ptr{Cint}, Cdouble, Cdouble, Cdouble, Cdouble, Cdouble, Cdouble), canvas, xc, yc, w, h, angle1, angle2)
+function wdCanvasArc(canvas::Ptr{cdCanvas}, xc::Cdouble, yc::Cdouble, w::Cdouble, h::Cdouble, angle1::Cdouble, angle2::Cdouble)
+  ccall( (:wdCanvasArc, libwd_), None, (Ptr{cdCanvas}, Cdouble, Cdouble, Cdouble, Cdouble, Cdouble, Cdouble), canvas, xc, yc, w, h, angle1, angle2)
 end
-function wdCanvasSector(canvas::Ptr{Cint}, xc::Cdouble, yc::Cdouble, w::Cdouble, h::Cdouble, angle1::Cdouble, angle2::Cdouble)
-  ccall( (:wdCanvasSector, libwd_), None, (Ptr{Cint}, Cdouble, Cdouble, Cdouble, Cdouble, Cdouble, Cdouble), canvas, xc, yc, w, h, angle1, angle2)
+function wdCanvasSector(canvas::Ptr{cdCanvas}, xc::Cdouble, yc::Cdouble, w::Cdouble, h::Cdouble, angle1::Cdouble, angle2::Cdouble)
+  ccall( (:wdCanvasSector, libwd_), None, (Ptr{cdCanvas}, Cdouble, Cdouble, Cdouble, Cdouble, Cdouble, Cdouble), canvas, xc, yc, w, h, angle1, angle2)
 end
-function wdCanvasChord(canvas::Ptr{Cint}, xc::Cdouble, yc::Cdouble, w::Cdouble, h::Cdouble, angle1::Cdouble, angle2::Cdouble)
-  ccall( (:wdCanvasChord, libwd_), None, (Ptr{Cint}, Cdouble, Cdouble, Cdouble, Cdouble, Cdouble, Cdouble), canvas, xc, yc, w, h, angle1, angle2)
+function wdCanvasChord(canvas::Ptr{cdCanvas}, xc::Cdouble, yc::Cdouble, w::Cdouble, h::Cdouble, angle1::Cdouble, angle2::Cdouble)
+  ccall( (:wdCanvasChord, libwd_), None, (Ptr{cdCanvas}, Cdouble, Cdouble, Cdouble, Cdouble, Cdouble, Cdouble), canvas, xc, yc, w, h, angle1, angle2)
 end
-function wdCanvasText(canvas::Ptr{Cint}, x::Cdouble, y::Cdouble, s::String)
-  ccall( (:wdCanvasText, libwd_), None, (Ptr{Cint}, Cdouble, Cdouble, Ptr{Uint8}), canvas, x, y, s)
+function wdCanvasText(canvas::Ptr{cdCanvas}, x::Cdouble, y::Cdouble, s::String)
+  ccall( (:wdCanvasText, libwd_), None, (Ptr{cdCanvas}, Cdouble, Cdouble, Ptr{Uint8}), canvas, x, y, s)
 end
-function wdCanvasPutImageRect(canvas::Ptr{Cint}, image::Ptr{Cint}, x::Cdouble, y::Cdouble, xmin::Cint, xmax::Cint, ymin::Cint, ymax::Cint)
-  ccall( (:wdCanvasPutImageRect, libwd_), None, (Ptr{Cint}, Ptr{Cint}, Cdouble, Cdouble, Cint, Cint, Cint, Cint), canvas, image, x, y, xmin, xmax, ymin, ymax)
+function wdCanvasPutImageRect(canvas::Ptr{cdCanvas}, image::Ptr{Cint}, x::Cdouble, y::Cdouble, xmin::Integer, xmax::Integer, ymin::Integer, ymax::Integer)
+  ccall( (:wdCanvasPutImageRect, libwd_), None, (Ptr{cdCanvas}, Ptr{Cint}, Cdouble, Cdouble, Cint, Cint, Cint, Cint), canvas, image, x, y, xmin, xmax, ymin, ymax)
 end
-function wdCanvasPutImageRectRGB(canvas::Ptr{Cint}, iw::Cint, ih::Cint, r::Ptr{Cuchar}, g::Ptr{Cuchar}, b::Ptr{Cuchar}, x::Cdouble, y::Cdouble, w::Cdouble, h::Cdouble, xmin::Cint, xmax::Cint, ymin::Cint, ymax::Cint)
-  ccall( (:wdCanvasPutImageRectRGB, libwd_), None, (Ptr{Cint}, Cint, Cint, Ptr{Cuchar}, Ptr{Cuchar}, Ptr{Cuchar}, Cdouble, Cdouble, Cdouble, Cdouble, Cint, Cint, Cint, Cint), canvas, iw, ih, r, g, b, x, y, w, h, xmin, xmax, ymin, ymax)
+function wdCanvasPutImageRectRGB(canvas::Ptr{cdCanvas}, iw::Integer, ih::Integer, r::Ptr{Cuchar}, g::Ptr{Cuchar}, b::Ptr{Cuchar}, x::Cdouble, y::Cdouble, w::Cdouble, h::Cdouble, xmin::Integer, xmax::Integer, ymin::Integer, ymax::Integer)
+  ccall( (:wdCanvasPutImageRectRGB, libwd_), None, (Ptr{cdCanvas}, Cint, Cint, Ptr{Cuchar}, Ptr{Cuchar}, Ptr{Cuchar}, Cdouble, Cdouble, Cdouble, Cdouble, Cint, Cint, Cint, Cint), canvas, iw, ih, r, g, b, x, y, w, h, xmin, xmax, ymin, ymax)
 end
-function wdCanvasPutImageRectRGBA(canvas::Ptr{Cint}, iw::Cint, ih::Cint, r::Ptr{Cuchar}, g::Ptr{Cuchar}, b::Ptr{Cuchar}, a::Ptr{Cuchar}, x::Cdouble, y::Cdouble, w::Cdouble, h::Cdouble, xmin::Cint, xmax::Cint, ymin::Cint, ymax::Cint)
-  ccall( (:wdCanvasPutImageRectRGBA, libwd_), None, (Ptr{Cint}, Cint, Cint, Ptr{Cuchar}, Ptr{Cuchar}, Ptr{Cuchar}, Ptr{Cuchar}, Cdouble, Cdouble, Cdouble, Cdouble, Cint, Cint, Cint, Cint), canvas, iw, ih, r, g, b, a, x, y, w, h, xmin, xmax, ymin, ymax)
+function wdCanvasPutImageRectRGBA(canvas::Ptr{cdCanvas}, iw::Integer, ih::Integer, r::Ptr{Cuchar}, g::Ptr{Cuchar}, b::Ptr{Cuchar}, a::Ptr{Cuchar}, x::Cdouble, y::Cdouble, w::Cdouble, h::Cdouble, xmin::Integer, xmax::Integer, ymin::Integer, ymax::Integer)
+  ccall( (:wdCanvasPutImageRectRGBA, libwd_), None, (Ptr{cdCanvas}, Cint, Cint, Ptr{Cuchar}, Ptr{Cuchar}, Ptr{Cuchar}, Ptr{Cuchar}, Cdouble, Cdouble, Cdouble, Cdouble, Cint, Cint, Cint, Cint), canvas, iw, ih, r, g, b, a, x, y, w, h, xmin, xmax, ymin, ymax)
 end
-function wdCanvasPutImageRectMap(canvas::Ptr{Cint}, iw::Cint, ih::Cint, index::Ptr{Cuchar}, colors::Ptr{Clong}, x::Cdouble, y::Cdouble, w::Cdouble, h::Cdouble, xmin::Cint, xmax::Cint, ymin::Cint, ymax::Cint)
-  ccall( (:wdCanvasPutImageRectMap, libwd_), None, (Ptr{Cint}, Cint, Cint, Ptr{Cuchar}, Ptr{Clong}, Cdouble, Cdouble, Cdouble, Cdouble, Cint, Cint, Cint, Cint), canvas, iw, ih, index, colors, x, y, w, h, xmin, xmax, ymin, ymax)
+function wdCanvasPutImageRectMap(canvas::Ptr{cdCanvas}, iw::Integer, ih::Integer, index::Ptr{Cuchar}, colors::Ptr{Clong}, x::Cdouble, y::Cdouble, w::Cdouble, h::Cdouble, xmin::Integer, xmax::Integer, ymin::Integer, ymax::Integer)
+  ccall( (:wdCanvasPutImageRectMap, libwd_), None, (Ptr{cdCanvas}, Cint, Cint, Ptr{Cuchar}, Ptr{Clong}, Cdouble, Cdouble, Cdouble, Cdouble, Cint, Cint, Cint, Cint), canvas, iw, ih, index, colors, x, y, w, h, xmin, xmax, ymin, ymax)
 end
-function wdCanvasPutBitmap(canvas::Ptr{Cint}, bitmap::Ptr{Cint}, x::Cdouble, y::Cdouble, w::Cdouble, h::Cdouble)
-  ccall( (:wdCanvasPutBitmap, libwd_), None, (Ptr{Cint}, Ptr{Cint}, Cdouble, Cdouble, Cdouble, Cdouble), canvas, bitmap, x, y, w, h)
+function wdCanvasPutBitmap(canvas::Ptr{cdCanvas}, bitmap::Ptr{Cint}, x::Cdouble, y::Cdouble, w::Cdouble, h::Cdouble)
+  ccall( (:wdCanvasPutBitmap, libwd_), None, (Ptr{cdCanvas}, Ptr{Cint}, Cdouble, Cdouble, Cdouble, Cdouble), canvas, bitmap, x, y, w, h)
 end
-function wdCanvasLineWidth(canvas::Ptr{Cint}, width::Cdouble)
-  ccall( (:wdCanvasLineWidth, libwd_), Cdouble, (Ptr{Cint}, Cdouble), canvas, width)
+function wdCanvasLineWidth(canvas::Ptr{cdCanvas}, width::Cdouble)
+  ccall( (:wdCanvasLineWidth, libwd_), Cdouble, (Ptr{cdCanvas}, Cdouble), canvas, width)
 end
-function wdCanvasFont(canvas::Ptr{Cint}, type_face::String, style::Cint, size::Cdouble)
-  ccall( (:wdCanvasFont, libwd_), Cint, (Ptr{Cint}, Ptr{Uint8}, Cint, Cdouble), canvas, type_face, style, size)
+function wdCanvasFont(canvas::Ptr{cdCanvas}, type_face::String, style::Integer, size::Cdouble)
+  ccall( (:wdCanvasFont, libwd_), Cint, (Ptr{cdCanvas}, Ptr{Uint8}, Cint, Cdouble), canvas, type_face, style, size)
 end
-function wdCanvasGetFont(canvas::Ptr{Cint}, type_face::String, style::Ptr{Cint}, size::Ptr{Cdouble})
-  ccall( (:wdCanvasGetFont, libwd_), None, (Ptr{Cint}, Ptr{Uint8}, Ptr{Cint}, Ptr{Cdouble}), canvas, type_face, style, size)
+function wdCanvasGetFont(canvas::Ptr{cdCanvas}, type_face::String, style::Ptr{Cint}, size::Ptr{Cdouble})
+  ccall( (:wdCanvasGetFont, libwd_), None, (Ptr{cdCanvas}, Ptr{Uint8}, Ptr{Cint}, Ptr{Cdouble}), canvas, type_face, style, size)
 end
-function wdCanvasMarkSize(canvas::Ptr{Cint}, size::Cdouble)
-  ccall( (:wdCanvasMarkSize, libwd_), Cdouble, (Ptr{Cint}, Cdouble), canvas, size)
+function wdCanvasMarkSize(canvas::Ptr{cdCanvas}, size::Cdouble)
+  ccall( (:wdCanvasMarkSize, libwd_), Cdouble, (Ptr{cdCanvas}, Cdouble), canvas, size)
 end
-function wdCanvasGetFontDim(canvas::Ptr{Cint}, max_width::Ptr{Cdouble}, height::Ptr{Cdouble}, ascent::Ptr{Cdouble}, descent::Ptr{Cdouble})
-  ccall( (:wdCanvasGetFontDim, libwd_), None, (Ptr{Cint}, Ptr{Cdouble}, Ptr{Cdouble}, Ptr{Cdouble}, Ptr{Cdouble}), canvas, max_width, height, ascent, descent)
+function wdCanvasGetFontDim(canvas::Ptr{cdCanvas}, max_width::Ptr{Cdouble}, height::Ptr{Cdouble}, ascent::Ptr{Cdouble}, descent::Ptr{Cdouble})
+  ccall( (:wdCanvasGetFontDim, libwd_), None, (Ptr{cdCanvas}, Ptr{Cdouble}, Ptr{Cdouble}, Ptr{Cdouble}, Ptr{Cdouble}), canvas, max_width, height, ascent, descent)
 end
-function wdCanvasGetTextSize(canvas::Ptr{Cint}, s::String, width::Ptr{Cdouble}, height::Ptr{Cdouble})
-  ccall( (:wdCanvasGetTextSize, libwd_), None, (Ptr{Cint}, Ptr{Uint8}, Ptr{Cdouble}, Ptr{Cdouble}), canvas, s, width, height)
+function wdCanvasGetTextSize(canvas::Ptr{cdCanvas}, s::String, width::Ptr{Cdouble}, height::Ptr{Cdouble})
+  ccall( (:wdCanvasGetTextSize, libwd_), None, (Ptr{cdCanvas}, Ptr{Uint8}, Ptr{Cdouble}, Ptr{Cdouble}), canvas, s, width, height)
 end
-function wdCanvasGetTextBox(canvas::Ptr{Cint}, x::Cdouble, y::Cdouble, s::String, xmin::Ptr{Cdouble}, xmax::Ptr{Cdouble}, ymin::Ptr{Cdouble}, ymax::Ptr{Cdouble})
-  ccall( (:wdCanvasGetTextBox, libwd_), None, (Ptr{Cint}, Cdouble, Cdouble, Ptr{Uint8}, Ptr{Cdouble}, Ptr{Cdouble}, Ptr{Cdouble}, Ptr{Cdouble}), canvas, x, y, s, xmin, xmax, ymin, ymax)
+function wdCanvasGetTextBox(canvas::Ptr{cdCanvas}, x::Cdouble, y::Cdouble, s::String, xmin::Ptr{Cdouble}, xmax::Ptr{Cdouble}, ymin::Ptr{Cdouble}, ymax::Ptr{Cdouble})
+  ccall( (:wdCanvasGetTextBox, libwd_), None, (Ptr{cdCanvas}, Cdouble, Cdouble, Ptr{Uint8}, Ptr{Cdouble}, Ptr{Cdouble}, Ptr{Cdouble}, Ptr{Cdouble}), canvas, x, y, s, xmin, xmax, ymin, ymax)
 end
-function wdCanvasGetTextBounds(canvas::Ptr{Cint}, x::Cdouble, y::Cdouble, s::String, rect::Ptr{Cdouble})
-  ccall( (:wdCanvasGetTextBounds, libwd_), None, (Ptr{Cint}, Cdouble, Cdouble, Ptr{Uint8}, Ptr{Cdouble}), canvas, x, y, s, rect)
+function wdCanvasGetTextBounds(canvas::Ptr{cdCanvas}, x::Cdouble, y::Cdouble, s::String, rect::Ptr{Cdouble})
+  ccall( (:wdCanvasGetTextBounds, libwd_), None, (Ptr{cdCanvas}, Cdouble, Cdouble, Ptr{Uint8}, Ptr{Cdouble}), canvas, x, y, s, rect)
 end
-function wdCanvasStipple(canvas::Ptr{Cint}, w::Cint, h::Cint, fgbg::Ptr{Cuchar}, w_mm::Cdouble, h_mm::Cdouble)
-  ccall( (:wdCanvasStipple, libwd_), None, (Ptr{Cint}, Cint, Cint, Ptr{Cuchar}, Cdouble, Cdouble), canvas, w, h, fgbg, w_mm, h_mm)
+function wdCanvasStipple(canvas::Ptr{cdCanvas}, w::Integer, h::Integer, fgbg::Ptr{Cuchar}, w_mm::Cdouble, h_mm::Cdouble)
+  ccall( (:wdCanvasStipple, libwd_), None, (Ptr{cdCanvas}, Cint, Cint, Ptr{Cuchar}, Cdouble, Cdouble), canvas, w, h, fgbg, w_mm, h_mm)
 end
-function wdCanvasPattern(canvas::Ptr{Cint}, w::Cint, h::Cint, color::Ptr{Clong}, w_mm::Cdouble, h_mm::Cdouble)
-  ccall( (:wdCanvasPattern, libwd_), None, (Ptr{Cint}, Cint, Cint, Ptr{Clong}, Cdouble, Cdouble), canvas, w, h, color, w_mm, h_mm)
+function wdCanvasPattern(canvas::Ptr{cdCanvas}, w::Integer, h::Integer, color::Ptr{Clong}, w_mm::Cdouble, h_mm::Cdouble)
+  ccall( (:wdCanvasPattern, libwd_), None, (Ptr{cdCanvas}, Cint, Cint, Ptr{Clong}, Cdouble, Cdouble), canvas, w, h, color, w_mm, h_mm)
 end
-function wdCanvasVectorTextDirection(canvas::Ptr{Cint}, x1::Cdouble, y1::Cdouble, x2::Cdouble, y2::Cdouble)
-  ccall( (:wdCanvasVectorTextDirection, libwd_), None, (Ptr{Cint}, Cdouble, Cdouble, Cdouble, Cdouble), canvas, x1, y1, x2, y2)
+function wdCanvasVectorTextDirection(canvas::Ptr{cdCanvas}, x1::Cdouble, y1::Cdouble, x2::Cdouble, y2::Cdouble)
+  ccall( (:wdCanvasVectorTextDirection, libwd_), None, (Ptr{cdCanvas}, Cdouble, Cdouble, Cdouble, Cdouble), canvas, x1, y1, x2, y2)
 end
-function wdCanvasVectorTextSize(canvas::Ptr{Cint}, size_x::Cdouble, size_y::Cdouble, s::String)
-  ccall( (:wdCanvasVectorTextSize, libwd_), None, (Ptr{Cint}, Cdouble, Cdouble, Ptr{Uint8}), canvas, size_x, size_y, s)
+function wdCanvasVectorTextSize(canvas::Ptr{cdCanvas}, size_x::Cdouble, size_y::Cdouble, s::String)
+  ccall( (:wdCanvasVectorTextSize, libwd_), None, (Ptr{cdCanvas}, Cdouble, Cdouble, Ptr{Uint8}), canvas, size_x, size_y, s)
 end
-function wdCanvasGetVectorTextSize(canvas::Ptr{Cint}, s::String, x::Ptr{Cdouble}, y::Ptr{Cdouble})
-  ccall( (:wdCanvasGetVectorTextSize, libwd_), None, (Ptr{Cint}, Ptr{Uint8}, Ptr{Cdouble}, Ptr{Cdouble}), canvas, s, x, y)
+function wdCanvasGetVectorTextSize(canvas::Ptr{cdCanvas}, s::String, x::Ptr{Cdouble}, y::Ptr{Cdouble})
+  ccall( (:wdCanvasGetVectorTextSize, libwd_), None, (Ptr{cdCanvas}, Ptr{Uint8}, Ptr{Cdouble}, Ptr{Cdouble}), canvas, s, x, y)
 end
-function wdCanvasVectorCharSize(canvas::Ptr{Cint}, size::Cdouble)
-  ccall( (:wdCanvasVectorCharSize, libwd_), Cdouble, (Ptr{Cint}, Cdouble), canvas, size)
+function wdCanvasVectorCharSize(canvas::Ptr{cdCanvas}, size::Cdouble)
+  ccall( (:wdCanvasVectorCharSize, libwd_), Cdouble, (Ptr{cdCanvas}, Cdouble), canvas, size)
 end
-function wdCanvasVectorText(canvas::Ptr{Cint}, x::Cdouble, y::Cdouble, s::String)
-  ccall( (:wdCanvasVectorText, libwd_), None, (Ptr{Cint}, Cdouble, Cdouble, Ptr{Uint8}), canvas, x, y, s)
+function wdCanvasVectorText(canvas::Ptr{cdCanvas}, x::Cdouble, y::Cdouble, s::String)
+  ccall( (:wdCanvasVectorText, libwd_), None, (Ptr{cdCanvas}, Cdouble, Cdouble, Ptr{Uint8}), canvas, x, y, s)
 end
-function wdCanvasMultiLineVectorText(canvas::Ptr{Cint}, x::Cdouble, y::Cdouble, s::String)
-  ccall( (:wdCanvasMultiLineVectorText, libwd_), None, (Ptr{Cint}, Cdouble, Cdouble, Ptr{Uint8}), canvas, x, y, s)
+function wdCanvasMultiLineVectorText(canvas::Ptr{cdCanvas}, x::Cdouble, y::Cdouble, s::String)
+  ccall( (:wdCanvasMultiLineVectorText, libwd_), None, (Ptr{cdCanvas}, Cdouble, Cdouble, Ptr{Uint8}), canvas, x, y, s)
 end
-function wdCanvasGetVectorTextBounds(canvas::Ptr{Cint}, s::String, x::Cdouble, y::Cdouble, rect::Ptr{Cdouble})
-  ccall( (:wdCanvasGetVectorTextBounds, libwd_), None, (Ptr{Cint}, Ptr{Uint8}, Cdouble, Cdouble, Ptr{Cdouble}), canvas, s, x, y, rect)
+function wdCanvasGetVectorTextBounds(canvas::Ptr{cdCanvas}, s::String, x::Cdouble, y::Cdouble, rect::Ptr{Cdouble})
+  ccall( (:wdCanvasGetVectorTextBounds, libwd_), None, (Ptr{cdCanvas}, Ptr{Uint8}, Cdouble, Cdouble, Ptr{Cdouble}), canvas, s, x, y, rect)
 end
-function wdCanvasGetVectorTextBox(canvas::Ptr{Cint}, x::Cdouble, y::Cdouble, s::String, xmin::Ptr{Cdouble}, xmax::Ptr{Cdouble}, ymin::Ptr{Cdouble}, ymax::Ptr{Cdouble})
-  ccall( (:wdCanvasGetVectorTextBox, libwd_), None, (Ptr{Cint}, Cdouble, Cdouble, Ptr{Uint8}, Ptr{Cdouble}, Ptr{Cdouble}, Ptr{Cdouble}, Ptr{Cdouble}), canvas, x, y, s, xmin, xmax, ymin, ymax)
+function wdCanvasGetVectorTextBox(canvas::Ptr{cdCanvas}, x::Cdouble, y::Cdouble, s::String, xmin::Ptr{Cdouble}, xmax::Ptr{Cdouble}, ymin::Ptr{Cdouble}, ymax::Ptr{Cdouble})
+  ccall( (:wdCanvasGetVectorTextBox, libwd_), None, (Ptr{cdCanvas}, Cdouble, Cdouble, Ptr{Uint8}, Ptr{Cdouble}, Ptr{Cdouble}, Ptr{Cdouble}, Ptr{Cdouble}), canvas, x, y, s, xmin, xmax, ymin, ymax)
 end
 function wdWindow(xmin::Cdouble, xmax::Cdouble, ymin::Cdouble, ymax::Cdouble)
   ccall( (:wdWindow, libwd_), None, (Cdouble, Cdouble, Cdouble, Cdouble), xmin, xmax, ymin, ymax)
@@ -159,7 +159,7 @@ end
 function wdGetWindow(xmin::Ptr{Cdouble}, xmax::Ptr{Cdouble}, ymin::Ptr{Cdouble}, ymax::Ptr{Cdouble})
   ccall( (:wdGetWindow, libwd_), None, (Ptr{Cdouble}, Ptr{Cdouble}, Ptr{Cdouble}, Ptr{Cdouble}), xmin, xmax, ymin, ymax)
 end
-function wdViewport(xmin::Cint, xmax::Cint, ymin::Cint, ymax::Cint)
+function wdViewport(xmin::Integer, xmax::Integer, ymin::Integer, ymax::Integer)
   ccall( (:wdViewport, libwd_), None, (Cint, Cint, Cint, Cint), xmin, xmax, ymin, ymax)
 end
 function wdGetViewport(xmin::Ptr{Cint}, xmax::Ptr{Cint}, ymin::Ptr{Cint}, ymax::Ptr{Cint})
@@ -171,7 +171,7 @@ end
 function wdWorld2CanvasSize(hw::Cdouble, vw::Cdouble, hv::Ptr{Cint}, vv::Ptr{Cint})
   ccall( (:wdWorld2CanvasSize, libwd_), None, (Cdouble, Cdouble, Ptr{Cint}, Ptr{Cint}), hw, vw, hv, vv)
 end
-function wdCanvas2World(xv::Cint, yv::Cint, xw::Ptr{Cdouble}, yw::Ptr{Cdouble})
+function wdCanvas2World(xv::Integer, yv::Integer, xw::Ptr{Cdouble}, yw::Ptr{Cdouble})
   ccall( (:wdCanvas2World, libwd_), None, (Cint, Cint, Ptr{Cdouble}, Ptr{Cdouble}), xv, yv, xw, yw)
 end
 function wdClipArea(xmin::Cdouble, xmax::Cdouble, ymin::Cdouble, ymax::Cdouble)
@@ -225,16 +225,16 @@ end
 function wdText(x::Cdouble, y::Cdouble, s::String)
   ccall( (:wdText, libwd_), None, (Cdouble, Cdouble, Ptr{Uint8}), x, y, s)
 end
-function wdPutImageRect(image::Ptr{Cint}, x::Cdouble, y::Cdouble, xmin::Cint, xmax::Cint, ymin::Cint, ymax::Cint)
+function wdPutImageRect(image::Ptr{Cint}, x::Cdouble, y::Cdouble, xmin::Integer, xmax::Integer, ymin::Integer, ymax::Integer)
   ccall( (:wdPutImageRect, libwd_), None, (Ptr{Cint}, Cdouble, Cdouble, Cint, Cint, Cint, Cint), image, x, y, xmin, xmax, ymin, ymax)
 end
-function wdPutImageRectRGB(iw::Cint, ih::Cint, r::Ptr{Cuchar}, g::Ptr{Cuchar}, b::Ptr{Cuchar}, x::Cdouble, y::Cdouble, w::Cdouble, h::Cdouble, xmin::Cint, xmax::Cint, ymin::Cint, ymax::Cint)
+function wdPutImageRectRGB(iw::Integer, ih::Integer, r::Ptr{Cuchar}, g::Ptr{Cuchar}, b::Ptr{Cuchar}, x::Cdouble, y::Cdouble, w::Cdouble, h::Cdouble, xmin::Integer, xmax::Integer, ymin::Integer, ymax::Integer)
   ccall( (:wdPutImageRectRGB, libwd_), None, (Cint, Cint, Ptr{Cuchar}, Ptr{Cuchar}, Ptr{Cuchar}, Cdouble, Cdouble, Cdouble, Cdouble, Cint, Cint, Cint, Cint), iw, ih, r, g, b, x, y, w, h, xmin, xmax, ymin, ymax)
 end
-function wdPutImageRectRGBA(iw::Cint, ih::Cint, r::Ptr{Cuchar}, g::Ptr{Cuchar}, b::Ptr{Cuchar}, a::Ptr{Cuchar}, x::Cdouble, y::Cdouble, w::Cdouble, h::Cdouble, xmin::Cint, xmax::Cint, ymin::Cint, ymax::Cint)
+function wdPutImageRectRGBA(iw::Integer, ih::Integer, r::Ptr{Cuchar}, g::Ptr{Cuchar}, b::Ptr{Cuchar}, a::Ptr{Cuchar}, x::Cdouble, y::Cdouble, w::Cdouble, h::Cdouble, xmin::Integer, xmax::Integer, ymin::Integer, ymax::Integer)
   ccall( (:wdPutImageRectRGBA, libwd_), None, (Cint, Cint, Ptr{Cuchar}, Ptr{Cuchar}, Ptr{Cuchar}, Ptr{Cuchar}, Cdouble, Cdouble, Cdouble, Cdouble, Cint, Cint, Cint, Cint), iw, ih, r, g, b, a, x, y, w, h, xmin, xmax, ymin, ymax)
 end
-function wdPutImageRectMap(iw::Cint, ih::Cint, index::Ptr{Cuchar}, colors::Ptr{Clong}, x::Cdouble, y::Cdouble, w::Cdouble, h::Cdouble, xmin::Cint, xmax::Cint, ymin::Cint, ymax::Cint)
+function wdPutImageRectMap(iw::Integer, ih::Integer, index::Ptr{Cuchar}, colors::Ptr{Clong}, x::Cdouble, y::Cdouble, w::Cdouble, h::Cdouble, xmin::Integer, xmax::Integer, ymin::Integer, ymax::Integer)
   ccall( (:wdPutImageRectMap, libwd_), None, (Cint, Cint, Ptr{Cuchar}, Ptr{Clong}, Cdouble, Cdouble, Cdouble, Cdouble, Cint, Cint, Cint, Cint), iw, ih, index, colors, x, y, w, h, xmin, xmax, ymin, ymax)
 end
 function wdPutBitmap(bitmap::Ptr{Cint}, x::Cdouble, y::Cdouble, w::Cdouble, h::Cdouble)
@@ -243,7 +243,7 @@ end
 function wdLineWidth(width::Cdouble)
   ccall( (:wdLineWidth, libwd_), Cdouble, (Cdouble,), width)
 end
-function wdFont(type_face::Cint, style::Cint, size::Cdouble)
+function wdFont(type_face::Integer, style::Integer, size::Cdouble)
   ccall( (:wdFont, libwd_), None, (Cint, Cint, Cdouble), type_face, style, size)
 end
 function wdGetFont(type_face::Ptr{Cint}, style::Ptr{Cint}, size::Ptr{Cdouble})
@@ -264,10 +264,10 @@ end
 function wdTextBounds(x::Cdouble, y::Cdouble, s::String, rect::Ptr{Cdouble})
   ccall( (:wdTextBounds, libwd_), None, (Cdouble, Cdouble, Ptr{Uint8}, Ptr{Cdouble}), x, y, s, rect)
 end
-function wdStipple(w::Cint, h::Cint, stipple::Ptr{Cuchar}, w_mm::Cdouble, h_mm::Cdouble)
+function wdStipple(w::Integer, h::Integer, stipple::Ptr{Cuchar}, w_mm::Cdouble, h_mm::Cdouble)
   ccall( (:wdStipple, libwd_), None, (Cint, Cint, Ptr{Cuchar}, Cdouble, Cdouble), w, h, stipple, w_mm, h_mm)
 end
-function wdPattern(w::Cint, h::Cint, pattern::Ptr{Clong}, w_mm::Cdouble, h_mm::Cdouble)
+function wdPattern(w::Integer, h::Integer, pattern::Ptr{Clong}, w_mm::Cdouble, h_mm::Cdouble)
   ccall( (:wdPattern, libwd_), None, (Cint, Cint, Ptr{Clong}, Cdouble, Cdouble), w, h, pattern, w_mm, h_mm)
 end
 function wdVectorTextDirection(x1::Cdouble, y1::Cdouble, x2::Cdouble, y2::Cdouble)
