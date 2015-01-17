@@ -16,6 +16,7 @@ export
 	cdContextIsPlus,
 	cdContextType,
 	cdContext,
+	cdContextNativeWindow,
 	cdCanvasSimulate,
 	cdCanvasFlush,
 	cdCanvasClear,
