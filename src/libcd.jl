@@ -268,6 +268,9 @@ end
 function cdCreateCanvas(context::Ptr{cdContext}, data::Ptr{Void})
   ccall( (:cdCreateCanvas, libcd_), Ptr{cdCanvas}, (Ptr{cdContext}, Ptr{Void}), context, data)
 end
+function cdCreateCanvas(context::Ptr{cdContext}, data::Ptr{Uint8})
+  ccall( (:cdCreateCanvas, libcd_), Ptr{cdCanvas}, (Ptr{cdContext}, Ptr{Void}), context, data)
+end
 function cdKillCanvas(canvas::Ptr{cdCanvas})
   ccall( (:cdKillCanvas, libcd_), None, (Ptr{cdCanvas},), canvas)
 end
