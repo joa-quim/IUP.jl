@@ -329,8 +329,15 @@ function cdCanvasPlay(canvas::Ptr{cdCanvas}, context::Ptr{cdContext}, xmin::Inte
   ccall( (:cdCanvasPlay, libcd_), Cint, (Ptr{cdCanvas}, Ptr{cdContext}, Cint, Cint, Cint, Cint, Ptr{None}), canvas, context, xmin, xmax, ymin, ymax, data)
 end
 function cdCanvasGetSize(canvas::Ptr{cdCanvas}, width::Ptr{Cint}, height::Ptr{Cint}, width_mm::Ptr{Cdouble}, height_mm::Ptr{Cdouble})
-  ccall( (:cdCanvasGetSize, libcd_), None, (Ptr{cdCanvas}, Ptr{Cint}, Ptr{Cint}, Ptr{Cdouble}, Ptr{Cdouble}), canvas, width, height, width_mm, height_mm)
+    ccall( (:cdCanvasGetSize, libcd_), None, (Ptr{cdCanvas}, Ptr{Cint}, Ptr{Cint}, Ptr{Cdouble}, Ptr{Cdouble}),
+        canvas, width, height, width_mm, height_mm)
 end
+function cdCanvasGetSize(canvas::Ptr{cdCanvas}, width::Ptr{Cint}, height::Ptr{Cint}, width_mm::Ptr{Void}, height_mm::Ptr{Void})
+    ccall( (:cdCanvasGetSize, libcd_), None, (Ptr{cdCanvas}, Ptr{Cint}, Ptr{Cint}, Ptr{Cdouble}, Ptr{Cdouble}),
+        canvas, width, height, width_mm, height_mm)
+end
+
+
 function cdCanvasUpdateYAxis(canvas::Ptr{cdCanvas}, y::Ptr{Cint})
   ccall( (:cdCanvasUpdateYAxis, libcd_), Cint, (Ptr{cdCanvas}, Ptr{Cint}), canvas, y)
 end
@@ -481,16 +488,16 @@ end
 function cdfCanvasText(canvas::Ptr{cdCanvas}, x::Cdouble, y::Cdouble, s::Ptr{Uint8})
   ccall( (:cdfCanvasText, libcd_), None, (Ptr{cdCanvas}, Cdouble, Cdouble, Ptr{Uint8}), canvas, x, y, s)
 end
-function cdCanvasSetBackground(canvas::Ptr{cdCanvas}, color::Clong)
+function cdCanvasSetBackground(canvas::Ptr{cdCanvas}, color::Integer)
   ccall( (:cdCanvasSetBackground, libcd_), None, (Ptr{cdCanvas}, Clong), canvas, color)
 end
-function cdCanvasSetForeground(canvas::Ptr{cdCanvas}, color::Clong)
+function cdCanvasSetForeground(canvas::Ptr{cdCanvas}, color::Integer)
   ccall( (:cdCanvasSetForeground, libcd_), None, (Ptr{cdCanvas}, Clong), canvas, color)
 end
-function cdCanvasBackground(canvas::Ptr{cdCanvas}, color::Clong)
+function cdCanvasBackground(canvas::Ptr{cdCanvas}, color::Integer)
   ccall( (:cdCanvasBackground, libcd_), Clong, (Ptr{cdCanvas}, Clong), canvas, color)
 end
-function cdCanvasForeground(canvas::Ptr{cdCanvas}, color::Clong)
+function cdCanvasForeground(canvas::Ptr{cdCanvas}, color::Integer)
   ccall( (:cdCanvasForeground, libcd_), Clong, (Ptr{cdCanvas}, Clong), canvas, color)
 end
 function cdCanvasBackOpacity(canvas::Ptr{cdCanvas}, opacity::Integer)
@@ -685,13 +692,13 @@ end
 function cdEncodeColor(red::Cuchar, green::Cuchar, blue::Cuchar)
   ccall( (:cdEncodeColor, libcd_), Clong, (Cuchar, Cuchar, Cuchar), red, green, blue)
 end
-function cdDecodeColor(color::Clong, red::Ptr{Cuchar}, green::Ptr{Cuchar}, blue::Ptr{Cuchar})
+function cdDecodeColor(color::Integer, red::Ptr{Cuchar}, green::Ptr{Cuchar}, blue::Ptr{Cuchar})
   ccall( (:cdDecodeColor, libcd_), None, (Clong, Ptr{Cuchar}, Ptr{Cuchar}, Ptr{Cuchar}), color, red, green, blue)
 end
-function cdDecodeAlpha(color::Clong)
+function cdDecodeAlpha(color::Integer)
   ccall( (:cdDecodeAlpha, libcd_), Cuchar, (Clong,), color)
 end
-function cdEncodeAlpha(color::Clong, alpha::Cuchar)
+function cdEncodeAlpha(color::Integer, alpha::Char)
   ccall( (:cdEncodeAlpha, libcd_), Clong, (Clong, Cuchar), color, alpha)
 end
 function cdRGB2Map(width::Integer, height::Integer, red::Ptr{Cuchar}, green::Ptr{Cuchar}, blue::Ptr{Cuchar}, index::Ptr{Cuchar}, pal_size::Integer, color::Ptr{Clong})
