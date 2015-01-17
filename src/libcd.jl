@@ -328,7 +328,7 @@ end
 function cdCanvasPlay(canvas::Ptr{cdCanvas}, context::Ptr{cdContext}, xmin::Integer, xmax::Integer, ymin::Integer, ymax::Integer, data::Ptr{None})
   ccall( (:cdCanvasPlay, libcd_), Cint, (Ptr{cdCanvas}, Ptr{cdContext}, Cint, Cint, Cint, Cint, Ptr{None}), canvas, context, xmin, xmax, ymin, ymax, data)
 end
-function cdCanvasGetSize(canvas::Ptr{cdCanvas}, width::Ptr{Cint}, height::Ptr{Cint}, width_mm::Ptr{Cdouble}, height_mm::Ptr{Cdouble})
+function cdCanvasGetSize(canvas::Ptr{cdCanvas}, width::Ptr{Cint}, height::Ptr{Cint}, width_mm::Ptr{Cdouble}=C_NULL, height_mm::Ptr{Cdouble}=C_NULL)
     ccall( (:cdCanvasGetSize, libcd_), None, (Ptr{cdCanvas}, Ptr{Cint}, Ptr{Cint}, Ptr{Cdouble}, Ptr{Cdouble}),
         canvas, width, height, width_mm, height_mm)
 end
@@ -336,7 +336,6 @@ function cdCanvasGetSize(canvas::Ptr{cdCanvas}, width::Ptr{Cint}, height::Ptr{Ci
     ccall( (:cdCanvasGetSize, libcd_), None, (Ptr{cdCanvas}, Ptr{Cint}, Ptr{Cint}, Ptr{Cdouble}, Ptr{Cdouble}),
         canvas, width, height, width_mm, height_mm)
 end
-
 
 function cdCanvasUpdateYAxis(canvas::Ptr{cdCanvas}, y::Ptr{Cint})
   ccall( (:cdCanvasUpdateYAxis, libcd_), Cint, (Ptr{cdCanvas}, Ptr{Cint}), canvas, y)
@@ -740,7 +739,10 @@ end
 function cdPlay(context::Ptr{cdContext}, xmin::Integer, xmax::Integer, ymin::Integer, ymax::Integer, data::Ptr{None})
   ccall( (:cdPlay, libcd_), Cint, (Ptr{cdContext}, Cint, Cint, Cint, Cint, Ptr{None}), context, xmin, xmax, ymin, ymax, data)
 end
-function cdGetCanvasSize(width::Ptr{Cint}, height::Ptr{Cint}, width_mm::Ptr{Cdouble}, height_mm::Ptr{Cdouble})
+function cdGetCanvasSize(width::Ptr{Cint}, height::Ptr{Cint}, width_mm::Ptr{Cdouble}=C_NULL, height_mm::Ptr{Cdouble}=C_NULL)
+  ccall( (:cdGetCanvasSize, libcd_), None, (Ptr{Cint}, Ptr{Cint}, Ptr{Cdouble}, Ptr{Cdouble}), width, height, width_mm, height_mm)
+end
+function cdGetCanvasSize(width::Ptr{Cint}, height::Ptr{Cint}, width_mm::Ptr{Void}, height_mm::Ptr{Void})
   ccall( (:cdGetCanvasSize, libcd_), None, (Ptr{Cint}, Ptr{Cint}, Ptr{Cdouble}, Ptr{Cdouble}), width, height, width_mm, height_mm)
 end
 function cdUpdateYAxis(y::Ptr{Cint})
@@ -956,4 +958,8 @@ end
 
 function cdContextDBuffer()
     ccall( (:cdContextDBuffer, libcd_), Ptr{cdContext}, (),)
+end
+
+function cdContextNativeWindow()
+    ccall( (:cdContextNativeWindow, libcd_), Ptr{cdContext}, (),)
 end
