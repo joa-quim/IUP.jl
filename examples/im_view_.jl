@@ -27,36 +27,6 @@ export
 include("../src/libiup_h.jl")
 include("../src/im_process_h.jl")
 
-#= ---------------------------------------------------------------------------------
-# Tried to write this macro instead of the IUP_CD.jl function but it fails miserably
-macro imcdCanvasPutImage(_canvas, _image, _x, _y, _w, _h, _xmin, _xmax, _ymin, _ymax)
-	if (isa(_image, Ptr{imImage}))
-		_image = unsafe_load(_image)
-	end
-	if (_image.color_space == IM_RGB)
-		data = [convert(Ptr{Uint8}, unsafe_load(_image.data,1)),
-			convert(Ptr{Uint8}, unsafe_load(_image.data,2)),
-			convert(Ptr{Uint8}, unsafe_load(_image.data,3))]
-
-		if ($_image.has_alpha != 0)
-			data = [data, convert(Ptr{Uint8}, unsafe_load(_image.data,4))]
-			return cdCanvasPutImageRectRGBA(_canvas, _image.width, _image.height,
-					data[1], data[2], data[3], data[4],
-					_x, _y, _w, _h, _xmin, _xmax, _ymin, _ymax)
-		else
-			return cdCanvasPutImageRectRGB($_canvas, _image.width, _image.height,
-					data[1], data[2], data[3],
-					_x, _y, _w, _h, _xmin, _xmax, _ymin, _ymax)
-		end
-	else
-		data = [convert(Ptr{Uint8}, unsafe_load(_imag.data,1))]
-		return cdCanvasPutImageRectMap(_canvas, _image.width, _image.height,
-					data[0], _image.palette,
-					_x, _y, _w, _h, _xmin, _xmax, _ymin, _ymax)
-	end
-end
-=#
-
 global disable_repaint = false      # used to optimize repaint, while opening a new file
 
 # --------------------------------------------------------------------------------
