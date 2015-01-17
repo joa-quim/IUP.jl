@@ -223,6 +223,9 @@ end
 function IupSetFloat(ih::Ptr{Ihandle}, name::String, value)
   ccall( (:IupSetFloat, iup), None, (Ptr{Ihandle}, Ptr{Uint8}, Cfloat), ih, name, value)
 end
+function IupSetDouble(ih::Ptr{Ihandle}, name::String, value)
+  ccall( (:IupSetFloat, iup), None, (Ptr{Ihandle}, Ptr{Uint8}, Cdouble), ih, name, value)
+end
 function IupSetRGB(ih::Ptr{Ihandle}, name::String, r::Cuchar, g::Cuchar, b::Cuchar)
   ccall( (:IupSetRGB, iup), None, (Ptr{Ihandle}, Ptr{Uint8}, Cuchar, Cuchar, Cuchar), ih, name, r, g, b)
 end
@@ -241,6 +244,9 @@ end
 function IupGetFloat(ih::Ptr{Ihandle}, name::String)
 	ccall((:IupGetFloat, iup), Cfloat, (Ptr{Ihandle}, Ptr{Uint8}), ih, name)
 end
+function IupGetDouble(ih::Ptr{Ihandle}, name::String)
+    ccall((:IupGetFloat, iup), Cdouble, (Ptr{Ihandle}, Ptr{Uint8}), ih, name)
+end
 function IupGetRGB(ih::Ptr{Ihandle}, name::String, r::Ptr{Cuchar}, g::Ptr{Cuchar}, b::Ptr{Cuchar})
   ccall( (:IupGetRGB, iup), None, (Ptr{Ihandle}, Ptr{Uint8}, Ptr{Cuchar}, Ptr{Cuchar}, Ptr{Cuchar}), ih, name, r, g, b)
 end
@@ -256,6 +262,9 @@ end
 function IupSetFloatId(ih::Ptr{Ihandle}, name::String, id::Cint, value::Cfloat)
   ccall( (:IupSetFloatId, iup), None, (Ptr{Ihandle}, Ptr{Uint8}, Cint, Cfloat), ih, name, id, value)
 end
+function IupSetDoubleId(ih::Ptr{Ihandle}, name::String, id::Cint, value::Cdouble)
+  ccall( (:IupSetFloatId, iup), None, (Ptr{Ihandle}, Ptr{Uint8}, Cint, Cdouble), ih, name, id, value)
+end
 function IupSetRGBId(ih::Ptr{Ihandle}, name::String, id::Cint, r::Cuchar, g::Cuchar, b::Cuchar)
   ccall( (:IupSetRGBId, iup), None, (Ptr{Ihandle}, Ptr{Uint8}, Cint, Cuchar, Cuchar, Cuchar), ih, name, id, r, g, b)
 end
@@ -267,6 +276,9 @@ function IupGetIntId(ih::Ptr{Ihandle}, name::String, id::Cint)
 end
 function IupGetFloatId(ih::Ptr{Ihandle}, name::String, id::Cint)
   ccall( (:IupGetFloatId, iup), Cfloat, (Ptr{Ihandle}, Ptr{Uint8}, Cint), ih, name, id)
+end
+function IupGetDoubleId(ih::Ptr{Ihandle}, name::String, id::Cint)
+  ccall( (:IupGetFloatId, iup), Cdouble, (Ptr{Ihandle}, Ptr{Uint8}, Cint), ih, name, id)
 end
 function IupGetRGBId(ih::Ptr{Ihandle}, name::String, id::Cint, r::Ptr{Cuchar}, g::Ptr{Cuchar}, b::Ptr{Cuchar})
   ccall( (:IupGetRGBId, iup), None, (Ptr{Ihandle}, Ptr{Uint8}, Cint, Ptr{Cuchar}, Ptr{Cuchar}, Ptr{Cuchar}), ih, name, id, r, g, b)
