@@ -148,7 +148,7 @@ function CDTestInit()
 	#IupSetFunction("cmdGetFocusCB", (Icallback) fGetFocusCB);
 
 
-	# inicializaccao do contexto */
+	# inicializacao do contexto */
 	#ctgc.write_mode = 0;
 	#ctgc.line_style = 0;
 	#ctgc.line_cap = 0;
@@ -249,7 +249,7 @@ function CDTestInit()
 	IupMap(IupGetHandle("dlgPICCanvas"));
 
 	# cria o canvas WD
-	use_contextplus = 0
+	use_contextplus = 1
 	if (use_contextplus != 0) cdUseContextPlus(1)	end
 	ctgc.wd_canvas  = cdCreateCanvas(cdContextIup(), IupGetHandle("cnvWDCanvas"));
 	ctgc.pic_canvas = cdCreateCanvas(cdContextIup(), IupGetHandle("cnvPICCanvas"));
@@ -771,8 +771,8 @@ function follow(x::Integer, y::Integer)
 		# atualiza a caixa de dialogo */
 		fl_mx = @sprintf("%d", x)
 		fl_my = @sprintf("%d", y)
-		IupSetAttribute(IupGetHandle("txtMarkX"), IUP_VALUE, fl_mx);
-		IupSetAttribute(IupGetHandle("txtMarkY"), IUP_VALUE, fl_my);
+		IupSetAttribute(IupGetHandle("txtMarkX"), IUP_VALUE, fl_mx)
+		IupSetAttribute(IupGetHandle("txtMarkY"), IUP_VALUE, fl_my)
 	elseif (ctgc.cur_prim == RECT || ctgc.cur_prim == BOX)
 		# atualiza os parametros da box
 		if (ctgc.following != 0)
@@ -820,6 +820,27 @@ function follow(x::Integer, y::Integer)
 			IupSetAttribute(IupGetHandle("txtLBY1"), IUP_VALUE, fl_my);
 			IupSetAttribute(IupGetHandle("txtLBY2"), IUP_VALUE, fl_my);
 		end
+	elseif (ctgc.cur_prim == ARC || ctgc.cur_prim == SECTOR || ctgc.cur_prim == CHORD)
+		if (ctgc.following != 0)
+			# atualiza os parametros do arc
+			arc_pos.w = 2*abs(arc_pos.xc-x+1)
+			arc_pos.h = 2*abs(arc_pos.yc-y+1)
+			# atualiza a caixa de dialogo
+			fl_mx = @sprintf("%d", arc_pos.w)
+			fl_my = @sprintf("%d", arc_pos.h)
+			IupSetAttribute(IupGetHandle("txtASW"), IUP_VALUE, fl_mx)
+			IupSetAttribute(IupGetHandle("txtASH"), IUP_VALUE, fl_my)
+		else
+			arc_pos.xc = x;
+			arc_pos.xc = y;
+			fl_mx = @sprintf("%d", x)
+			fl_my = @sprintf("%d", y)
+			IupSetAttribute(IupGetHandle("txtASXC"), IUP_VALUE, fl_mx);
+			IupSetAttribute(IupGetHandle("txtASYC"), IUP_VALUE, fl_my);
+		end
+	elseif (ctgc.cur_prim == TEXT)
+		IupSetAttribute(IupGetHandle("txtTextX"), IUP_VALUE, fl_nx)
+		IupSetAttribute(IupGetHandle("txtTextY"), IUP_VALUE, fl_ny)
     end
 end
 
@@ -1046,6 +1067,14 @@ function draw()
 		#newchord(arc_pos.xc, arc_pos.yc, arc_pos.w, arc_pos.h, arc_pos.angle1, arc_pos.angle2);
 	elseif (ctgc.cur_prim == PIXEL)
 	elseif (ctgc.cur_prim == MARK)
+		mark_pos.size = IupGetInt(IupGetHandle("txtMarkSize"),IUP_VALUE);
+		#sprintf(ctgc.status_line,"cdMark( %d, %d)", mark_pos.x, mark_pos.y);
+		#set_status();
+		# desenha a marca na tela */
+		cdMarkType(ctgc.mark_type);
+		cdMarkSize(mark_pos.size);
+		cdMark(mark_pos.x, mark_pos.y);
+		#newmark(mark_pos.x, mark_pos.y, mark_pos.size);
 	elseif (ctgc.cur_prim == TEXT)
 		if (IupGetAttribute(IupGetHandle("txtTextS"),IUP_VALUE) != C_NULL)
 			a=IupGetInt(IupGetHandle("txtTextX"),IUP_VALUE);
