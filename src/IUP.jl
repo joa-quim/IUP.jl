@@ -30,10 +30,13 @@ export
 	IupStoreAttribute,
 	IupSubmenu,
 	IupTabs, IupText, IupToggle, IupTree,
-	IupVal, IupVbox
+	IupVal, IupVbox,
 	#
 	# Need to add many more
-
+	#
+	IUP_ERROR, IUP_NOERROR, IUP_OPENED, IUP_INVALID, IUP_INVALID_ID, IUP_IGNORE,
+	IUP_DEFAULT, IUP_CENTER, IUP_LEFT, IUP_TOP, IUP_BOTTOM, IUP_RIGHT, IUP_MOUSEPOS, IUP_CURRENT, IUP_CENTERPARENT,
+	IUP_BUTTON1, IUP_BUTTON2, IUP_BUTTON3, IUP_BUTTON4, IUP_BUTTON5
 
 include("libiup_h.jl")
 include("libiup.jl")
