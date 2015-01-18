@@ -925,22 +925,21 @@ function box(what::Integer, x::Integer, y::Integer)
 		if (box_lastwhat == MOVE)
 			frame(box_x1, box_y1, box_x2, box_y2);       # apaga a caixa anterior */
 		end
-		frame(box_x1, box_y1, x, y); # desenha a nova */
-		box_x2 = x;                  # o novo se... */
-		box_y2 = y;                  # torna velho */
+		frame(box_x1, box_y1, x, y); # desenha a nova
+		box_x2 = x;                  # o novo se...
+		box_y2 = y;                  # torna velho
 	elseif (what == REPAINT)
-		frame(box_x1, box_y1, box_x2, box_y2);         # restaura a caixa perdida */
+		frame(box_x1, box_y1, box_x2, box_y2);         # restaura a caixa perdida
 		return;                      # nao modifica lastwhat */
 	elseif (what == CLOSE)
-@show("MERDA_FECHA_BOX")
-		#frame(box_x1, box_y1, box_x2, box_y2);         # apaga a caixa definitiva */
+		#frame(box_x1, box_y1, box_x2, box_y2);         # apaga a caixa definitiva
 	end
 	box_lastwhat = what
 end
 
-#-------------------------------------------------------------------------*/
-# Desenha uma caixa centrada, em rubber band.                             */
-#-------------------------------------------------------------------------*/
+#-------------------------------------------------------------------------
+# Desenha uma caixa centrada, em rubber band.
+#-------------------------------------------------------------------------
 function arc(what::Integer, x::Integer, y::Integer)
 	global arc_xc, arc_yc, arc_y1, arc_x1
 	global arc_lastwhat
