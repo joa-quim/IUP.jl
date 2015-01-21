@@ -134,6 +134,13 @@ function CDTestInit()
 
 	# cria o canvas do CD associado ao canvas do IUP */
 	ctgc.iup_canvas = cdCreateCanvas(cdContextIup(), IupGetHandle("cnvMain"))
+
+w = convert(Ptr{Cint}, [int32(0)])
+h = convert(Ptr{Cint}, [int32(0)])
+cdCanvasGetSize(ctgc.iup_canvas, w, h, C_NULL, C_NULL); 
+w = unsafe_load(w)
+h = unsafe_load(h)
+@show(w,h)
 	if (antialias != 0) cdCanvasSetAttribute(ctgc.iup_canvas, "ANTIALIAS", "0")	end
 	cdActivate(ctgc.iup_canvas);
 
