@@ -29,8 +29,33 @@ export
 	IupShowXY,
 	IupStoreAttribute,
 	IupSubmenu,
-	IupTabs, IupText, IupToggle, IupTree,
+	IupTabs, IupTabsv, IupText, IupToggle, IupTree,
 	IupVal, IupVbox,
+	#
+	# From iup_plot
+	#
+	IupPlotOpen,
+	IupPlot,
+	IupPlotBegin,
+	IupPlotAdd,
+	IupPlotAddStr,
+	IupPlotEnd,
+	IupPlotLoadData,
+	IupPlotInsertStr,
+	IupPlotInsert,
+	IupPlotInsertStrPoints,
+	IupPlotInsertPoints,
+	IupPlotAddPoints,
+	IupPlotAddStrPoints,
+	IupPlotGetSample,
+	IupPlotGetSampleStr,
+	IupPlotGetSampleSelection,
+	IupPlotSetSample,
+	IupPlotSetSampleStr,
+	IupPlotSetSampleSelection,
+	IupPlotTransform,
+	IupPlotTransformTo,
+	IupPlotPaintTo,
 	#
 	# Need to add many more
 	#
@@ -41,5 +66,6 @@ export
 include("libiup_h.jl")
 include("libiup.jl")
 include("iupcontrols.jl")
+include("iup_plot.jl")
 
 end  # module
