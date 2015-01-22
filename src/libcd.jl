@@ -464,7 +464,10 @@ function cdCanvasChord(canvas::Ptr{cdCanvas}, xc::Integer, yc::Integer, w::Integ
   ccall( (:cdCanvasChord, libcd_), None, (Ptr{cdCanvas}, Cint, Cint, Cint, Cint, Cdouble, Cdouble), canvas, xc, yc, w, h, angle1, angle2)
 end
 function cdCanvasText(canvas::Ptr{cdCanvas}, x::Integer, y::Integer, s::Ptr{Uint8})
-  ccall( (:cdCanvasText, libcd_), None, (Ptr{cdCanvas}, Cint, Cint, Ptr{Uint8}), canvas, x, y, s)
+    ccall( (:cdCanvasText, libcd_), None, (Ptr{cdCanvas}, Cint, Cint, Ptr{Uint8}), canvas, x, y, s)
+end
+function cdCanvasText(canvas::Ptr{cdCanvas}, x::Integer, y::Integer, s::String)
+    ccall( (:cdCanvasText, libcd_), None, (Ptr{cdCanvas}, Cint, Cint, Ptr{Uint8}), canvas, x, y, s)
 end
 function cdfCanvasLine(canvas::Ptr{cdCanvas}, x1::Cdouble, y1::Cdouble, x2::Cdouble, y2::Cdouble)
   ccall( (:cdfCanvasLine, libcd_), None, (Ptr{cdCanvas}, Cdouble, Cdouble, Cdouble, Cdouble), canvas, x1, y1, x2, y2)
@@ -545,6 +548,9 @@ function cdCanvasFillMode(canvas::Ptr{cdCanvas}, mode::Integer)
   ccall( (:cdCanvasFillMode, libcd_), Cint, (Ptr{cdCanvas}, Cint), canvas, mode)
 end
 function cdCanvasFont(canvas::Ptr{cdCanvas}, type_face::Ptr{Uint8}, style::Integer, size::Integer)
+  ccall( (:cdCanvasFont, libcd_), Cint, (Ptr{cdCanvas}, Ptr{Uint8}, Cint, Cint), canvas, type_face, style, size)
+end
+function cdCanvasFont(canvas::Ptr{cdCanvas}, type_face::Ptr{None}, style::Integer, size::Integer)
   ccall( (:cdCanvasFont, libcd_), Cint, (Ptr{cdCanvas}, Ptr{Uint8}, Cint, Cint), canvas, type_face, style, size)
 end
 function cdCanvasGetFont(canvas::Ptr{cdCanvas}, type_face::Ptr{Uint8}, style::Ptr{Cint}, size::Ptr{Cint})
