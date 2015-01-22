@@ -346,6 +346,9 @@ end
 function IupGetHandle(name::String)
 	ccall((:IupGetHandle, iup), Ptr{Ihandle}, (Ptr{Uint8},), name)
 end
+function IupGetHandle(name::Ptr{Uint8})
+    ccall((:IupGetHandle, iup), Ptr{Ihandle}, (Ptr{Uint8},), name)
+end
 function IupSetHandle(name::String, ih::Ptr{Ihandle})
 	ccall((:IupSetHandle, iup), Ptr{Ihandle}, (Ptr{Uint8}, Ptr{Ihandle}), name, ih)
 end
