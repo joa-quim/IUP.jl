@@ -33,12 +33,6 @@ function getappdata(hand::Ptr{Ihandle}, name::String)
 end
 
 # -------------------------------------------------------------------------------
-function current_point(canvas::Ptr{Ihandle})
-
-
-end
-
-# -------------------------------------------------------------------------------
 function WindowButtonDownFcn(canvas::Ptr{Ihandle}, f::Function)
 	# Sets the Button press callback function which is executed whenever a mouse button is pressed
 	# The interface for the callback function is described in IUP docs under BUTTON_CB
@@ -54,4 +48,47 @@ function WindowButtonMotionFcn(canvas::Ptr{Ihandle}, f::Function)
 	# int function(Ihandle *ih, int x, int y, char *status); [in C]
 	# Warning: the macros that make use of the status variable are not yet implemented
 	IupSetCallback(canvas, "MOTION_CB", cfunction(f, Int, (Ptr{Ihandle}, Cint, Cint, Ptr{Uint8})))
+end
+
+# -------------------------------------------------------------------------------
+function KeyPressFcn(canvas::Ptr{Ihandle}, f::Function)
+	# Sets the Key press callback function, which is invoked when a key is pressed or released.
+	# The interface for the callback function is described in IUP docs under KEYPRESS_CB
+	# int function(Ihandle *ih, int c, int press); [in C]
+	IupSetCallback(canvas, "KEYPRESS_CB", cfunction(f, Int, (Ptr{Ihandle}, Char, Cint)))
+end
+
+# -------------------------------------------------------------------------------
+function set_current_point(canvas::Ptr{Ihandle}, pt)
+	# Stores the coordinates of the last clicked point in the canva's "CurrentPoint" attribute.
+	# ATTENTION: this function MUST be called from inside the WindowButtonDownFcn() callback function
+	setappdata(canvas, "CurrentPoint", pt)
+end
+
+# -------------------------------------------------------------------------------
+function get_current_point(canvas::Ptr{Ihandle})
+	# Get the location of last button clicked.
+	# In Matlab the corresponding property depends if it refers to a Figure, case in which
+	# it returns a two elements vector with [x-coordinate, y-coordinate], or an Axes object,
+	# the output is a 2x3 matrix with [xfront yfront zfront; xback yback zback].
+	# For the time being here we are only returning teh 1x2 Array version ... or empty is prop not set
+	# MANDATORY: for this to work it is crutial that the WindowButtonDownFcn() callback function
+	# is set and calls the set_current_point() function (which sets the appropriate attribute)
+	cpt = getappdata(canvas, "CurrentPoint")
+	return cpt
+end
+
+# -------------------------------------------------------------------------------
+function set_current_character(canvas::Ptr{Ihandle}, s::Char)
+	# PROBABLY, NOT FINISHED
+	setappdata(canvas, "CurrentCharacter", s)
+end
+
+# -------------------------------------------------------------------------------
+function get_current_character(canvas::Ptr{Ihandle})
+	# Get the last key pressed. We store this info as an attribute in the canvas handle. 
+	# MANDATORY: for this to work it is crutial that the WindowButtonDownFcn() callback function
+	# is set and calls the set_current_character() function (which sets the appropriate attribute)
+	cc = getappdata(canvas, "CurrentCharacter")
+	return cc
 end
