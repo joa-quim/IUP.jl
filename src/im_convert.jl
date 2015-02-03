@@ -7,41 +7,41 @@
 function imImageCreate(width::Cint, height::Cint, color_space::Cint, data_type::Cint)
   ccall( (:imImageCreate, libim_convert_), Ptr{imImage}, (Cint, Cint, Cint, Cint), width, height, color_space, data_type)
 end
-function imImageInit(width::Cint, height::Cint, color_mode::Cint, data_type::Cint, data_buffer::Ptr{None}, palette::Ptr{Clong}, palette_count::Cint)
-  ccall( (:imImageInit, libim_convert_), Ptr{imImage}, (Cint, Cint, Cint, Cint, Ptr{None}, Ptr{Clong}, Cint), width, height, color_mode, data_type, data_buffer, palette, palette_count)
+function imImageInit(width::Cint, height::Cint, color_mode::Cint, data_type::Cint, data_buffer::Ptr{Void}, palette::Ptr{Clong}, palette_count::Cint)
+  ccall( (:imImageInit, libim_convert_), Ptr{imImage}, (Cint, Cint, Cint, Cint, Ptr{Void}, Ptr{Clong}, Cint), width, height, color_mode, data_type, data_buffer, palette, palette_count)
 end
 function imImageCreateBased(image::Ptr{imImage}, width::Cint, height::Cint, color_space::Cint, data_type::Cint)
   ccall( (:imImageCreateBased, libim_convert_), Ptr{imImage}, (Ptr{imImage}, Cint, Cint, Cint, Cint), image, width, height, color_space, data_type)
 end
 function imImageDestroy(image::Ptr{imImage})
-  ccall( (:imImageDestroy, libim_convert_), None, (Ptr{imImage},), image)
+  ccall( (:imImageDestroy, libim_convert_), Void, (Ptr{imImage},), image)
 end
 function imImageAddAlpha(image::Ptr{imImage})
-  ccall( (:imImageAddAlpha, libim_convert_), None, (Ptr{imImage},), image)
+  ccall( (:imImageAddAlpha, libim_convert_), Void, (Ptr{imImage},), image)
 end
 function imImageSetAlpha(image::Ptr{imImage}, alpha::Cfloat)
-  ccall( (:imImageSetAlpha, libim_convert_), None, (Ptr{imImage}, Cfloat), image, alpha)
+  ccall( (:imImageSetAlpha, libim_convert_), Void, (Ptr{imImage}, Cfloat), image, alpha)
 end
 function imImageRemoveAlpha(image::Ptr{imImage})
-  ccall( (:imImageRemoveAlpha, libim_convert_), None, (Ptr{imImage},), image)
+  ccall( (:imImageRemoveAlpha, libim_convert_), Void, (Ptr{imImage},), image)
 end
 function imImageReshape(image::Ptr{imImage}, width::Cint, height::Cint)
-  ccall( (:imImageReshape, libim_convert_), None, (Ptr{imImage}, Cint, Cint), image, width, height)
+  ccall( (:imImageReshape, libim_convert_), Void, (Ptr{imImage}, Cint, Cint), image, width, height)
 end
 function imImageCopy(src_image::Ptr{imImage}, dst_image::Ptr{imImage})
-  ccall( (:imImageCopy, libim_convert_), None, (Ptr{imImage}, Ptr{imImage}), src_image, dst_image)
+  ccall( (:imImageCopy, libim_convert_), Void, (Ptr{imImage}, Ptr{imImage}), src_image, dst_image)
 end
 function imImageCopyData(src_image::Ptr{imImage}, dst_image::Ptr{imImage})
-  ccall( (:imImageCopyData, libim_convert_), None, (Ptr{imImage}, Ptr{imImage}), src_image, dst_image)
+  ccall( (:imImageCopyData, libim_convert_), Void, (Ptr{imImage}, Ptr{imImage}), src_image, dst_image)
 end
 function imImageCopyAttributes(src_image::Ptr{imImage}, dst_image::Ptr{imImage})
-  ccall( (:imImageCopyAttributes, libim_convert_), None, (Ptr{imImage}, Ptr{imImage}), src_image, dst_image)
+  ccall( (:imImageCopyAttributes, libim_convert_), Void, (Ptr{imImage}, Ptr{imImage}), src_image, dst_image)
 end
 function imImageMergeAttributes(src_image::Ptr{imImage}, dst_image::Ptr{imImage})
-  ccall( (:imImageMergeAttributes, libim_convert_), None, (Ptr{imImage}, Ptr{imImage}), src_image, dst_image)
+  ccall( (:imImageMergeAttributes, libim_convert_), Void, (Ptr{imImage}, Ptr{imImage}), src_image, dst_image)
 end
 function imImageCopyPlane(src_image::Ptr{imImage}, src_plane::Cint, dst_image::Ptr{imImage}, dst_plane::Cint)
-  ccall( (:imImageCopyPlane, libim_convert_), None, (Ptr{imImage}, Cint, Ptr{imImage}, Cint), src_image, src_plane, dst_image, dst_plane)
+  ccall( (:imImageCopyPlane, libim_convert_), Void, (Ptr{imImage}, Cint, Ptr{imImage}, Cint), src_image, src_plane, dst_image, dst_plane)
 end
 function imImageDuplicate(image::Ptr{imImage})
   ccall( (:imImageDuplicate, libim_convert_), Ptr{imImage}, (Ptr{imImage},), image)
@@ -49,23 +49,23 @@ end
 function imImageClone(image::Ptr{imImage})
   ccall( (:imImageClone, libim_convert_), Ptr{imImage}, (Ptr{imImage},), image)
 end
-function imImageSetAttribute(image::Ptr{imImage}, attrib::Ptr{Uint8}, data_type::Cint, count::Cint, data::Ptr{None})
-  ccall( (:imImageSetAttribute, libim_convert_), None, (Ptr{imImage}, Ptr{Uint8}, Cint, Cint, Ptr{None}), image, attrib, data_type, count, data)
+function imImageSetAttribute(image::Ptr{imImage}, attrib::Ptr{Uint8}, data_type::Cint, count::Cint, data::Ptr{Void})
+  ccall( (:imImageSetAttribute, libim_convert_), Void, (Ptr{imImage}, Ptr{Uint8}, Cint, Cint, Ptr{Void}), image, attrib, data_type, count, data)
 end
 function imImageGetAttribute(image::Ptr{imImage}, attrib::Ptr{Uint8}, data_type::Ptr{Cint}, count::Ptr{Cint})
-  ccall( (:imImageGetAttribute, libim_convert_), Ptr{None}, (Ptr{imImage}, Ptr{Uint8}, Ptr{Cint}, Ptr{Cint}), image, attrib, data_type, count)
+  ccall( (:imImageGetAttribute, libim_convert_), Ptr{Void}, (Ptr{imImage}, Ptr{Uint8}, Ptr{Cint}, Ptr{Cint}), image, attrib, data_type, count)
 end
 function imImageGetAttributeList(image::Ptr{imImage}, attrib::Ptr{Ptr{Uint8}}, attrib_count::Ptr{Cint})
-  ccall( (:imImageGetAttributeList, libim_convert_), None, (Ptr{imImage}, Ptr{Ptr{Uint8}}, Ptr{Cint}), image, attrib, attrib_count)
+  ccall( (:imImageGetAttributeList, libim_convert_), Void, (Ptr{imImage}, Ptr{Ptr{Uint8}}, Ptr{Cint}), image, attrib, attrib_count)
 end
 function imImageClear(image::Ptr{imImage})
-  ccall( (:imImageClear, libim_convert_), None, (Ptr{imImage},), image)
+  ccall( (:imImageClear, libim_convert_), Void, (Ptr{imImage},), image)
 end
 function imImageIsBitmap(image::Ptr{imImage})
   ccall( (:imImageIsBitmap, libim_convert_), Cint, (Ptr{imImage},), image)
 end
 function imImageSetPalette(image::Ptr{imImage}, palette::Ptr{Clong}, palette_count::Cint)
-  ccall( (:imImageSetPalette, libim_convert_), None, (Ptr{imImage}, Ptr{Clong}, Cint), image, palette, palette_count)
+  ccall( (:imImageSetPalette, libim_convert_), Void, (Ptr{imImage}, Ptr{Clong}, Cint), image, palette, palette_count)
 end
 function imImageMatchSize(image1::Ptr{imImage}, image2::Ptr{imImage})
   ccall( (:imImageMatchSize, libim_convert_), Cint, (Ptr{imImage}, Ptr{imImage}), image1, image2)
@@ -83,25 +83,25 @@ function imImageMatch(image1::Ptr{imImage}, image2::Ptr{imImage})
   ccall( (:imImageMatch, libim_convert_), Cint, (Ptr{imImage}, Ptr{imImage}), image1, image2)
 end
 function imImageSetMap(image::Ptr{imImage})
-  ccall( (:imImageSetMap, libim_convert_), None, (Ptr{imImage},), image)
+  ccall( (:imImageSetMap, libim_convert_), Void, (Ptr{imImage},), image)
 end
 function imImageSetBinary(image::Ptr{imImage})
-  ccall( (:imImageSetBinary, libim_convert_), None, (Ptr{imImage},), image)
+  ccall( (:imImageSetBinary, libim_convert_), Void, (Ptr{imImage},), image)
 end
 function imImageSetGray(image::Ptr{imImage})
-  ccall( (:imImageSetGray, libim_convert_), None, (Ptr{imImage},), image)
+  ccall( (:imImageSetGray, libim_convert_), Void, (Ptr{imImage},), image)
 end
 function imImageMakeBinary(image::Ptr{imImage})
-  ccall( (:imImageMakeBinary, libim_convert_), None, (Ptr{imImage},), image)
+  ccall( (:imImageMakeBinary, libim_convert_), Void, (Ptr{imImage},), image)
 end
 function imImageMakeGray(image::Ptr{imImage})
-  ccall( (:imImageMakeGray, libim_convert_), None, (Ptr{imImage},), image)
+  ccall( (:imImageMakeGray, libim_convert_), Void, (Ptr{imImage},), image)
 end
 function imFileLoadImage(ifile::Ptr{Cint}, index::Cint, error::Ptr{Cint})
   ccall( (:imFileLoadImage, libim_convert_), Ptr{imImage}, (Ptr{Cint}, Cint, Ptr{Cint}), ifile, index, error)
 end
 function imFileLoadImageFrame(ifile::Ptr{Cint}, index::Cint, image::Ptr{imImage}, error::Ptr{Cint})
-  ccall( (:imFileLoadImageFrame, libim_convert_), None, (Ptr{Cint}, Cint, Ptr{imImage}, Ptr{Cint}), ifile, index, image, error)
+  ccall( (:imFileLoadImageFrame, libim_convert_), Void, (Ptr{Cint}, Cint, Ptr{imImage}, Ptr{Cint}), ifile, index, image, error)
 end
 function imFileLoadBitmap(ifile::Ptr{Cint}, index::Cint, error::Ptr{Cint})
   ccall( (:imFileLoadBitmap, libim_convert_), Ptr{imImage}, (Ptr{Cint}, Cint, Ptr{Cint}), ifile, index, error)
@@ -110,7 +110,7 @@ function imFileLoadImageRegion(ifile::Ptr{Cint}, index::Cint, bitmap::Cint, erro
   ccall( (:imFileLoadImageRegion, libim_convert_), Ptr{imImage}, (Ptr{Cint}, Cint, Cint, Ptr{Cint}, Cint, Cint, Cint, Cint, Cint, Cint), ifile, index, bitmap, error, xmin, xmax, ymin, ymax, width, height)
 end
 function imFileLoadBitmapFrame(ifile::Ptr{Cint}, index::Cint, image::Ptr{imImage}, error::Ptr{Cint})
-  ccall( (:imFileLoadBitmapFrame, libim_convert_), None, (Ptr{Cint}, Cint, Ptr{imImage}, Ptr{Cint}), ifile, index, image, error)
+  ccall( (:imFileLoadBitmapFrame, libim_convert_), Void, (Ptr{Cint}, Cint, Ptr{imImage}, Ptr{Cint}), ifile, index, image, error)
 end
 function imFileSaveImage(ifile::Ptr{Cint}, image::Ptr{imImage})
   ccall( (:imFileSaveImage, libim_convert_), Cint, (Ptr{Cint}, Ptr{imImage}), ifile, image)
@@ -137,16 +137,16 @@ function imConvertToBitmap(src_image::Ptr{imImage}, dst_image::Ptr{imImage}, cpx
   ccall( (:imConvertToBitmap, libim_convert_), Cint, (Ptr{imImage}, Ptr{imImage}, Cint, Cfloat, Cint, Cint), src_image, dst_image, cpx2real, gamma, abssolute, cast_mode)
 end
 function imImageGetOpenGLData(image::Ptr{imImage}, glformat::Ptr{Cint})
-  ccall( (:imImageGetOpenGLData, libim_convert_), Ptr{None}, (Ptr{imImage}, Ptr{Cint}), image, glformat)
+  ccall( (:imImageGetOpenGLData, libim_convert_), Ptr{Void}, (Ptr{imImage}, Ptr{Cint}), image, glformat)
 end
-function imImageCreateFromOpenGLData(width::Cint, height::Cint, glformat::Cint, gldata::Ptr{None})
-  ccall( (:imImageCreateFromOpenGLData, libim_convert_), Ptr{imImage}, (Cint, Cint, Cint, Ptr{None}), width, height, glformat, gldata)
+function imImageCreateFromOpenGLData(width::Cint, height::Cint, glformat::Cint, gldata::Ptr{Void})
+  ccall( (:imImageCreateFromOpenGLData, libim_convert_), Ptr{imImage}, (Cint, Cint, Cint, Ptr{Void}), width, height, glformat, gldata)
 end
-function imConvertPacking(src_data::Ptr{None}, dst_data::Ptr{None}, width::Cint, height::Cint, src_depth::Cint, dst_depth::Cint, data_type::Cint, src_is_packed::Cint)
-  ccall( (:imConvertPacking, libim_convert_), None, (Ptr{None}, Ptr{None}, Cint, Cint, Cint, Cint, Cint, Cint), src_data, dst_data, width, height, src_depth, dst_depth, data_type, src_is_packed)
+function imConvertPacking(src_data::Ptr{Void}, dst_data::Ptr{Void}, width::Cint, height::Cint, src_depth::Cint, dst_depth::Cint, data_type::Cint, src_is_packed::Cint)
+  ccall( (:imConvertPacking, libim_convert_), Void, (Ptr{Void}, Ptr{Void}, Cint, Cint, Cint, Cint, Cint, Cint), src_data, dst_data, width, height, src_depth, dst_depth, data_type, src_is_packed)
 end
 function imConvertMapToRGB(data::Ptr{Cuchar}, count::Cint, depth::Cint, packed::Cint, palette::Ptr{Clong}, palette_count::Cint)
-  ccall( (:imConvertMapToRGB, libim_convert_), None, (Ptr{Cuchar}, Cint, Cint, Cint, Ptr{Clong}, Cint), data, count, depth, packed, palette, palette_count)
+  ccall( (:imConvertMapToRGB, libim_convert_), Void, (Ptr{Cuchar}, Cint, Cint, Cint, Ptr{Clong}, Cint), data, count, depth, packed, palette, palette_count)
 end
 function imConvertRGB2Map(width::Cint, height::Cint, red::Ptr{Cuchar}, green::Ptr{Cuchar}, blue::Ptr{Cuchar}, map::Ptr{Cuchar}, palette::Ptr{Clong}, palette_count::Ptr{Cint})
   ccall( (:imConvertRGB2Map, libim_convert_), Cint, (Cint, Cint, Ptr{Cuchar}, Ptr{Cuchar}, Ptr{Cuchar}, Ptr{Cuchar}, Ptr{Clong}, Ptr{Cint}), width, height, red, green, blue, map, palette, palette_count)

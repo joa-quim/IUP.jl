@@ -2,7 +2,7 @@
 # Automatically generated using Clang.jl wrap_c, version 0.0.0
 
 function IupScintillaOpen()
-  ccall( (:IupScintillaOpen, iup), None, (), )
+  ccall( (:IupScintillaOpen, iup), Void, (), )
 end
 function IupScintilla()
   ccall( (:IupScintilla, iup), Ptr{Cint}, (), )

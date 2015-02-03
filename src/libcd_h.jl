@@ -1389,7 +1389,7 @@ type cdBitmap
     w::Cint
     h::Cint
     _type::Cint
-    data::Ptr{None}
+    data::Ptr{Void}
 end
 typealias cdCallback Ptr{Void}
 # begin enum ANONYMOUS_3

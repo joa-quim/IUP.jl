@@ -68,7 +68,7 @@ function getparam()
 	IupClose()                                  # And close it when ready
 end
 
-function param_action(dialog::Ptr{Ihandle}, param_index::Int, user_data::Ptr{None})
+function param_action(dialog::Ptr{Ihandle}, param_index::Int, user_data::Ptr{Void})
 	if (param_index == IUP_GETPARAM_OK)
 		@printf("OK\n")
 	elseif (param_index == IUP_GETPARAM_INIT)

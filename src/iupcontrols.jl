@@ -11,7 +11,7 @@ function IupControlsOpen()
 	ccall((:IupControlsOpen, libiupcontrols_), Cint, (),)
 end
 function IupControlsClose()
-	ccall((:IupControlsClose, libiupcontrols_), None, (),)
+	ccall((:IupControlsClose, libiupcontrols_), Void, (),)
 end
 function IupColorbar()
 	ccall((:IupColorbar, libiupcontrols_), Ptr{Cint}, (),)
@@ -31,7 +31,7 @@ end
 function IupMatrix(action::String="")
 	ccall((:IupMatrix, libiupcontrols_), Ptr{Ihandle}, (Ptr{Uint8},), action)
 end
-function IupMatrix(action::Ptr{None})
+function IupMatrix(action::Ptr{Void})
 	ccall((:IupMatrix, libiupcontrols_), Ptr{Ihandle}, (Ptr{Uint8},), action)
 end
 function IupMatrixList()
@@ -39,10 +39,10 @@ function IupMatrixList()
 end
 # DEPRECATED
 function IupMatSetAttribute(ih::Ptr{Int}, name::String, lin::Int, col::Int, value::String)
-	ccall((:IupMatSetAttribute, libiupcontrols_), None, (Ptr{Cint}, Ptr{Uint8}, Cint, Cint, Ptr{Uint8}), ih, name, lin, col, value)
+	ccall((:IupMatSetAttribute, libiupcontrols_), Void, (Ptr{Cint}, Ptr{Uint8}, Cint, Cint, Ptr{Uint8}), ih, name, lin, col, value)
 end
 function IupMatStoreAttribute(ih::Ptr{Int}, name::String, lin::Int, col::Int, value::String)
-	ccall((:IupMatStoreAttribute, libiupcontrols_), None, (Ptr{Cint}, Ptr{Uint8}, Cint, Cint, Ptr{Uint8}), ih, name, lin, col, value)
+	ccall((:IupMatStoreAttribute, libiupcontrols_), Void, (Ptr{Cint}, Ptr{Uint8}, Cint, Cint, Ptr{Uint8}), ih, name, lin, col, value)
 end
 function IupMatGetAttribute(ih::Ptr{Int}, name::String, lin::Int, col::Int)
 	ccall((:IupMatGetAttribute, libiupcontrols_), Ptr{Uint8}, (Ptr{Cint}, Ptr{Uint8}, Cint, Cint), ih, name, lin, col)

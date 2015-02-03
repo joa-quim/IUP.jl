@@ -11,8 +11,8 @@ type imImage
     plane_size::Cint
     size::Cint
     count::Cint
-    data::Ptr{Ptr{None}}
+    data::Ptr{Ptr{Void}}
     palette::Ptr{Clong}
     palette_count::Cint
-    attrib_table::Ptr{None}
+    attrib_table::Ptr{Void}
 end

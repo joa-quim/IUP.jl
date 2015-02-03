@@ -189,7 +189,7 @@ end
 # --------------------------------------------------------------------------------
 function draw_cb(ih::Ptr{Ihandle}, index::Cint, sample_index::Cint, x::Cdouble, y::Cdouble, select::Cint)
 	s = @sprintf("DRAWSAMPLE_CB(%d, %d, %f, %f, %d)\n", index, sample_index, x, y, select)
-	println(s)
+#	println(s)
 	return IUP_DEFAULT
 end
 
@@ -442,7 +442,7 @@ global tabs
   ss = bytestring(IupGetAttribute(new_tab, "TABTITLE"))
   #ss += 5; # Skip "Plot "
   #ii = atoi(ss);
-  ii = int32(float64(ss[6])) - 48 		# Where the hell is atoi() ????
+  ii = parseint(ss[6]) 		# Where the hell is atoi() ????
 
   # autoscaling
   # X axis
@@ -543,7 +543,7 @@ end
 function tabs_get_index()
 	curr_tab = IupGetHandle(IupGetAttribute(tabs, "VALUE"));
 	ss = bytestring(IupGetAttribute(curr_tab, "TABTITLE"))
-	ii = int32(float64(ss[6])) - 48 		# Where the hell is atoi() ????
+	ii = parseint(ss[6]) 		# Where the hell is atoi() ????
 	return ii
 end
 
@@ -552,17 +552,17 @@ end
 function tabs_tabchange_cb(self::Ptr{Ihandle}, new_tab::Ptr{Ihandle})
 
 	ss = bytestring(IupGetAttribute(new_tab, "TABTITLE"))
-	ii = int32(float64(ss[6])) - 48 		# Where the hell is atoi() ????
+	ii = parseint(ss[6]) 		# Where the hell is atoi() ????
 
 	# autoscaling
 	# X axis
-  if (IupGetInt(plot[ii], "AXS_XAUTOMIN") != 0 && IupGetInt(plot[ii], "AXS_XAUTOMAX") != 0)
-    IupSetAttribute(tgg2, "VALUE", "ON");
-    IupSetAttribute(dial2, "ACTIVE", "NO");
-  else
-    IupSetAttribute(tgg2, "VALUE", "OFF");
-    IupSetAttribute(dial2, "ACTIVE", "YES");
-  end
+	if (IupGetInt(plot[ii], "AXS_XAUTOMIN") != 0 && IupGetInt(plot[ii], "AXS_XAUTOMAX") != 0)
+		IupSetAttribute(tgg2, "VALUE", "ON");
+		IupSetAttribute(dial2, "ACTIVE", "NO");
+	else
+		IupSetAttribute(tgg2, "VALUE", "OFF");
+		IupSetAttribute(dial2, "ACTIVE", "YES");
+	end
   # Y axis
   if (IupGetInt(plot[ii], "AXS_YAUTOMIN") != 0 && IupGetInt(plot[ii], "AXS_YAUTOMAX") != 0)
     IupSetAttribute(tgg1, "VALUE", "ON");
