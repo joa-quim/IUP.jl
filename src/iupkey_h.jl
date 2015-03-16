@@ -1,4 +1,3 @@
-const OBJC_NEW_PROPERTIES = 1
 const K_SP = ' '
 const K_exclam = '!'
 const K_quotedbl = '\"'

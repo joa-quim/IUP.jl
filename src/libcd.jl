@@ -16,7 +16,7 @@ end
 function cdCreateVectorFont(canvas::Ptr{Cint})
   ccall( (:cdCreateVectorFont, libcd_), Ptr{cdVectorFont}, (Ptr{Cint},), canvas)
 end
-function cdKillVectorFont(vector_font_data::Ptr{cdVectorFont})
+function cdKillVectorFont(vector_font_data::Ptr{Void})
   ccall( (:cdKillVectorFont, libcd_), Void, (Ptr{cdVectorFont},), vector_font_data)
 end
 function wdSetDefaults(canvas::Ptr{Cint})
@@ -142,11 +142,11 @@ end
 function cdGetFontSizePoints(canvas::Ptr{Cint}, size::Integer)
   ccall( (:cdGetFontSizePoints, libcd_), Cint, (Ptr{Cint}, Cint), canvas, size)
 end
-function cdgetfontdimEX(ctxcanvas::Ptr{cdCtxCanvas}, max_width::Ptr{Cint}, height::Ptr{Cint}, ascent::Ptr{Cint}, descent::Ptr{Cint})
-  ccall( (:cdgetfontdimEX, libcd_), Void, (Ptr{cdCtxCanvas}, Ptr{Cint}, Ptr{Cint}, Ptr{Cint}, Ptr{Cint}), ctxcanvas, max_width, height, ascent, descent)
+function cdgetfontdimEX(ctxcanvas::Ptr{Void}, max_width::Ptr{Cint}, height::Ptr{Cint}, ascent::Ptr{Cint}, descent::Ptr{Cint})
+  ccall( (:cdgetfontdimEX, libcd_), Void, (Ptr{Void}, Ptr{Cint}, Ptr{Cint}, Ptr{Cint}, Ptr{Cint}), ctxcanvas, max_width, height, ascent, descent)
 end
-function cdgettextsizeEX(ctxcanvas::Ptr{cdCtxCanvas}, s::Ptr{Uint8}, len::Integer, width::Ptr{Cint}, height::Ptr{Cint})
-  ccall( (:cdgettextsizeEX, libcd_), Void, (Ptr{cdCtxCanvas}, Ptr{Uint8}, Cint, Ptr{Cint}, Ptr{Cint}), ctxcanvas, s, len, width, height)
+function cdgettextsizeEX(ctxcanvas::Ptr{Void}, s::Ptr{Uint8}, len::Integer, width::Ptr{Cint}, height::Ptr{Cint})
+  ccall( (:cdgettextsizeEX, libcd_), Void, (Ptr{Void}, Ptr{Uint8}, Cint, Ptr{Cint}, Ptr{Cint}), ctxcanvas, s, len, width, height)
 end
 function cdZeroOrderInterpolation(width::Integer, height::Integer, map::Ptr{Cuchar}, xl::Cdouble, yl::Cdouble)
   ccall( (:cdZeroOrderInterpolation, libcd_), Cuchar, (Cint, Cint, Ptr{Cuchar}, Cdouble, Cdouble), width, height, map, xl, yl)
@@ -173,25 +173,25 @@ function cdCalcZoom(canvas_size::Integer, cnv_rect_pos::Integer, cnv_rect_size::
   ccall( (:cdCalcZoom, libcd_), Cint, (Cint, Cint, Cint, Ptr{Cint}, Ptr{Cint}, Cint, Cint, Ptr{Cint}, Ptr{Cint}, Cint), canvas_size, cnv_rect_pos, cnv_rect_size, new_cnv_rect_pos, new_cnv_rect_size, img_rect_pos, img_rect_size, new_img_rect_pos, new_img_rect_size, is_horizontal)
 end
 function cdCreateSimulation(canvas::Ptr{Cint})
-  ccall( (:cdCreateSimulation, libcd_), Ptr{cdSimulation}, (Ptr{Cint},), canvas)
+  ccall( (:cdCreateSimulation, libcd_), Ptr{Void}, (Ptr{Cint},), canvas)
 end
-function cdKillSimulation(simulation::Ptr{cdSimulation})
-  ccall( (:cdKillSimulation, libcd_), Void, (Ptr{cdSimulation},), simulation)
+function cdKillSimulation(simulation::Ptr{Void})
+  ccall( (:cdKillSimulation, libcd_), Void, (Ptr{Void},), simulation)
 end
-function cdSimInitText(simulation::Ptr{cdSimulation})
-  ccall( (:cdSimInitText, libcd_), Void, (Ptr{cdSimulation},), simulation)
+function cdSimInitText(simulation::Ptr{Void})
+  ccall( (:cdSimInitText, libcd_), Void, (Ptr{Void},), simulation)
 end
-function cdSimTextFT(ctxcanvas::Ptr{cdCtxCanvas}, x::Integer, y::Integer, s::Ptr{Uint8}, len::Integer)
-  ccall( (:cdSimTextFT, libcd_), Void, (Ptr{cdCtxCanvas}, Cint, Cint, Ptr{Uint8}, Cint), ctxcanvas, x, y, s, len)
+function cdSimTextFT(ctxcanvas::Ptr{Void}, x::Integer, y::Integer, s::Ptr{Uint8}, len::Integer)
+  ccall( (:cdSimTextFT, libcd_), Void, (Ptr{Void}, Cint, Cint, Ptr{Uint8}, Cint), ctxcanvas, x, y, s, len)
 end
-function cdSimFontFT(ctxcanvas::Ptr{cdCtxCanvas}, type_face::Ptr{Uint8}, style::Integer, size::Integer)
-  ccall( (:cdSimFontFT, libcd_), Cint, (Ptr{cdCtxCanvas}, Ptr{Uint8}, Cint, Cint), ctxcanvas, type_face, style, size)
+function cdSimFontFT(ctxcanvas::Ptr{Void}, type_face::Ptr{Uint8}, style::Integer, size::Integer)
+  ccall( (:cdSimFontFT, libcd_), Cint, (Ptr{Void}, Ptr{Uint8}, Cint, Cint), ctxcanvas, type_face, style, size)
 end
-function cdSimGetFontDimFT(ctxcanvas::Ptr{cdCtxCanvas}, max_width::Ptr{Cint}, height::Ptr{Cint}, ascent::Ptr{Cint}, descent::Ptr{Cint})
-  ccall( (:cdSimGetFontDimFT, libcd_), Void, (Ptr{cdCtxCanvas}, Ptr{Cint}, Ptr{Cint}, Ptr{Cint}, Ptr{Cint}), ctxcanvas, max_width, height, ascent, descent)
+function cdSimGetFontDimFT(ctxcanvas::Ptr{Void}, max_width::Ptr{Cint}, height::Ptr{Cint}, ascent::Ptr{Cint}, descent::Ptr{Cint})
+  ccall( (:cdSimGetFontDimFT, libcd_), Void, (Ptr{Void}, Ptr{Cint}, Ptr{Cint}, Ptr{Cint}, Ptr{Cint}), ctxcanvas, max_width, height, ascent, descent)
 end
-function cdSimGetTextSizeFT(ctxcanvas::Ptr{cdCtxCanvas}, s::Ptr{Uint8}, len::Integer, width::Ptr{Cint}, height::Ptr{Cint})
-  ccall( (:cdSimGetTextSizeFT, libcd_), Void, (Ptr{cdCtxCanvas}, Ptr{Uint8}, Cint, Ptr{Cint}, Ptr{Cint}), ctxcanvas, s, len, width, height)
+function cdSimGetTextSizeFT(ctxcanvas::Ptr{Void}, s::Ptr{Uint8}, len::Integer, width::Ptr{Cint}, height::Ptr{Cint})
+  ccall( (:cdSimGetTextSizeFT, libcd_), Void, (Ptr{Void}, Ptr{Uint8}, Cint, Ptr{Cint}, Ptr{Cint}), ctxcanvas, s, len, width, height)
 end
 function cdSimMark(canvas::Ptr{Cint}, x::Integer, y::Integer)
   ccall( (:cdSimMark, libcd_), Void, (Ptr{Cint}, Cint, Cint), canvas, x, y)
@@ -202,26 +202,26 @@ end
 function cdSimPutImageRectRGB(canvas::Ptr{Cint}, iw::Integer, ih::Integer, r::Ptr{Cuchar}, g::Ptr{Cuchar}, b::Ptr{Cuchar}, x::Integer, y::Integer, w::Integer, h::Integer, xmin::Integer, xmax::Integer, ymin::Integer, ymax::Integer)
   ccall( (:cdSimPutImageRectRGB, libcd_), Void, (Ptr{Cint}, Cint, Cint, Ptr{Cuchar}, Ptr{Cuchar}, Ptr{Cuchar}, Cint, Cint, Cint, Cint, Cint, Cint, Cint, Cint), canvas, iw, ih, r, g, b, x, y, w, h, xmin, xmax, ymin, ymax)
 end
-function cdSimLine(ctxcanvas::Ptr{cdCtxCanvas}, x1::Integer, y1::Integer, x2::Integer, y2::Integer)
-  ccall( (:cdSimLine, libcd_), Void, (Ptr{cdCtxCanvas}, Cint, Cint, Cint, Cint), ctxcanvas, x1, y1, x2, y2)
+function cdSimLine(ctxcanvas::Ptr{Void}, x1::Integer, y1::Integer, x2::Integer, y2::Integer)
+  ccall( (:cdSimLine, libcd_), Void, (Ptr{Void}, Cint, Cint, Cint, Cint), ctxcanvas, x1, y1, x2, y2)
 end
-function cdSimRect(ctxcanvas::Ptr{cdCtxCanvas}, xmin::Integer, xmax::Integer, ymin::Integer, ymax::Integer)
-  ccall( (:cdSimRect, libcd_), Void, (Ptr{cdCtxCanvas}, Cint, Cint, Cint, Cint), ctxcanvas, xmin, xmax, ymin, ymax)
+function cdSimRect(ctxcanvas::Ptr{Void}, xmin::Integer, xmax::Integer, ymin::Integer, ymax::Integer)
+  ccall( (:cdSimRect, libcd_), Void, (Ptr{Void}, Cint, Cint, Cint, Cint), ctxcanvas, xmin, xmax, ymin, ymax)
 end
-function cdSimBox(ctxcanvas::Ptr{cdCtxCanvas}, xmin::Integer, xmax::Integer, ymin::Integer, ymax::Integer)
-  ccall( (:cdSimBox, libcd_), Void, (Ptr{cdCtxCanvas}, Cint, Cint, Cint, Cint), ctxcanvas, xmin, xmax, ymin, ymax)
+function cdSimBox(ctxcanvas::Ptr{Void}, xmin::Integer, xmax::Integer, ymin::Integer, ymax::Integer)
+  ccall( (:cdSimBox, libcd_), Void, (Ptr{Void}, Cint, Cint, Cint, Cint), ctxcanvas, xmin, xmax, ymin, ymax)
 end
-function cdSimArc(ctxcanvas::Ptr{cdCtxCanvas}, xc::Integer, yc::Integer, width::Integer, height::Integer, angle1::Cdouble, angle2::Cdouble)
-  ccall( (:cdSimArc, libcd_), Void, (Ptr{cdCtxCanvas}, Cint, Cint, Cint, Cint, Cdouble, Cdouble), ctxcanvas, xc, yc, width, height, angle1, angle2)
+function cdSimArc(ctxcanvas::Ptr{Void}, xc::Integer, yc::Integer, width::Integer, height::Integer, angle1::Cdouble, angle2::Cdouble)
+  ccall( (:cdSimArc, libcd_), Void, (Ptr{Void}, Cint, Cint, Cint, Cint, Cdouble, Cdouble), ctxcanvas, xc, yc, width, height, angle1, angle2)
 end
-function cdSimSector(ctxcanvas::Ptr{cdCtxCanvas}, xc::Integer, yc::Integer, width::Integer, height::Integer, angle1::Cdouble, angle2::Cdouble)
-  ccall( (:cdSimSector, libcd_), Void, (Ptr{cdCtxCanvas}, Cint, Cint, Cint, Cint, Cdouble, Cdouble), ctxcanvas, xc, yc, width, height, angle1, angle2)
+function cdSimSector(ctxcanvas::Ptr{Void}, xc::Integer, yc::Integer, width::Integer, height::Integer, angle1::Cdouble, angle2::Cdouble)
+  ccall( (:cdSimSector, libcd_), Void, (Ptr{Void}, Cint, Cint, Cint, Cint, Cdouble, Cdouble), ctxcanvas, xc, yc, width, height, angle1, angle2)
 end
-function cdSimChord(ctxcanvas::Ptr{cdCtxCanvas}, xc::Integer, yc::Integer, width::Integer, height::Integer, angle1::Cdouble, angle2::Cdouble)
-  ccall( (:cdSimChord, libcd_), Void, (Ptr{cdCtxCanvas}, Cint, Cint, Cint, Cint, Cdouble, Cdouble), ctxcanvas, xc, yc, width, height, angle1, angle2)
+function cdSimChord(ctxcanvas::Ptr{Void}, xc::Integer, yc::Integer, width::Integer, height::Integer, angle1::Cdouble, angle2::Cdouble)
+  ccall( (:cdSimChord, libcd_), Void, (Ptr{Void}, Cint, Cint, Cint, Cint, Cdouble, Cdouble), ctxcanvas, xc, yc, width, height, angle1, angle2)
 end
-function cdSimPoly(ctxcanvas::Ptr{cdCtxCanvas}, mode::Integer, points::Ptr{cdPoint}, n::Integer)
-  ccall( (:cdSimPoly, libcd_), Void, (Ptr{cdCtxCanvas}, Cint, Ptr{cdPoint}, Cint), ctxcanvas, mode, points, n)
+function cdSimPoly(ctxcanvas::Ptr{Void}, mode::Integer, points::Ptr{cdPoint}, n::Integer)
+  ccall( (:cdSimPoly, libcd_), Void, (Ptr{Void}, Cint, Ptr{cdPoint}, Cint), ctxcanvas, mode, points, n)
 end
 function cdSimPolyBezier(canvas::Ptr{Cint}, points::Ptr{cdPoint}, n::Integer)
   ccall( (:cdSimPolyBezier, libcd_), Void, (Ptr{Cint}, Ptr{cdPoint}, Cint), canvas, points, n)
@@ -229,26 +229,26 @@ end
 function cdSimPolyPath(canvas::Ptr{Cint}, points::Ptr{cdPoint}, n::Integer)
   ccall( (:cdSimPolyPath, libcd_), Void, (Ptr{Cint}, Ptr{cdPoint}, Cint), canvas, points, n)
 end
-function cdfSimLine(ctxcanvas::Ptr{cdCtxCanvas}, x1::Cdouble, y1::Cdouble, x2::Cdouble, y2::Cdouble)
-  ccall( (:cdfSimLine, libcd_), Void, (Ptr{cdCtxCanvas}, Cdouble, Cdouble, Cdouble, Cdouble), ctxcanvas, x1, y1, x2, y2)
+function cdfSimLine(ctxcanvas::Ptr{Void}, x1::Cdouble, y1::Cdouble, x2::Cdouble, y2::Cdouble)
+  ccall( (:cdfSimLine, libcd_), Void, (Ptr{Void}, Cdouble, Cdouble, Cdouble, Cdouble), ctxcanvas, x1, y1, x2, y2)
 end
-function cdfSimRect(ctxcanvas::Ptr{cdCtxCanvas}, xmin::Cdouble, xmax::Cdouble, ymin::Cdouble, ymax::Cdouble)
-  ccall( (:cdfSimRect, libcd_), Void, (Ptr{cdCtxCanvas}, Cdouble, Cdouble, Cdouble, Cdouble), ctxcanvas, xmin, xmax, ymin, ymax)
+function cdfSimRect(ctxcanvas::Ptr{Void}, xmin::Cdouble, xmax::Cdouble, ymin::Cdouble, ymax::Cdouble)
+  ccall( (:cdfSimRect, libcd_), Void, (Ptr{Void}, Cdouble, Cdouble, Cdouble, Cdouble), ctxcanvas, xmin, xmax, ymin, ymax)
 end
-function cdfSimBox(ctxcanvas::Ptr{cdCtxCanvas}, xmin::Cdouble, xmax::Cdouble, ymin::Cdouble, ymax::Cdouble)
-  ccall( (:cdfSimBox, libcd_), Void, (Ptr{cdCtxCanvas}, Cdouble, Cdouble, Cdouble, Cdouble), ctxcanvas, xmin, xmax, ymin, ymax)
+function cdfSimBox(ctxcanvas::Ptr{Void}, xmin::Cdouble, xmax::Cdouble, ymin::Cdouble, ymax::Cdouble)
+  ccall( (:cdfSimBox, libcd_), Void, (Ptr{Void}, Cdouble, Cdouble, Cdouble, Cdouble), ctxcanvas, xmin, xmax, ymin, ymax)
 end
-function cdfSimArc(ctxcanvas::Ptr{cdCtxCanvas}, xc::Cdouble, yc::Cdouble, width::Cdouble, height::Cdouble, angle1::Cdouble, angle2::Cdouble)
-  ccall( (:cdfSimArc, libcd_), Void, (Ptr{cdCtxCanvas}, Cdouble, Cdouble, Cdouble, Cdouble, Cdouble, Cdouble), ctxcanvas, xc, yc, width, height, angle1, angle2)
+function cdfSimArc(ctxcanvas::Ptr{Void}, xc::Cdouble, yc::Cdouble, width::Cdouble, height::Cdouble, angle1::Cdouble, angle2::Cdouble)
+  ccall( (:cdfSimArc, libcd_), Void, (Ptr{Void}, Cdouble, Cdouble, Cdouble, Cdouble, Cdouble, Cdouble), ctxcanvas, xc, yc, width, height, angle1, angle2)
 end
-function cdfSimSector(ctxcanvas::Ptr{cdCtxCanvas}, xc::Cdouble, yc::Cdouble, width::Cdouble, height::Cdouble, angle1::Cdouble, angle2::Cdouble)
-  ccall( (:cdfSimSector, libcd_), Void, (Ptr{cdCtxCanvas}, Cdouble, Cdouble, Cdouble, Cdouble, Cdouble, Cdouble), ctxcanvas, xc, yc, width, height, angle1, angle2)
+function cdfSimSector(ctxcanvas::Ptr{Void}, xc::Cdouble, yc::Cdouble, width::Cdouble, height::Cdouble, angle1::Cdouble, angle2::Cdouble)
+  ccall( (:cdfSimSector, libcd_), Void, (Ptr{Void}, Cdouble, Cdouble, Cdouble, Cdouble, Cdouble, Cdouble), ctxcanvas, xc, yc, width, height, angle1, angle2)
 end
-function cdfSimChord(ctxcanvas::Ptr{cdCtxCanvas}, xc::Cdouble, yc::Cdouble, width::Cdouble, height::Cdouble, angle1::Cdouble, angle2::Cdouble)
-  ccall( (:cdfSimChord, libcd_), Void, (Ptr{cdCtxCanvas}, Cdouble, Cdouble, Cdouble, Cdouble, Cdouble, Cdouble), ctxcanvas, xc, yc, width, height, angle1, angle2)
+function cdfSimChord(ctxcanvas::Ptr{Void}, xc::Cdouble, yc::Cdouble, width::Cdouble, height::Cdouble, angle1::Cdouble, angle2::Cdouble)
+  ccall( (:cdfSimChord, libcd_), Void, (Ptr{Void}, Cdouble, Cdouble, Cdouble, Cdouble, Cdouble, Cdouble), ctxcanvas, xc, yc, width, height, angle1, angle2)
 end
-function cdfSimPoly(ctxcanvas::Ptr{cdCtxCanvas}, mode::Integer, fpoly::Ptr{cdfPoint}, n::Integer)
-  ccall( (:cdfSimPoly, libcd_), Void, (Ptr{cdCtxCanvas}, Cint, Ptr{cdfPoint}, Cint), ctxcanvas, mode, fpoly, n)
+function cdfSimPoly(ctxcanvas::Ptr{Void}, mode::Integer, fpoly::Ptr{cdfPoint}, n::Integer)
+  ccall( (:cdfSimPoly, libcd_), Void, (Ptr{Void}, Cint, Ptr{cdfPoint}, Cint), ctxcanvas, mode, fpoly, n)
 end
 function cdfSimPolyBezier(canvas::Ptr{Cint}, points::Ptr{cdfPoint}, n::Integer)
   ccall( (:cdfSimPolyBezier, libcd_), Void, (Ptr{Cint}, Ptr{cdfPoint}, Cint), canvas, points, n)

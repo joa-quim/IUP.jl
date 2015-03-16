@@ -3,7 +3,6 @@
 
 @windows? (const libiupcontrols_ = "iupcontrols") : (const libiupcontrols_ = "libiupcontrols")  # Name of the shared lib.
 
-const OBJC_NEW_PROPERTIES = 1
 const IUP_PRIMARY = -1
 const IUP_SECONDARY = -2
 

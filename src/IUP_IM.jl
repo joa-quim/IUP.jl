@@ -87,7 +87,6 @@ export
 	#
 	# From libim_h.jl
 	#
-	OBJC_NEW_PROPERTIES,
 	IM_INTERRUPTED,
 	IM_ALL,
 	IM_COUNTER_CB,

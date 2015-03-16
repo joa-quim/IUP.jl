@@ -6,3 +6,6 @@
 function cdContextIup()
 	ccall((:cdContextIup, libiupcd_), Ptr{cdContext}, (), )
 end
+
+# Was (alone) in cdiup_h.jl
+const CD_IUP = cdContextIup

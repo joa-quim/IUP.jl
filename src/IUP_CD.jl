@@ -349,7 +349,6 @@ export
 include("libcd_h.jl")
 include("libcd.jl")
 include("cdiup.jl")
-include("wd_h.jl")
 include("wd.jl")
 include("im_image_h.jl")
 

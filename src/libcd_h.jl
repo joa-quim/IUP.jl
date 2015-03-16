@@ -1,4 +1,3 @@
-const OBJC_NEW_PROPERTIES = 1
 # Skipping MacroDefinition: va_start(ap,param)__builtin_va_start(ap,param)
 # Skipping MacroDefinition: va_end(ap)__builtin_va_end(ap)
 # Skipping MacroDefinition: va_arg(ap,type)__builtin_va_arg(ap,type)
@@ -98,10 +97,6 @@ const CD_DEG2RAD = 0.01745329252
 type cdCtxCanvasBase
     canvas::Ptr{Cint}
 end
-typealias cdCtxCanvas Void
-typealias cdCtxImage Void
-typealias cdVectorFont Void
-typealias cdSimulation Void
 
 type cdPoint
     x::Cint
@@ -131,7 +126,7 @@ end
 type cdImage
     w::Cint
     h::Cint
-    ctximage::Ptr{cdCtxImage}
+    ctximage::Ptr{Void}
     cxGetImage::Ptr{Void}
     cxPutImageRect::Ptr{Void}
     cxKillImage::Ptr{Void}
@@ -1366,9 +1361,9 @@ type cdCanvas
     viewport::cdRect
     attrib_list::Array_50_Ptr
     attrib_n::Cint
-    vector_font::Ptr{cdVectorFont}
-    simulation::Ptr{cdSimulation}
-    ctxcanvas::Ptr{cdCtxCanvas}
+    vector_font::Ptr{Void}
+    simulation::Ptr{Void}
+    ctxcanvas::Ptr{Void}
     context::Ptr{Cint}
 end
 # begin enum ANONYMOUS_1

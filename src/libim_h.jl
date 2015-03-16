@@ -1,4 +1,3 @@
-const OBJC_NEW_PROPERTIES = 1
 const IM_INTERRUPTED = -1
 const IM_ALL = -1
 const IM_COUNTER_CB = 0

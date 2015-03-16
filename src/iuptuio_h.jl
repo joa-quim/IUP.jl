@@ -1,1 +1,0 @@
-const OBJC_NEW_PROPERTIES = 1

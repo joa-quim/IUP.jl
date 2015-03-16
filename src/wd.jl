@@ -3,6 +3,15 @@
 
 @windows? (const libwd_ = "cd") : (const libwd_ = "libcd")  # Name of IUP shared lib.
 
+# These used to be in wd_h.jl (meanwhile removed)
+const wdVectorTextTransform = cdVectorTextTransform
+const wdActivate = cdActivate
+# Skipping MacroDefinition: wdClip(mode)cdClip(mode)
+# Skipping MacroDefinition: wdBegin(mode)cdBegin(mode)
+# Skipping MacroDefinition: wdEnd()cdEnd();
+# Skipping MacroDefinition: wdMM2Pixel(mm_dx,mm_dy,dx,dy)cdMM2Pixel(mm_dx,mm_dy,dx,dy)
+# Skipping MacroDefinition: wdPixel2MM(dx,dy,mm_dx,mm_dy)cdPixel2MM(dx,dy,mm_dx,mm_dy)
+
 function wdCanvasWindow(canvas::Ptr{cdCanvas}, xmin::Cdouble, xmax::Cdouble, ymin::Cdouble, ymax::Cdouble)
   ccall( (:wdCanvasWindow, libwd_), Void, (Ptr{cdCanvas}, Cdouble, Cdouble, Cdouble, Cdouble), canvas, xmin, xmax, ymin, ymax)
 end

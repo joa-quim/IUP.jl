@@ -474,10 +474,10 @@ end
 function IupButton(title::String="", action::String="")
 	ccall((:IupButton, iup), Ptr{Ihandle}, (Ptr{Uint8}, Ptr{Uint8}), title, action)
 end
-function IupCanvas(action::String="")
+function IupCanvas(action::String)
 	ccall((:IupCanvas, iup), Ptr{Ihandle}, (Ptr{Uint8},), action)
 end
-function IupCanvas(action::Ptr{Void})
+function IupCanvas(action::Ptr{Void}=C_NULL)
 	ccall((:IupCanvas, iup), Ptr{Ihandle}, (Ptr{Uint8},), action)
 end
 function IupDialog(child::Ptr{Ihandle})
