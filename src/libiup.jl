@@ -51,10 +51,15 @@ end
 
 # I Don't understand the purpose of this function, which true definition includes a varargs, so I implemented
 # this one only as a guide for the future problems
+#=
 function IupSetCallbacks(ih::Ptr{Ihandle}, name::String, func1::Icallback, func2::Icallback)
 	ccall((:IupSetCallbacks, iup), Icallback, (Ptr{Ihandle}, Ptr{Uint8}, Icallback, Icallback), ih, name, func1, func2)
 end
-
+=#
+# Followinfg the advice in https://groups.google.com/forum/?fromgroups=#!topic/julia-users/bBXHSq_KJZM
+function IupSetCallbacks(ih::Ptr{Ihandle}, name::String, func1::Icallback)
+    ccall((:IupSetCallbacks, iup), Icallback, (Ptr{Ihandle}, Ptr{Uint8}, Icallback, Ptr{Void}...), ih, name, func1, C_NULL)
+end
 
 # When I find that these arguments may be used to send in something useful I'll activate them
 #function IupOpen(argc::Ptr{Cint}=C_NULL, argv::Ptr{Ptr{Ptr{Uint8}}}=C_NULL)
