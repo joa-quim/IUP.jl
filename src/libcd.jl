@@ -13,12 +13,14 @@ end
 function cdUpdateAttributes(canvas::Ptr{Cint})
   ccall( (:cdUpdateAttributes, libcd_), Void, (Ptr{Cint},), canvas)
 end
+#=
 function cdCreateVectorFont(canvas::Ptr{Cint})
   ccall( (:cdCreateVectorFont, libcd_), Ptr{cdVectorFont}, (Ptr{Cint},), canvas)
 end
 function cdKillVectorFont(vector_font_data::Ptr{Void})
   ccall( (:cdKillVectorFont, libcd_), Void, (Ptr{cdVectorFont},), vector_font_data)
 end
+=#
 function wdSetDefaults(canvas::Ptr{Cint})
   ccall( (:wdSetDefaults, libcd_), Void, (Ptr{Cint},), canvas)
 end
