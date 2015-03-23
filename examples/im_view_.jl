@@ -24,7 +24,7 @@ using IUP_CD
 export
   im_view
 
-include("../src/libiup_h.jl")
+#include("../src/libiup_h.jl")
 include("../src/im_process_h.jl")
 
 global disable_repaint = false      # used to optimize repaint, while opening a new file
@@ -41,6 +41,7 @@ function im_view()
 	IupSetAttribute(dlg, "MENU","mainMenu")
 
 	imlabCreateButtonImages()
+
 	btOpen = IupButton("", "imImgWinOpen" )
 	IupSetAttribute(btOpen,"TIP","Loads an image file from disk.")
 	IupSetAttribute(btOpen,"IMAGE","imImgWinOpenButton")
@@ -90,7 +91,6 @@ function cbCanvasRepaint(iup_canvas::Ptr{Ihandle})
 	global disable_repaint
 
 	cd_canvas = convert(Ptr{cdCanvas}, IupGetAttribute(iup_canvas, "cdCanvas"))
-	image = convert(Ptr{imImage}, IupGetAttribute(iup_canvas, "imImage"))
 
 	if (cd_canvas == C_NULL || disable_repaint)
 		return IUP_DEFAULT
@@ -99,13 +99,14 @@ function cbCanvasRepaint(iup_canvas::Ptr{Ihandle})
 	cdCanvasActivate(cd_canvas);
 	cdCanvasClear(cd_canvas);
 
+	image = convert(Ptr{imImage}, IupGetAttribute(iup_canvas, "imImage"))
 	if (image == C_NULL)
 		return IUP_DEFAULT
 	end
 
 	img = unsafe_load(image)		# Need to get access to the composite type, not to its pointer
-#	imcdCanvasPutImage(cd_canvas, img, 0, 0, img.width, img.height, 0, 0, 0, 0)
-	imcdCanvasPutImage(cd_canvas, img, 20,20,int64(img.width/2), int64(img.height/2),  0, 0, 0, 0)
+	imcdCanvasPutImage(cd_canvas, img, 0, 0, img.width, img.height, 0, 0, 0, 0)
+#	imcdCanvasPutImage(cd_canvas, img, 20,20,int64(img.width/2), int64(img.height/2),  0, 0, 0, 0)
 
 	#=data = [convert(Ptr{Uint8}, unsafe_load(img.data,1)),
 			convert(Ptr{Uint8}, unsafe_load(img.data,2)),
@@ -127,7 +128,7 @@ function ShowImage(file_name::String, iup_dialog::Ptr{Ihandle})
 	end
 	IupSetAttribute(iup_dialog, "imImage")
 
-	error = convert(Ptr{Cint}, [int32(0)])
+	error = pointer([0])
 	image = imFileImageLoadBitmap(file_name, 0, error)
 	error = unsafe_load(error)
 	if (error != 0)	PrintError(error)	end
@@ -142,9 +143,8 @@ end
 # --------------------------------------------------------------------------------
 function cbCanvasButton(iup_canvas::Ptr{Ihandle}, but::Int, pressed::Int)
 	global disable_repaint
-	
-	file_name = "*.*"
 
+	file_name = "*.*"
 	if (but != IUP_BUTTON1 || pressed != 0)
 		return IUP_DEFAULT
 	end
@@ -211,7 +211,7 @@ end
 
 # ----------------------------------------------------------------------------------------------
 function imlabCreateButtonImages()
-	new_bits = uint8([
+	new_bits = Uint8[
 		2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2
 		,3,2,2,1,3,2,2,1,2,2,2,2,2,2,2,2
 		,1,3,2,1,4,2,1,3,2,2,2,2,2,2,2,2
@@ -228,7 +228,7 @@ function imlabCreateButtonImages()
 		,2,2,2,0,4,4,4,4,4,4,4,4,4,4,0,2
 		,2,2,2,0,4,4,4,4,4,4,4,4,4,4,0,2
 		,2,2,2,0,0,0,0,0,0,0,0,0,0,0,0,2
-	])
+	]
 
 	new_colors = [                                      
 		"0 0 0",
@@ -239,7 +239,7 @@ function imlabCreateButtonImages()
 		""
 	]
 
-	open_bits = uint8([
+	open_bits = Uint8[
 		1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
 		1,1,1,1,1,1,1,1,1,1,0,0,0,1,1,1,
 		1,1,1,1,1,1,1,1,1,0,1,1,1,0,1,0,
@@ -256,7 +256,7 @@ function imlabCreateButtonImages()
 		1,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,
 		1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
 		1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
-	])
+	]
 
 	open_colors = [
 		"0 0 0",
