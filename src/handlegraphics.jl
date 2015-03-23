@@ -1,6 +1,24 @@
 # This file has simple functions that mimic (part of) the behavior of the Matlab functions with the same name
 # Figure properties like for example WindowButtonDownFcn() were implemented as functions too.
 
+### Garbage collection [prevention]
+const gc_preserve = ObjectIdDict() # reference counted closures
+function gc_ref(x::ANY)
+	global gc_preserve
+	#isbits(x) && error("can't gc-preserve an isbits object")
+	gc_preserve[x] = (get(gc_preserve, x, 0)::Int)+1
+	x
+end
+function gc_unref(x::ANY)
+	global gc_preserve
+	#@assert !isbits(x)
+	count = get(gc_preserve, x, 0)::Int-1
+	if count <= 0
+		delete!(gc_preserve, x)
+	end
+	nothing
+end
+
 function guidata(hand::Ptr{Ihandle})
 	# Get the handles stored in the Ihandle hand
 	handles = unsafe_pointer_to_objref(IupGetAttribute(hand, "handles"))
