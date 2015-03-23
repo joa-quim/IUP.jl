@@ -22,6 +22,7 @@ export
 	IupOpen,
 	IupPopup, IupProgressBar,
 	IupRadio,
+	IupRefresh,
 	IupSeparator,
 	IupSetAttribute, IupSetAttributes, IupSetAttributeHandle, IupSetCallback, IupSetCallbacks, IupSetFunction,
 	IupSetFloat, IupSetDouble, IupSetDoubleId, IupSetGlobal, IupSetHandle, IupSetLanguage,
