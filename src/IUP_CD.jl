@@ -233,7 +233,7 @@ export
 	cdVersionDate,
 	cdVersionNumber,	
 	cdVectorText,
-	cdVectorFont,
+#	cdVectorFont,
 	cdVectorTextDirection,
 	cdVectorTextTransform,
 	cdVectorTextSize,
@@ -370,9 +370,9 @@ function imcdCanvasPutImage(_canvas, _image, _x, _y, _w, _h, _xmin, _xmax, _ymin
 			convert(Ptr{Uint8}, unsafe_load(_image.data,3))]
 
 		if (_image.has_alpha != 0)
-			data = [data, convert(Ptr{Uint8}, unsafe_load(_image.data,4))]
+			alfa = convert(Ptr{Uint8}, unsafe_load(_image.data,4))
 			cdCanvasPutImageRectRGBA(_canvas, _image.width, _image.height,
-					data[1], data[2], data[3], data[4],
+					data[1], data[2], data[3], alfa,
 					_x, _y, _w, _h, _xmin, _xmax, _ymin, _ymax)
 		else
 			cdCanvasPutImageRectRGB(_canvas, _image.width, _image.height,
@@ -386,4 +386,5 @@ function imcdCanvasPutImage(_canvas, _image, _x, _y, _w, _h, _xmin, _xmax, _ymin
 					_x, _y, _w, _h, _xmin, _xmax, _ymin, _ymax)
 	end
 end
+
 end  # module
