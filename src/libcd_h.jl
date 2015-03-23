@@ -139,6 +139,7 @@ type cdContext
     cxPlay::Ptr{Void}
     cxRegisterCallback::Ptr{Void}
 end
+
 immutable Array_2_Uint8
     d1::Uint8
     d2::Uint8
@@ -640,6 +641,7 @@ immutable Array_1024_Uint8
     d486::Uint8
     d487::Uint8
     d488::Uint8
+#=
     d489::Uint8
     d490::Uint8
     d491::Uint8
@@ -1176,7 +1178,9 @@ immutable Array_1024_Uint8
     d1022::Uint8
     d1023::Uint8
     d1024::Uint8
+=#
 end
+
 immutable Array_50_Ptr
     d1::Ptr{cdAttribute}
     d2::Ptr{cdAttribute}
@@ -1366,6 +1370,7 @@ type cdCanvas
     ctxcanvas::Ptr{Void}
     context::Ptr{Cint}
 end
+
 # begin enum ANONYMOUS_1
 const CD_BASE_WIN = 0
 const CD_BASE_X = 1
@@ -1386,6 +1391,7 @@ type cdBitmap
     _type::Cint
     data::Ptr{Void}
 end
+
 typealias cdCallback Ptr{Void}
 # begin enum ANONYMOUS_3
 const CD_RGB = 0
