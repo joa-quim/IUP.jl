@@ -1,4 +1,4 @@
-module xxx_
+module mirone_toy_
 
 export
 	mirone_toy
@@ -128,6 +128,7 @@ end
 # ---------------------------------------------------------------------------------------------
 function blabla()
 	iup_canvas = IupCanvas()
+	IupSetAttribute(iup_canvas, "BORDER", "NO");
 	IupSetCallback(iup_canvas, "ACTION", cfunction(cbCanvasRepaint, Int, (Ptr{Ihandle},)))
 	IupSetCallback(iup_canvas, "MAP_CB", cfunction(cbCanvasMap, Int, (Ptr{Ihandle},)))
 	return iup_canvas
@@ -159,11 +160,9 @@ end
 # ------------------------------------------------------------------------
 function fMotionCB(hand::Ptr{Ihandle}, x::Int32, y::Int32, r::Ptr{Uint8})
 	handles = guidata(hand)
-
-	yp = convert(Ptr{Cint}, [y]);
+	yp = convert(Ptr{Cint}, pointer([y]))
 	cdCanvasUpdateYAxis(handles.cd_canvas, yp)
-	y = int32(unsafe_load(yp))
-	x = int32(x)						# <=========== NAO DEVIA SER Int64
+	y = unsafe_load(yp)
 	polygon(handles, MOVE, x, y)
 	return IUP_DEFAULT
 end
@@ -175,17 +174,17 @@ function fButtonCB(hand::Ptr{Ihandle}, b::Char, e::Integer, x::Integer, y::Integ
 	handles = guidata(hand)
 
 	cdCanvasActivate(handles.cd_canvas)
-	cdCanvasWriteMode(handles.cd_canvas, IUP_CD.CD_NOT_XOR)
+	#cdCanvasWriteMode(handles.cd_canvas, IUP_CD.CD_NOT_XOR)
 	cdCanvasForeground(handles.cd_canvas, convert(Clong, IUP_CD.CD_BLACK))
 	cdCanvasLineStyle(handles.cd_canvas, IUP_CD.CD_CONTINUOUS)
 	cdCanvasLineWidth(handles.cd_canvas, 1)
 	cdCanvasClip(handles.cd_canvas, IUP_CD.CD_CLIPOFF)
 
-	yp = convert(Ptr{Cint}, [y]);
+	yp = convert(Ptr{Cint}, pointer([y]))
 	cdCanvasUpdateYAxis(handles.cd_canvas, yp)
-	y = int32(unsafe_load(yp))
+	y = unsafe_load(yp)
 	x = int32(x)				# <=========== NAO DEVIA SER Int64
-	
+
 	set_current_point(handles.iup_canvas, [x,y])
 
 	if (b == IUP_BUTTON1)		# Left button
@@ -207,7 +206,7 @@ end
 #-------------------------------------------------------------------------
 function polygon(handles::Handles, what::Integer, x::Integer, y::Integer)
 # I have to have those redeclared here otherwise it errors saying they are not declared ??????????????????
-global poly_lastwhat
+	global poly_lastwhat
 
 	line_seg = getappdata(handles.iup_canvas, "lineSeg")
 #@show(line_seg)
@@ -264,8 +263,8 @@ end
 
 # ---------------------------------------------------------------------------------------------
 function cmOpen(iup_canvas::Ptr{Ihandle})
-	# Retrieve a file name */
-	FileName = "*.*"
+	# Retrieve a file name
+	FileName = "*.*" * repeat(" ",253)
 	if (IupGetFile(FileName) != 0)
 		return IUP_DEFAULT
 	end
@@ -292,6 +291,13 @@ function ShowImage(FileName::String, iup_dialog::Ptr{Ihandle})
 #
 	#image = load_with_gmt(FileName)
 
+	img = unsafe_load(image)		# Need to get access to the composite type, not to its pointer
+@show(pointer_to_array(img.palette,256*3))
+	handles = guidata(iup_dialog)
+	IupSetAttribute(handles.figure1, "CLIENTSIZE", @sprintf("%dx%d", max(img.width,730), img.height+72))
+	IupRefresh(handles.figure1)
+@show(bytestring(IupGetAttribute(handles.figure1, "RASTERSIZE")))
+
 	IupSetAttribute(iup_dialog, "imImage", image);
 	cbCanvasRepaint(iup_dialog)   # we can do this because canvas inherit attributes from the dialog */
 	IupShow(iup_dialog)
@@ -312,15 +318,11 @@ function cbCanvasRepaint(iup_canvas::Ptr{Ihandle})
 		return IUP_DEFAULT
 	end
 
+	#handles = guidata(iup_canvas)
 	img = unsafe_load(image)		# Need to get access to the composite type, not to its pointer
-	imcdCanvasPutImage(cd_canvas, img, 0, 0, img.width, img.height, 0, 0, 0, 0)
-#	imcdCanvasPutImage(cd_canvas, img, 10,10,div(img.width,2), div(img.height,2),  0, 0, 0, 0)
+	x_off = div(730 - img.width, 2)
+	imcdCanvasPutImage(cd_canvas, img, x_off, 0, img.width, img.height, 0, 0, 0, 0)
 
-	#IupSetAttribute(iup_canvas, "RASTERSIZE", @sprintf("%dx%d", img.width, img.height+25+91+12))
-	IupSetAttribute(iup_canvas, "RASTERSIZE", @sprintf("%dx%d", img.width, img.height))
-	handles = guidata(iup_canvas)
-	#IupSetAttribute(handles.figure1, "RASTERSIZE", C_NULL) ;
-@show(bytestring(IupGetAttribute(iup_canvas, "RASTERSIZE")))
 	IupRefresh(iup_canvas)
 	cdCanvasFlush(cd_canvas)
 	return IUP_DEFAULT
@@ -328,10 +330,23 @@ end
 
 # --------------------------------------------------------------------------------
 function load_with_gmt(FileName::String)
-	I = gmt("read C://progs_cygw//GMTdev//gmt5//branches//5.2.0//test//grdimage//gdal//needle.jpg -Ti")
+	I = gmt("read -Ti " * FileName)
+#	I = gmt("read C://progs_cygw//GMTdev//gmt5//branches//5.2.0//test//grdimage//gdal//needle.jpg -Ti")
 	n = I.n_columns * I.n_rows
-	data = pointer([pointer(I.image[:,:,1]), pointer(I.image[:,:,2]), pointer(I.image[:,:,3])])
-	im = imImage(I.n_columns,I.n_rows,IM_RGB,0,0,3,I.n_columns, n, n*3, n, data, C_NULL, 0, C_NULL)
+	if (I.LayerCount >= 3)
+		data = pointer([pointer(I.image[:,:,1]), pointer(I.image[:,:,2]), pointer(I.image[:,:,3])])
+		cmap = C_NULL
+	else
+		data = pointer([pointer(I.image)])
+	end
+	palette_count = size(I.colormap, 1)
+	color_space = IM_RGB
+	if (size(I.colormap,1) > 1)
+		cmap = I.colormap
+		color_space = IM_MAP
+	end
+	im = imImage(I.n_columns, I.n_rows, color_space, 0, 0, I.LayerCount, I.n_columns, n,
+	             n*I.LayerCount, n, data, pointer(cmap), palette_count, C_NULL)
 	image = pointer([im])
 	return gc_ref(image)
 end
