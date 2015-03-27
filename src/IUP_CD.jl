@@ -356,10 +356,6 @@ include("im_image_h.jl")
 # Utility function to draw the image in a CD library canvas (from im_image.h)
 # Works only for data_type IM_BYTE, and color spaces: IM_RGB, IM_MAP, IMGRAY and IM_BINARY.
 function imcdCanvasPutImage(_canvas, _image, _x, _y, _w, _h, _xmin, _xmax, _ymin, _ymax)
-	# When _image is a Ptr{imImage} the code errors uncomprehensibly. The printls()s show that
-	#println("_image: ", _image)
-	#println("typeof(_image): ", typeof(_image))
-	#println("isa(_image, Ptr{imImage}): ", isa(_image, Ptr{imImage}))
 	if (isa(_image, Ptr{imImage}))
 		_image = unsafe_load(_image)
 	end
@@ -381,8 +377,11 @@ function imcdCanvasPutImage(_canvas, _image, _x, _y, _w, _h, _xmin, _xmax, _ymin
 		end
 	else
 		data = [convert(Ptr{Uint8}, unsafe_load(_image.data,1))]
+		t = pointer_to_array(_image.palette, 256*3)
+#@show(t)
+#@show(reshape(t,256,3))
 		cdCanvasPutImageRectMap(_canvas, _image.width, _image.height,
-					data[0], _image.palette,
+					data[1], _image.palette,
 					_x, _y, _w, _h, _xmin, _xmax, _ymin, _ymax)
 	end
 end
