@@ -110,3 +110,16 @@ function get_current_character(canvas::Ptr{Ihandle})
 	cc = getappdata(canvas, "CurrentCharacter")
 	return cc
 end
+
+# -------------------------------------------------------------------------------
+function isnada(x::Any)
+	# Replacement for isempty that works for any type
+	empty = false
+	try
+		isempty(x)
+		empty = true
+	catch
+		empty = false
+	end
+	return empty
+end
