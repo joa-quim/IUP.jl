@@ -343,6 +343,12 @@ export
 	cdContextIup,
 	# From cdxdbuf
 	cdContextDBuffer,
+	#
+	# From handlegraphics
+	#
+	guidata, setappdata, getappdata, WindowButtonDownFcn, WindowButtonMotionFcn, KeyPressFcn,
+	set_current_point, get_current_point, set_current_character, get_current_character, isnada, Handles,
+	gc_ref, gc_unref,
 	# local
 	imcdCanvasPutImage
 
@@ -351,6 +357,7 @@ include("libcd.jl")
 include("cdiup.jl")
 include("wd.jl")
 include("im_image_h.jl")
+include("handlegraphics.jl")
 
 # ----------------------------------------------------------------------------------------
 # Utility function to draw the image in a CD library canvas (from im_image.h)
@@ -377,7 +384,7 @@ function imcdCanvasPutImage(_canvas, _image, _x, _y, _w, _h, _xmin, _xmax, _ymin
 		end
 	else
 		data = [convert(Ptr{Uint8}, unsafe_load(_image.data,1))]
-		t = pointer_to_array(_image.palette, 256*3)
+		#t = pointer_to_array(_image.palette, 256)
 #@show(t)
 #@show(reshape(t,256,3))
 		cdCanvasPutImageRectMap(_canvas, _image.width, _image.height,
