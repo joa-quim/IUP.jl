@@ -1,6 +1,15 @@
 # This file has simple functions that mimic (part of) the behavior of the Matlab functions with the same name
 # Figure properties like for example WindowButtonDownFcn() were implemented as functions too.
 
+include("libiup_h.jl")
+include("libiup.jl")
+
+type Handles
+	figure1::Ptr{Ihandle}
+	iup_canvas::Ptr{Ihandle}
+	cd_canvas::Ptr{cdCanvas}	# cdCanvas is a composite type
+end
+
 ### Garbage collection [prevention]
 const gc_preserve = ObjectIdDict() # reference counted closures
 function gc_ref(x::ANY)
