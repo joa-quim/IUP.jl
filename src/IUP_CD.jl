@@ -374,22 +374,16 @@ function imcdCanvasPutImage(_canvas, _image, _x, _y, _w, _h, _xmin, _xmax, _ymin
 
 		if (_image.has_alpha != 0)
 			alfa = convert(Ptr{Uint8}, unsafe_load(_image.data,4))
-			cdCanvasPutImageRectRGBA(_canvas, _image.width, _image.height,
-					data[1], data[2], data[3], alfa,
-					_x, _y, _w, _h, _xmin, _xmax, _ymin, _ymax)
+			cdCanvasPutImageRectRGBA(_canvas, _image.width, _image.height, data[1], data[2],
+			                         data[3], alfa, _x, _y, _w, _h, _xmin, _xmax, _ymin, _ymax)
 		else
-			cdCanvasPutImageRectRGB(_canvas, _image.width, _image.height,
-					data[1], data[2], data[3],
-					_x, _y, _w, _h, _xmin, _xmax, _ymin, _ymax)
+			cdCanvasPutImageRectRGB(_canvas, _image.width, _image.height, data[1], data[2],
+			                        data[3], _x, _y, _w, _h, _xmin, _xmax, _ymin, _ymax)
 		end
 	else
 		data = [convert(Ptr{Uint8}, unsafe_load(_image.data,1))]
-		#t = pointer_to_array(_image.palette, 256)
-#@show(t)
-#@show(reshape(t,256,3))
-		cdCanvasPutImageRectMap(_canvas, _image.width, _image.height,
-					data[1], _image.palette,
-					_x, _y, _w, _h, _xmin, _xmax, _ymin, _ymax)
+		cdCanvasPutImageRectMap(_canvas, _image.width, _image.height, data[1], _image.palette,
+		                        _x, _y, _w, _h, _xmin, _xmax, _ymin, _ymax)
 	end
 end
 
