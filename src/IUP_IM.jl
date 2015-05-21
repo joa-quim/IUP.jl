@@ -138,6 +138,8 @@ export
 	IM_RES_NONE,
 	IM_RES_DPI,
 	IM_RES_DPC,
+	# From iupim.jl
+	IupLoadImage, IupSaveImage, IupGetNativeHandleImage, IupGetImageNativeHandle, IupImageFromImImage,
 	# From im_image_h.jl
 	imImage	# A composite type
 
@@ -145,6 +147,7 @@ include("libim_h.jl")
 include("libim.jl")
 include("im_image_h.jl")
 include("im_image.jl")
+include("iupim.jl")
 
 
 end  # module
