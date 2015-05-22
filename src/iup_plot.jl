@@ -8,7 +8,7 @@ function IupPlotOpen()
   ccall( (:IupPlotOpen, iup_plot), Void, (), )
 end
 function IupPlot()
-  ccall( (:IupPlot, iup_plot), Ptr{Cint}, (), )
+    ccall((:IupPlot, iup_plot), Ptr{Ihandle}, (),)
 end
 function IupPlotBegin(ih::Ptr{Ihandle}, strXdata::Integer)
   ccall( (:IupPlotBegin, iup_plot), Void, (Ptr{Ihandle}, Cint), ih, strXdata)
