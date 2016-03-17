@@ -1,6 +1,6 @@
-##Julia interface to the `IUP` GUI library
-Gui building, using the IUP library: [http://www.tecgraf.puc-rio.br/iup/](http://www.tecgraf.puc-rio.br/iup/)
-<br>
+## Julia interface to the `IUP` GUI library
+
+GUI building, using the [IUP library](http://www.tecgraf.puc-rio.br/iup/)
 
 ## Installation
 
@@ -14,13 +14,13 @@ Prior to using this library, you must install `IUP` on your computer. You will n
   
 To install `IUP.jl`, do
 
-  Pkg.clone("IUP")
+    Pkg.clone("IUP")
   
-## Using
+## Usage
+
 I have only tested it on Windows and recreated several of the `IUP` examples by porting directly from the `C` version.
 
-Those examples where created as modules so if you add the `src` and `examples` installation dir to `LOAD_PATH`, one can run them by typing (for example for the `mathglsamples` example)
+Those examples were created as modules so if you add the `src` and `examples` installation directory to `LOAD_PATH`, one can run them by typing (for example for the `mathglsamples` example):
 
-     using mathglsamples_
-     mathglsamples()
-
+    using mathglsamples_
+    mathglsamples()
