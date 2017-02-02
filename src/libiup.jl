@@ -1,7 +1,7 @@
 # Julia wrapper for header: /Volumes/BOOTCAMP/programs/compa_libs/iup/include/iup.h
 # Automatically generated using Clang.jl wrap_c, version 0.0.0
 
-@windows? (const iup = "iup") : (const iup = "libiup")  # Name of IUP shared lib.
+@static is_windows()? (const iup = "iup") : (const iup = "libiup")  # Name of IUP shared lib.
 
 
 function IupVbox(c1::Ptr{Ihandle}, c2=C_NULL, c3=C_NULL, c4=C_NULL, c5=C_NULL, c6=C_NULL, c7=C_NULL, c8=C_NULL, c9=C_NULL,
@@ -53,18 +53,18 @@ end
 # this one only as a guide for the future problems
 #=
 function IupSetCallbacks(ih::Ptr{Ihandle}, name::String, func1::Icallback, func2::Icallback)
-	ccall((:IupSetCallbacks, iup), Icallback, (Ptr{Ihandle}, Ptr{Uint8}, Icallback, Icallback), ih, name, func1, func2)
+	ccall((:IupSetCallbacks, iup), Icallback, (Ptr{Ihandle}, Ptr{UInt8}, Icallback, Icallback), ih, name, func1, func2)
 end
 =#
 # Followinfg the advice in https://groups.google.com/forum/?fromgroups=#!topic/julia-users/bBXHSq_KJZM
 function IupSetCallbacks(ih::Ptr{Ihandle}, name::String, func1::Icallback)
-    ccall((:IupSetCallbacks, iup), Icallback, (Ptr{Ihandle}, Ptr{Uint8}, Icallback, Ptr{Void}...), ih, name, func1, C_NULL)
+    ccall((:IupSetCallbacks, iup), Icallback, (Ptr{Ihandle}, Ptr{UInt8}, Icallback, Ptr{Void}...), ih, name, func1, C_NULL)
 end
 
 # When I find that these arguments may be used to send in something useful I'll activate them
-#function IupOpen(argc::Ptr{Cint}=C_NULL, argv::Ptr{Ptr{Ptr{Uint8}}}=C_NULL)
+#function IupOpen(argc::Ptr{Cint}=C_NULL, argv::Ptr{Ptr{Ptr{UInt8}}}=C_NULL)
 function IupOpen(argc=C_NULL, argv=C_NULL)
-	ccall((:IupOpen, iup), Cint, (Ptr{Cint}, Ptr{Ptr{Ptr{Uint8}}}), argc, argv)
+	ccall((:IupOpen, iup), Cint, (Ptr{Cint}, Ptr{Ptr{Ptr{UInt8}}}), argc, argv)
 end
 function IupClose()
 	ccall((:IupClose, iup), Void, (),)
@@ -91,10 +91,10 @@ function IupExitLoop()
   ccall( (:IupExitLoop, iup), Void, (), )
 end
 function IupRecordInput(filename::String, mode::Int)
-	ccall((:IupRecordInput, iup), Cint, (Ptr{Uint8}, Cint), filename, mode)
+	ccall((:IupRecordInput, iup), Cint, (Ptr{UInt8}, Cint), filename, mode)
 end
 function IupPlayInput(filename::String)
-  ccall( (:IupPlayInput, iup), Cint, (Ptr{Uint8},), filename)
+  ccall( (:IupPlayInput, iup), Cint, (Ptr{UInt8},), filename)
 end
 function IupUpdate(ih::Ptr{Ihandle})
   ccall( (:IupUpdate, iup), Void, (Ptr{Ihandle},), ih)
@@ -112,37 +112,37 @@ function IupRefreshChildren(ih::Ptr{Ihandle})
   ccall( (:IupRefreshChildren, iup), Void, (Ptr{Ihandle},), ih)
 end
 function IupHelp(url::String)
-  ccall( (:IupHelp, iup), Cint, (Ptr{Uint8},), url)
+  ccall( (:IupHelp, iup), Cint, (Ptr{UInt8},), url)
 end
 function IupLoad(filename::String)
-  ccall( (:IupLoad, iup), Ptr{Uint8}, (Ptr{Uint8},), filename)
+  ccall( (:IupLoad, iup), Ptr{UInt8}, (Ptr{UInt8},), filename)
 end
 function IupLoadBuffer(buffer::String)
-  ccall( (:IupLoadBuffer, iup), Ptr{Uint8}, (Ptr{Uint8},), buffer)
+  ccall( (:IupLoadBuffer, iup), Ptr{UInt8}, (Ptr{UInt8},), buffer)
 end
 function IupVersion()
-  ccall( (:IupVersion, iup), Ptr{Uint8}, (), )
+  ccall( (:IupVersion, iup), Ptr{UInt8}, (), )
 end
 function IupVersionDate()
-  ccall( (:IupVersionDate, iup), Ptr{Uint8}, (), )
+  ccall( (:IupVersionDate, iup), Ptr{UInt8}, (), )
 end
 function IupVersionNumber()
   ccall( (:IupVersionNumber, iup), Cint, (), )
 end
 function IupSetLanguage(lng::String)
-	ccall((:IupSetLanguage, iup), Void, (Ptr{Uint8},), lng)
+	ccall((:IupSetLanguage, iup), Void, (Ptr{UInt8},), lng)
 end
 function IupGetLanguage()
-  ccall( (:IupGetLanguage, iup), Ptr{Uint8}, (), )
+  ccall( (:IupGetLanguage, iup), Ptr{UInt8}, (), )
 end
 function IupSetLanguageString(name::String, str::String)
-	ccall((:IupSetLanguageString, iup), Void, (Ptr{Uint8}, Ptr{Uint8}), name, str)
+	ccall((:IupSetLanguageString, iup), Void, (Ptr{UInt8}, Ptr{UInt8}), name, str)
 end
 function IupStoreLanguageString(name::String, str::String)
-	ccall((:IupStoreLanguageString, iup), Void, (Ptr{Uint8}, Ptr{Uint8}), name, str)
+	ccall((:IupStoreLanguageString, iup), Void, (Ptr{UInt8}, Ptr{UInt8}), name, str)
 end
 function IupGetLanguageString(name::String)
-	ccall((:IupGetLanguageString, iup), Ptr{Uint8}, (Ptr{Uint8},), name)
+	ccall((:IupGetLanguageString, iup), Ptr{UInt8}, (Ptr{UInt8},), name)
 end
 function IupSetLanguagePack(ih::Ptr{Ihandle})
   ccall( (:IupSetLanguagePack, iup), Void, (Ptr{Ihandle},), ih)
@@ -181,7 +181,7 @@ function IupGetDialog(ih::Ptr{Ihandle})
 	ccall((:IupGetDialog, iup), Ptr{Ihandle}, (Ptr{Ihandle},), ih)
 end
 function IupGetDialogChild(ih::Ptr{Ihandle}, name::String)
-  ccall( (:IupGetDialogChild, iup), Ptr{Ihandle}, (Ptr{Ihandle}, Ptr{Uint8}), ih, name)
+  ccall( (:IupGetDialogChild, iup), Ptr{Ihandle}, (Ptr{Ihandle}, Ptr{UInt8}), ih, name)
 end
 function IupReparent(ih::Ptr{Ihandle}, new_parent::Ptr{Ihandle}, ref_child::Ptr{Ihandle})
   ccall( (:IupReparent, iup), Cint, (Ptr{Ihandle}, Ptr{Ihandle}, Ptr{Ihandle}), ih, new_parent, ref_child)
@@ -205,124 +205,124 @@ function IupUnmap(ih::Ptr{Ihandle})
   ccall( (:IupUnmap, iup), Void, (Ptr{Ihandle},), ih)
 end
 function IupResetAttribute(ih::Ptr{Ihandle}, name::String)
-  ccall( (:IupResetAttribute, iup), Void, (Ptr{Ihandle}, Ptr{Uint8}), ih, name)
+  ccall( (:IupResetAttribute, iup), Void, (Ptr{Ihandle}, Ptr{UInt8}), ih, name)
 end
-function IupGetAllAttributes(ih::Ptr{Ihandle}, names::Ptr{Ptr{Uint8}}, n::Cint)
-  ccall( (:IupGetAllAttributes, iup), Cint, (Ptr{Ihandle}, Ptr{Ptr{Uint8}}, Cint), ih, names, n)
+function IupGetAllAttributes(ih::Ptr{Ihandle}, names::Ptr{Ptr{UInt8}}, n::Cint)
+  ccall( (:IupGetAllAttributes, iup), Cint, (Ptr{Ihandle}, Ptr{Ptr{UInt8}}, Cint), ih, names, n)
 end
 function IupSetAttributes(ih::Ptr{Ihandle}, str::String)
-	ccall((:IupSetAttributes, iup), Ptr{Ihandle}, (Ptr{Ihandle}, Ptr{Uint8}), ih, str)
+	ccall((:IupSetAttributes, iup), Ptr{Ihandle}, (Ptr{Ihandle}, Ptr{UInt8}), ih, str)
 end
 function IupGetAttributes(ih::Ptr{Ihandle})
-  ccall( (:IupGetAttributes, iup), Ptr{Uint8}, (Ptr{Ihandle},), ih)
+  ccall( (:IupGetAttributes, iup), Ptr{UInt8}, (Ptr{Ihandle},), ih)
 end
 function IupSetAttribute(ih::Ptr{Ihandle}, name::String, value=C_NULL)
-	ccall((:IupSetAttribute, iup), Void, (Ptr{Ihandle}, Ptr{Uint8}, Ptr{Uint8}), ih, name, value)
+	ccall((:IupSetAttribute, iup), Void, (Ptr{Ihandle}, Ptr{UInt8}, Ptr{UInt8}), ih, name, value)
 end
 function IupSetStrAttribute(ih::Ptr{Ihandle}, name::String, value::String)
-  ccall( (:IupSetStrAttribute, iup), Void, (Ptr{Ihandle}, Ptr{Uint8}, Ptr{Uint8}), ih, name, value)
+  ccall( (:IupSetStrAttribute, iup), Void, (Ptr{Ihandle}, Ptr{UInt8}, Ptr{UInt8}), ih, name, value)
 end
 function IupSetInt(ih::Ptr{Ihandle}, name::String, value::Cint)
-  ccall( (:IupSetInt, iup), Void, (Ptr{Ihandle}, Ptr{Uint8}, Cint), ih, name, value)
+  ccall( (:IupSetInt, iup), Void, (Ptr{Ihandle}, Ptr{UInt8}, Cint), ih, name, value)
 end
 function IupSetFloat(ih::Ptr{Ihandle}, name::String, value)
-  ccall( (:IupSetFloat, iup), Void, (Ptr{Ihandle}, Ptr{Uint8}, Cfloat), ih, name, value)
+  ccall( (:IupSetFloat, iup), Void, (Ptr{Ihandle}, Ptr{UInt8}, Cfloat), ih, name, value)
 end
 function IupSetDouble(ih::Ptr{Ihandle}, name::String, value)
-  ccall( (:IupSetFloat, iup), Void, (Ptr{Ihandle}, Ptr{Uint8}, Cdouble), ih, name, value)
+  ccall( (:IupSetFloat, iup), Void, (Ptr{Ihandle}, Ptr{UInt8}, Cdouble), ih, name, value)
 end
 function IupSetRGB(ih::Ptr{Ihandle}, name::String, r::Cuchar, g::Cuchar, b::Cuchar)
-  ccall( (:IupSetRGB, iup), Void, (Ptr{Ihandle}, Ptr{Uint8}, Cuchar, Cuchar, Cuchar), ih, name, r, g, b)
+  ccall( (:IupSetRGB, iup), Void, (Ptr{Ihandle}, Ptr{UInt8}, Cuchar, Cuchar, Cuchar), ih, name, r, g, b)
 end
 function IupGetAttribute(ih::Ptr{Ihandle}, name::String)
-	ccall((:IupGetAttribute, iup), Ptr{Uint8}, (Ptr{Ihandle}, Ptr{Uint8}), ih, name)
+	ccall((:IupGetAttribute, iup), Ptr{UInt8}, (Ptr{Ihandle}, Ptr{UInt8}), ih, name)
 end
 function IupGetInt(ih::Ptr{Ihandle}, name::String)
-	ccall((:IupGetInt, iup), Cint, (Ptr{Ihandle}, Ptr{Uint8}), ih, name)
+	ccall((:IupGetInt, iup), Cint, (Ptr{Ihandle}, Ptr{UInt8}), ih, name)
 end
 function IupGetInt2(ih::Ptr{Ihandle}, name::String)
-	ccall((:IupGetInt2, iup), Cint, (Ptr{Ihandle}, Ptr{Uint8}), ih, name)
+	ccall((:IupGetInt2, iup), Cint, (Ptr{Ihandle}, Ptr{UInt8}), ih, name)
 end
 function IupGetIntInt(ih::Ptr{Ihandle}, name::String, i1::Ptr{Cint}, i2::Ptr{Cint})
-  ccall( (:IupGetIntInt, iup), Cint, (Ptr{Ihandle}, Ptr{Uint8}, Ptr{Cint}, Ptr{Cint}), ih, name, i1, i2)
+  ccall( (:IupGetIntInt, iup), Cint, (Ptr{Ihandle}, Ptr{UInt8}, Ptr{Cint}, Ptr{Cint}), ih, name, i1, i2)
 end
 function IupGetFloat(ih::Ptr{Ihandle}, name::String)
-	ccall((:IupGetFloat, iup), Cfloat, (Ptr{Ihandle}, Ptr{Uint8}), ih, name)
+	ccall((:IupGetFloat, iup), Cfloat, (Ptr{Ihandle}, Ptr{UInt8}), ih, name)
 end
 function IupGetDouble(ih::Ptr{Ihandle}, name::String)
-    ccall((:IupGetFloat, iup), Cdouble, (Ptr{Ihandle}, Ptr{Uint8}), ih, name)
+    ccall((:IupGetFloat, iup), Cdouble, (Ptr{Ihandle}, Ptr{UInt8}), ih, name)
 end
 function IupGetRGB(ih::Ptr{Ihandle}, name::String, r::Ptr{Cuchar}, g::Ptr{Cuchar}, b::Ptr{Cuchar})
-  ccall( (:IupGetRGB, iup), Void, (Ptr{Ihandle}, Ptr{Uint8}, Ptr{Cuchar}, Ptr{Cuchar}, Ptr{Cuchar}), ih, name, r, g, b)
+  ccall( (:IupGetRGB, iup), Void, (Ptr{Ihandle}, Ptr{UInt8}, Ptr{Cuchar}, Ptr{Cuchar}, Ptr{Cuchar}), ih, name, r, g, b)
 end
 function IupSetAttributeId(ih::Ptr{Ihandle}, name::String, id::Cint, value::String)
-  ccall( (:IupSetAttributeId, iup), Void, (Ptr{Ihandle}, Ptr{Uint8}, Cint, Ptr{Uint8}), ih, name, id, value)
+  ccall( (:IupSetAttributeId, iup), Void, (Ptr{Ihandle}, Ptr{UInt8}, Cint, Ptr{UInt8}), ih, name, id, value)
 end
 function IupSetStrAttributeId(ih::Ptr{Ihandle}, name::String, id::Cint, value::String)
-  ccall( (:IupSetStrAttributeId, iup), Void, (Ptr{Ihandle}, Ptr{Uint8}, Cint, Ptr{Uint8}), ih, name, id, value)
+  ccall( (:IupSetStrAttributeId, iup), Void, (Ptr{Ihandle}, Ptr{UInt8}, Cint, Ptr{UInt8}), ih, name, id, value)
 end
 function IupSetIntId(ih::Ptr{Ihandle}, name::String, id::Cint, value::Cint)
-  ccall( (:IupSetIntId, iup), Void, (Ptr{Ihandle}, Ptr{Uint8}, Cint, Cint), ih, name, id, value)
+  ccall( (:IupSetIntId, iup), Void, (Ptr{Ihandle}, Ptr{UInt8}, Cint, Cint), ih, name, id, value)
 end
 function IupSetFloatId(ih::Ptr{Ihandle}, name::String, id::Cint, value::Cfloat)
-  ccall( (:IupSetFloatId, iup), Void, (Ptr{Ihandle}, Ptr{Uint8}, Cint, Cfloat), ih, name, id, value)
+  ccall( (:IupSetFloatId, iup), Void, (Ptr{Ihandle}, Ptr{UInt8}, Cint, Cfloat), ih, name, id, value)
 end
 function IupSetDoubleId(ih::Ptr{Ihandle}, name::String, id::Cint, value::Cdouble)
-  ccall( (:IupSetFloatId, iup), Void, (Ptr{Ihandle}, Ptr{Uint8}, Cint, Cdouble), ih, name, id, value)
+  ccall( (:IupSetFloatId, iup), Void, (Ptr{Ihandle}, Ptr{UInt8}, Cint, Cdouble), ih, name, id, value)
 end
 function IupSetRGBId(ih::Ptr{Ihandle}, name::String, id::Cint, r::Cuchar, g::Cuchar, b::Cuchar)
-  ccall( (:IupSetRGBId, iup), Void, (Ptr{Ihandle}, Ptr{Uint8}, Cint, Cuchar, Cuchar, Cuchar), ih, name, id, r, g, b)
+  ccall( (:IupSetRGBId, iup), Void, (Ptr{Ihandle}, Ptr{UInt8}, Cint, Cuchar, Cuchar, Cuchar), ih, name, id, r, g, b)
 end
 function IupGetAttributeId(ih::Ptr{Ihandle}, name::String, id::Cint)
-  ccall( (:IupGetAttributeId, iup), Ptr{Uint8}, (Ptr{Ihandle}, Ptr{Uint8}, Cint), ih, name, id)
+  ccall( (:IupGetAttributeId, iup), Ptr{UInt8}, (Ptr{Ihandle}, Ptr{UInt8}, Cint), ih, name, id)
 end
 function IupGetIntId(ih::Ptr{Ihandle}, name::String, id::Cint)
-  ccall( (:IupGetIntId, iup), Cint, (Ptr{Ihandle}, Ptr{Uint8}, Cint), ih, name, id)
+  ccall( (:IupGetIntId, iup), Cint, (Ptr{Ihandle}, Ptr{UInt8}, Cint), ih, name, id)
 end
 function IupGetFloatId(ih::Ptr{Ihandle}, name::String, id::Cint)
-  ccall( (:IupGetFloatId, iup), Cfloat, (Ptr{Ihandle}, Ptr{Uint8}, Cint), ih, name, id)
+  ccall( (:IupGetFloatId, iup), Cfloat, (Ptr{Ihandle}, Ptr{UInt8}, Cint), ih, name, id)
 end
 function IupGetDoubleId(ih::Ptr{Ihandle}, name::String, id::Cint)
-  ccall( (:IupGetFloatId, iup), Cdouble, (Ptr{Ihandle}, Ptr{Uint8}, Cint), ih, name, id)
+  ccall( (:IupGetFloatId, iup), Cdouble, (Ptr{Ihandle}, Ptr{UInt8}, Cint), ih, name, id)
 end
 function IupGetRGBId(ih::Ptr{Ihandle}, name::String, id::Cint, r::Ptr{Cuchar}, g::Ptr{Cuchar}, b::Ptr{Cuchar})
-  ccall( (:IupGetRGBId, iup), Void, (Ptr{Ihandle}, Ptr{Uint8}, Cint, Ptr{Cuchar}, Ptr{Cuchar}, Ptr{Cuchar}), ih, name, id, r, g, b)
+  ccall( (:IupGetRGBId, iup), Void, (Ptr{Ihandle}, Ptr{UInt8}, Cint, Ptr{Cuchar}, Ptr{Cuchar}, Ptr{Cuchar}), ih, name, id, r, g, b)
 end
 function IupSetAttributeId2(ih::Ptr{Ihandle}, name::String, lin::Cint, col::Cint, value::String)
-  ccall( (:IupSetAttributeId2, iup), Void, (Ptr{Ihandle}, Ptr{Uint8}, Cint, Cint, Ptr{Uint8}), ih, name, lin, col, value)
+  ccall( (:IupSetAttributeId2, iup), Void, (Ptr{Ihandle}, Ptr{UInt8}, Cint, Cint, Ptr{UInt8}), ih, name, lin, col, value)
 end
 function IupSetStrAttributeId2(ih::Ptr{Ihandle}, name::String, lin::Cint, col::Cint, value::String)
-  ccall( (:IupSetStrAttributeId2, iup), Void, (Ptr{Ihandle}, Ptr{Uint8}, Cint, Cint, Ptr{Uint8}), ih, name, lin, col, value)
+  ccall( (:IupSetStrAttributeId2, iup), Void, (Ptr{Ihandle}, Ptr{UInt8}, Cint, Cint, Ptr{UInt8}), ih, name, lin, col, value)
 end
 function IupSetIntId2(ih::Ptr{Ihandle}, name::String, lin::Cint, col::Cint, value::Cint)
-  ccall( (:IupSetIntId2, iup), Void, (Ptr{Ihandle}, Ptr{Uint8}, Cint, Cint, Cint), ih, name, lin, col, value)
+  ccall( (:IupSetIntId2, iup), Void, (Ptr{Ihandle}, Ptr{UInt8}, Cint, Cint, Cint), ih, name, lin, col, value)
 end
 function IupSetFloatId2(ih::Ptr{Ihandle}, name::String, lin::Cint, col::Cint, value::Cfloat)
-  ccall( (:IupSetFloatId2, iup), Void, (Ptr{Ihandle}, Ptr{Uint8}, Cint, Cint, Cfloat), ih, name, lin, col, value)
+  ccall( (:IupSetFloatId2, iup), Void, (Ptr{Ihandle}, Ptr{UInt8}, Cint, Cint, Cfloat), ih, name, lin, col, value)
 end
 function IupSetRGBId2(ih::Ptr{Ihandle}, name::String, lin::Cint, col::Cint, r::Cuchar, g::Cuchar, b::Cuchar)
-  ccall( (:IupSetRGBId2, iup), Void, (Ptr{Ihandle}, Ptr{Uint8}, Cint, Cint, Cuchar, Cuchar, Cuchar), ih, name, lin, col, r, g, b)
+  ccall( (:IupSetRGBId2, iup), Void, (Ptr{Ihandle}, Ptr{UInt8}, Cint, Cint, Cuchar, Cuchar, Cuchar), ih, name, lin, col, r, g, b)
 end
 function IupGetAttributeId2(ih::Ptr{Ihandle}, name::String, lin::Cint, col::Cint)
-  ccall( (:IupGetAttributeId2, iup), Ptr{Uint8}, (Ptr{Ihandle}, Ptr{Uint8}, Cint, Cint), ih, name, lin, col)
+  ccall( (:IupGetAttributeId2, iup), Ptr{UInt8}, (Ptr{Ihandle}, Ptr{UInt8}, Cint, Cint), ih, name, lin, col)
 end
 function IupGetIntId2(ih::Ptr{Ihandle}, name::String, lin::Cint, col::Cint)
-  ccall( (:IupGetIntId2, iup), Cint, (Ptr{Ihandle}, Ptr{Uint8}, Cint, Cint), ih, name, lin, col)
+  ccall( (:IupGetIntId2, iup), Cint, (Ptr{Ihandle}, Ptr{UInt8}, Cint, Cint), ih, name, lin, col)
 end
 function IupGetFloatId2(ih::Ptr{Ihandle}, name::String, lin::Cint, col::Cint)
-  ccall( (:IupGetFloatId2, iup), Cfloat, (Ptr{Ihandle}, Ptr{Uint8}, Cint, Cint), ih, name, lin, col)
+  ccall( (:IupGetFloatId2, iup), Cfloat, (Ptr{Ihandle}, Ptr{UInt8}, Cint, Cint), ih, name, lin, col)
 end
 function IupGetRGBId2(ih::Ptr{Ihandle}, name::String, lin::Cint, col::Cint, r::Ptr{Cuchar}, g::Ptr{Cuchar}, b::Ptr{Cuchar})
-  ccall( (:IupGetRGBId2, iup), Void, (Ptr{Ihandle}, Ptr{Uint8}, Cint, Cint, Ptr{Cuchar}, Ptr{Cuchar}, Ptr{Cuchar}), ih, name, lin, col, r, g, b)
+  ccall( (:IupGetRGBId2, iup), Void, (Ptr{Ihandle}, Ptr{UInt8}, Cint, Cint, Ptr{Cuchar}, Ptr{Cuchar}, Ptr{Cuchar}), ih, name, lin, col, r, g, b)
 end
 function IupSetGlobal(name::String, value::String)
-	ccall((:IupSetGlobal, iup), Void, (Ptr{Uint8}, Ptr{Uint8}), name, value)
+	ccall((:IupSetGlobal, iup), Void, (Ptr{UInt8}, Ptr{UInt8}), name, value)
 end
 function IupSetStrGlobal(name::String, value::String)
-  ccall( (:IupSetStrGlobal, iup), Void, (Ptr{Uint8}, Ptr{Uint8}), name, value)
+  ccall( (:IupSetStrGlobal, iup), Void, (Ptr{UInt8}, Ptr{UInt8}), name, value)
 end
 function IupGetGlobal(name::String)
-	ccall((:IupGetGlobal, iup), Ptr{Uint8}, (Ptr{Uint8},), name)
+	ccall((:IupGetGlobal, iup), Ptr{UInt8}, (Ptr{UInt8},), name)
 end
 function IupSetFocus(ih::Ptr{Ihandle})
   ccall( (:IupSetFocus, iup), Ptr{Ihandle}, (Ptr{Ihandle},), ih)
@@ -337,55 +337,55 @@ function IupNextField(ih::Ptr{Ihandle})
   ccall( (:IupNextField, iup), Ptr{Ihandle}, (Ptr{Ihandle},), ih)
 end
 function IupGetCallback(ih::Ptr{Ihandle}, name::String)
-  ccall( (:IupGetCallback, iup), Icallback, (Ptr{Ihandle}, Ptr{Uint8}), ih, name)
+  ccall( (:IupGetCallback, iup), Icallback, (Ptr{Ihandle}, Ptr{UInt8}), ih, name)
 end
 function IupSetCallback(ih::Ptr{Ihandle}, name::String, func::Icallback)
-	ccall((:IupSetCallback, iup), Icallback, (Ptr{Ihandle}, Ptr{Uint8}, Icallback), ih, name, func)
+	ccall((:IupSetCallback, iup), Icallback, (Ptr{Ihandle}, Ptr{UInt8}, Icallback), ih, name, func)
 end
 function IupGetFunction(name::String)
-  ccall( (:IupGetFunction, iup), Icallback, (Ptr{Uint8},), name)
+  ccall( (:IupGetFunction, iup), Icallback, (Ptr{UInt8},), name)
 end
 function IupSetFunction(name::String, func::Icallback)
-	ccall((:IupSetFunction, iup), Icallback, (Ptr{Uint8}, Icallback), name, func)
+	ccall((:IupSetFunction, iup), Icallback, (Ptr{UInt8}, Icallback), name, func)
 end
 function IupGetHandle(name::String)
-	ccall((:IupGetHandle, iup), Ptr{Ihandle}, (Ptr{Uint8},), name)
+	ccall((:IupGetHandle, iup), Ptr{Ihandle}, (Ptr{UInt8},), name)
 end
-function IupGetHandle(name::Ptr{Uint8})
-    ccall((:IupGetHandle, iup), Ptr{Ihandle}, (Ptr{Uint8},), name)
+function IupGetHandle(name::Ptr{UInt8})
+    ccall((:IupGetHandle, iup), Ptr{Ihandle}, (Ptr{UInt8},), name)
 end
 function IupSetHandle(name::String, ih::Ptr{Ihandle})
-	ccall((:IupSetHandle, iup), Ptr{Ihandle}, (Ptr{Uint8}, Ptr{Ihandle}), name, ih)
+	ccall((:IupSetHandle, iup), Ptr{Ihandle}, (Ptr{UInt8}, Ptr{Ihandle}), name, ih)
 end
-function IupGetAllNames(names::Ptr{Ptr{Uint8}}, n::Cint)
-  ccall( (:IupGetAllNames, iup), Cint, (Ptr{Ptr{Uint8}}, Cint), names, n)
+function IupGetAllNames(names::Ptr{Ptr{UInt8}}, n::Cint)
+  ccall( (:IupGetAllNames, iup), Cint, (Ptr{Ptr{UInt8}}, Cint), names, n)
 end
-function IupGetAllDialogs(names::Ptr{Ptr{Uint8}}, n::Cint)
-  ccall( (:IupGetAllDialogs, iup), Cint, (Ptr{Ptr{Uint8}}, Cint), names, n)
+function IupGetAllDialogs(names::Ptr{Ptr{UInt8}}, n::Cint)
+  ccall( (:IupGetAllDialogs, iup), Cint, (Ptr{Ptr{UInt8}}, Cint), names, n)
 end
 function IupGetName(ih::Ptr{Ihandle})
-  ccall( (:IupGetName, iup), Ptr{Uint8}, (Ptr{Ihandle},), ih)
+  ccall( (:IupGetName, iup), Ptr{UInt8}, (Ptr{Ihandle},), ih)
 end
 function IupSetAttributeHandle(ih::Ptr{Ihandle}, name::String, ih_named::Ptr{Ihandle})
-	ccall((:IupSetAttributeHandle, iup), Void, (Ptr{Ihandle}, Ptr{Uint8}, Ptr{Ihandle}), ih, name, ih_named)
+	ccall((:IupSetAttributeHandle, iup), Void, (Ptr{Ihandle}, Ptr{UInt8}, Ptr{Ihandle}), ih, name, ih_named)
 end
 function IupGetAttributeHandle(ih::Ptr{Ihandle}, name::String)
-	ccall((:IupGetAttributeHandle, iup), Ptr{Ihandle}, (Ptr{Ihandle}, Ptr{Uint8}), ih, name)
+	ccall((:IupGetAttributeHandle, iup), Ptr{Ihandle}, (Ptr{Ihandle}, Ptr{UInt8}), ih, name)
 end
 function IupGetClassName(ih::Ptr{Ihandle})
-	ccall((:IupGetClassName, iup), Ptr{Uint8}, (Ptr{Ihandle},), ih)
+	ccall((:IupGetClassName, iup), Ptr{UInt8}, (Ptr{Ihandle},), ih)
 end
 function IupGetClassType(ih::Ptr{Ihandle})
-  ccall( (:IupGetClassType, iup), Ptr{Uint8}, (Ptr{Ihandle},), ih)
+  ccall( (:IupGetClassType, iup), Ptr{UInt8}, (Ptr{Ihandle},), ih)
 end
-function IupGetAllClasses(names::Ptr{Ptr{Uint8}}, n::Int)
-  ccall( (:IupGetAllClasses, iup), Cint, (Ptr{Ptr{Uint8}}, Cint), names, n)
+function IupGetAllClasses(names::Ptr{Ptr{UInt8}}, n::Int)
+  ccall( (:IupGetAllClasses, iup), Cint, (Ptr{Ptr{UInt8}}, Cint), names, n)
 end
-function IupGetClassAttributes(classname::String, names::Ptr{Ptr{Uint8}}, n::Int)
-	ccall((:IupGetClassAttributes, iup), Cint, (Ptr{Uint8}, Ptr{Ptr{Uint8}}, Cint), classname, names, n)
+function IupGetClassAttributes(classname::String, names::Ptr{Ptr{UInt8}}, n::Int)
+	ccall((:IupGetClassAttributes, iup), Cint, (Ptr{UInt8}, Ptr{Ptr{UInt8}}, Cint), classname, names, n)
 end
-function IupGetClassCallbacks(classname::String, names::Ptr{Ptr{Uint8}}, n::Int)
-	ccall((:IupGetClassCallbacks, iup), Cint, (Ptr{Uint8}, Ptr{Ptr{Uint8}}, Cint), classname, names, n)
+function IupGetClassCallbacks(classname::String, names::Ptr{Ptr{UInt8}}, n::Int)
+	ccall((:IupGetClassCallbacks, iup), Cint, (Ptr{UInt8}, Ptr{Ptr{UInt8}}, Cint), classname, names, n)
 end
 function IupSaveClassAttributes(ih::Ptr{Ihandle})
   ccall( (:IupSaveClassAttributes, iup), Void, (Ptr{Ihandle},), ih)
@@ -394,16 +394,16 @@ function IupCopyClassAttributes(src_ih::Ptr{Ihandle}, dst_ih::Ptr{Ihandle})
   ccall( (:IupCopyClassAttributes, iup), Void, (Ptr{Ihandle}, Ptr{Ihandle}), src_ih, dst_ih)
 end
 function IupSetClassDefaultAttribute(classname::String, name::String, value::String)
-  ccall( (:IupSetClassDefaultAttribute, iup), Void, (Ptr{Uint8}, Ptr{Uint8}, Ptr{Uint8}), classname, name, value)
+  ccall( (:IupSetClassDefaultAttribute, iup), Void, (Ptr{UInt8}, Ptr{UInt8}, Ptr{UInt8}), classname, name, value)
 end
 function IupClassMatch(ih::Ptr{Ihandle}, classname::String)
-  ccall( (:IupClassMatch, iup), Cint, (Ptr{Ihandle}, Ptr{Uint8}), ih, classname)
+  ccall( (:IupClassMatch, iup), Cint, (Ptr{Ihandle}, Ptr{UInt8}), ih, classname)
 end
 function IupCreate(classname::String)
-  ccall( (:IupCreate, iup), Ptr{Ihandle}, (Ptr{Uint8},), classname)
+  ccall( (:IupCreate, iup), Ptr{Ihandle}, (Ptr{UInt8},), classname)
 end
 function IupCreatev(classname::String, params::Ptr{Ptr{Void}})
-  ccall( (:IupCreatev, iup), Ptr{Ihandle}, (Ptr{Uint8}, Ptr{Ptr{Void}}), classname, params)
+  ccall( (:IupCreatev, iup), Ptr{Ihandle}, (Ptr{UInt8}, Ptr{Ptr{Void}}), classname, params)
 end
 function IupFill()
 	ccall((:IupFill, iup), Ptr{Ihandle}, (), )
@@ -454,7 +454,7 @@ end
 function IupImage(width::Int, height::Int, pixmap::Ptr{Cuchar})
 	ccall((:IupImage, iup), Ptr{Ihandle}, (Cint, Cint, Ptr{Cuchar}), width, height, pixmap)
 end
-function IupImage(width::Integer, height::Integer, pixmap::Array{Uint8})
+function IupImage(width::Integer, height::Integer, pixmap::Array{UInt8})
 	IupImage(width, height, pointer(pixmap))
 end
 
@@ -465,10 +465,10 @@ function IupImageRGBA(width::Int, height::Int, pixmap::Ptr{Cuchar})
 	ccall((:IupImageRGBA, iup), Ptr{Ihandle}, (Cint, Cint, Ptr{Cuchar}), width, height, pixmap)
 end
 function IupItem(title::String, action::String="")
-	ccall((:IupItem, iup), Ptr{Ihandle}, (Ptr{Uint8}, Ptr{Uint8}), title, action)
+	ccall((:IupItem, iup), Ptr{Ihandle}, (Ptr{UInt8}, Ptr{UInt8}), title, action)
 end
 function IupSubmenu(title::String, child::Ptr{Ihandle})
-	ccall((:IupSubmenu, iup), Ptr{Ihandle}, (Ptr{Uint8}, Ptr{Ihandle}), title, child)
+	ccall((:IupSubmenu, iup), Ptr{Ihandle}, (Ptr{UInt8}, Ptr{Ihandle}), title, child)
 end
 function IupSeparator()
 	ccall((:IupSeparator, iup), Ptr{Ihandle}, (), )
@@ -477,13 +477,13 @@ function IupMenuv(children::Ptr{Ptr{Ihandle}})
   ccall( (:IupMenuv, iup), Ptr{Ihandle}, (Ptr{Ptr{Ihandle}},), children)
 end
 function IupButton(title::String="", action::String="")
-	ccall((:IupButton, iup), Ptr{Ihandle}, (Ptr{Uint8}, Ptr{Uint8}), title, action)
+	ccall((:IupButton, iup), Ptr{Ihandle}, (Ptr{UInt8}, Ptr{UInt8}), title, action)
 end
 function IupCanvas(action::String)
-	ccall((:IupCanvas, iup), Ptr{Ihandle}, (Ptr{Uint8},), action)
+	ccall((:IupCanvas, iup), Ptr{Ihandle}, (Ptr{UInt8},), action)
 end
 function IupCanvas(action::Ptr{Void}=C_NULL)
-	ccall((:IupCanvas, iup), Ptr{Ihandle}, (Ptr{Uint8},), action)
+	ccall((:IupCanvas, iup), Ptr{Ihandle}, (Ptr{UInt8},), action)
 end
 function IupDialog(child::Ptr{Ihandle})
 	ccall((:IupDialog, iup), Ptr{Ihandle}, (Ptr{Ihandle},), child)
@@ -492,28 +492,28 @@ function IupUser()
   ccall( (:IupUser, iup), Ptr{Ihandle}, (), )
 end
 function IupLabel(title::String="")
-	ccall((:IupLabel, iup), Ptr{Ihandle}, (Ptr{Uint8},), title)
+	ccall((:IupLabel, iup), Ptr{Ihandle}, (Ptr{UInt8},), title)
 end
 function IupLabel(title::Ptr{Void})
-	ccall((:IupLabel, iup), Ptr{Ihandle}, (Ptr{Uint8},), title)
+	ccall((:IupLabel, iup), Ptr{Ihandle}, (Ptr{UInt8},), title)
 end
 function IupList(action::String="")
-	ccall((:IupList, iup), Ptr{Ihandle}, (Ptr{Uint8},), action)
+	ccall((:IupList, iup), Ptr{Ihandle}, (Ptr{UInt8},), action)
 end
 function IupList(action::Ptr{Void})
-	ccall((:IupList, iup), Ptr{Ihandle}, (Ptr{Uint8},), action)
+	ccall((:IupList, iup), Ptr{Ihandle}, (Ptr{UInt8},), action)
 end
 function IupText(action::String="")
-	ccall((:IupText, iup), Ptr{Ihandle}, (Ptr{Uint8},), action)
+	ccall((:IupText, iup), Ptr{Ihandle}, (Ptr{UInt8},), action)
 end
 function IupMultiLine(action::String="")
-	ccall((:IupMultiLine, iup), Ptr{Ihandle}, (Ptr{Uint8},), action)
+	ccall((:IupMultiLine, iup), Ptr{Ihandle}, (Ptr{UInt8},), action)
 end
 function IupMultiLine(action::Ptr{Void})
-	ccall((:IupMultiLine, iup), Ptr{Ihandle}, (Ptr{Uint8},), action)
+	ccall((:IupMultiLine, iup), Ptr{Ihandle}, (Ptr{UInt8},), action)
 end
 function IupToggle(title::String="", action::String="")
-	ccall((:IupToggle, iup), Ptr{Ihandle}, (Ptr{Uint8}, Ptr{Uint8}), title, action)
+	ccall((:IupToggle, iup), Ptr{Ihandle}, (Ptr{UInt8}, Ptr{UInt8}), title, action)
 end
 function IupTimer()
   ccall( (:IupTimer, iup), Ptr{Ihandle}, (), )
@@ -525,10 +525,10 @@ function IupProgressBar()
 	ccall((:IupProgressBar, iup), Ptr{Ihandle}, (), )
 end
 function IupVal(type_::String="")
-	ccall((:IupVal, iup), Ptr{Ihandle}, (Ptr{Uint8},), type_)
+	ccall((:IupVal, iup), Ptr{Ihandle}, (Ptr{UInt8},), type_)
 end
 function IupVal(type_::Ptr{Void})
-	ccall((:IupVal, iup), Ptr{Ihandle}, (Ptr{Uint8},), type_)
+	ccall((:IupVal, iup), Ptr{Ihandle}, (Ptr{UInt8},), type_)
 end
 function IupTabsv(children::Ptr{Ptr{Ihandle}})
   ccall( (:IupTabsv, iup), Ptr{Ihandle}, (Ptr{Ptr{Ihandle}},), children)
@@ -537,7 +537,7 @@ function IupTree()
 	ccall((:IupTree, iup), Ptr{Ihandle}, (), )
 end
 function IupLink(url::String, title::String)
-  ccall( (:IupLink, iup), Ptr{Ihandle}, (Ptr{Uint8}, Ptr{Uint8}), url, title)
+  ccall( (:IupLink, iup), Ptr{Ihandle}, (Ptr{UInt8}, Ptr{UInt8}), url, title)
 end
 function IupSpin()
   ccall( (:IupSpin, iup), Ptr{Ihandle}, (), )
@@ -546,7 +546,7 @@ function IupSpinbox(child::Ptr{Ihandle})
   ccall( (:IupSpinbox, iup), Ptr{Ihandle}, (Ptr{Ihandle},), child)
 end
 function IupSaveImageAsText(ih::Ptr{Ihandle}, file_name::String, format::String, name::String)
-  ccall( (:IupSaveImageAsText, iup), Cint, (Ptr{Ihandle}, Ptr{Uint8}, Ptr{Uint8}, Ptr{Uint8}), ih, file_name, format, name)
+  ccall( (:IupSaveImageAsText, iup), Cint, (Ptr{Ihandle}, Ptr{UInt8}, Ptr{UInt8}, Ptr{UInt8}), ih, file_name, format, name)
 end
 function IupTextConvertLinColToPos(ih::Ptr{Ihandle}, lin::Cint, col::Cint, pos::Ptr{Cint})
   ccall( (:IupTextConvertLinColToPos, iup), Void, (Ptr{Ihandle}, Cint, Cint, Ptr{Cint}), ih, lin, col, pos)
@@ -558,19 +558,19 @@ function IupConvertXYToPos(ih::Ptr{Ihandle}, x::Cint, y::Cint)
   ccall( (:IupConvertXYToPos, iup), Cint, (Ptr{Ihandle}, Cint, Cint), ih, x, y)
 end
 function IupStoreGlobal(name::String, value::String)
-  ccall( (:IupStoreGlobal, iup), Void, (Ptr{Uint8}, Ptr{Uint8}), name, value)
+  ccall( (:IupStoreGlobal, iup), Void, (Ptr{UInt8}, Ptr{UInt8}), name, value)
 end
 function IupStoreAttribute(ih::Ptr{Ihandle}, name::String, value::String)
-	ccall((:IupStoreAttribute, iup), Void, (Ptr{Ihandle}, Ptr{Uint8}, Ptr{Uint8}), ih, name, value)
+	ccall((:IupStoreAttribute, iup), Void, (Ptr{Ihandle}, Ptr{UInt8}, Ptr{UInt8}), ih, name, value)
 end
-function IupStoreAttribute(ih::Ptr{Ihandle}, name::String, value::Ptr{Uint8})
-	ccall((:IupStoreAttribute, iup), Void, (Ptr{Ihandle}, Ptr{Uint8}, Ptr{Uint8}), ih, name, value)
+function IupStoreAttribute(ih::Ptr{Ihandle}, name::String, value::Ptr{UInt8})
+	ccall((:IupStoreAttribute, iup), Void, (Ptr{Ihandle}, Ptr{UInt8}, Ptr{UInt8}), ih, name, value)
 end
 function IupStoreAttributeId(ih::Ptr{Ihandle}, name::String, id::Cint, value::String)
-	ccall((:IupStoreAttributeId, iup), Void, (Ptr{Ihandle}, Ptr{Uint8}, Cint, Ptr{Uint8}), ih, name, id, value)
+	ccall((:IupStoreAttributeId, iup), Void, (Ptr{Ihandle}, Ptr{UInt8}, Cint, Ptr{UInt8}), ih, name, id, value)
 end
 function IupStoreAttributeId2(ih::Ptr{Ihandle}, name::String, lin::Cint, col::Cint, value::String)
-  ccall( (:IupStoreAttributeId2, iup), Void, (Ptr{Ihandle}, Ptr{Uint8}, Cint, Cint, Ptr{Uint8}), ih, name, lin, col, value)
+  ccall( (:IupStoreAttributeId2, iup), Void, (Ptr{Ihandle}, Ptr{UInt8}, Cint, Cint, Ptr{UInt8}), ih, name, lin, col, value)
 end
 function IupTreeSetUserId(ih::Ptr{Ihandle}, id::Cint, userid::Ptr{Void})
   ccall( (:IupTreeSetUserId, iup), Cint, (Ptr{Ihandle}, Cint, Ptr{Void}), ih, id, userid)
@@ -582,31 +582,31 @@ function IupTreeGetId(ih::Ptr{Ihandle}, userid::Ptr{Void})
   ccall( (:IupTreeGetId, iup), Cint, (Ptr{Ihandle}, Ptr{Void}), ih, userid)
 end
 function IupTreeSetAttributeHandle(ih::Ptr{Ihandle}, name::String, id::Cint, ih_named::Ptr{Ihandle})
-  ccall( (:IupTreeSetAttributeHandle, iup), Void, (Ptr{Ihandle}, Ptr{Uint8}, Cint, Ptr{Ihandle}), ih, name, id, ih_named)
+  ccall( (:IupTreeSetAttributeHandle, iup), Void, (Ptr{Ihandle}, Ptr{UInt8}, Cint, Ptr{Ihandle}), ih, name, id, ih_named)
 end
 function IupTreeSetAttribute(ih::Ptr{Ihandle}, name::String, id::Cint, value::String)
-  ccall( (:IupTreeSetAttribute, iup), Void, (Ptr{Ihandle}, Ptr{Uint8}, Cint, Ptr{Uint8}), ih, name, id, value)
+  ccall( (:IupTreeSetAttribute, iup), Void, (Ptr{Ihandle}, Ptr{UInt8}, Cint, Ptr{UInt8}), ih, name, id, value)
 end
 function IupTreeStoreAttribute(ih::Ptr{Ihandle}, name::String, id::Cint, value::String)
-  ccall( (:IupTreeStoreAttribute, iup), Void, (Ptr{Ihandle}, Ptr{Uint8}, Cint, Ptr{Uint8}), ih, name, id, value)
+  ccall( (:IupTreeStoreAttribute, iup), Void, (Ptr{Ihandle}, Ptr{UInt8}, Cint, Ptr{UInt8}), ih, name, id, value)
 end
 function IupTreeGetAttribute(ih::Ptr{Ihandle}, name::String, id::Int)
-	ccall((:IupTreeGetAttribute, iup), Ptr{Uint8}, (Ptr{Ihandle}, Ptr{Uint8}, Cint), ih, name, id)
+	ccall((:IupTreeGetAttribute, iup), Ptr{UInt8}, (Ptr{Ihandle}, Ptr{UInt8}, Cint), ih, name, id)
 end
 function IupTreeGetInt(ih::Ptr{Ihandle}, name::String, id::Int)
-	ccall((:IupTreeGetInt, iup), Cint, (Ptr{Ihandle}, Ptr{Uint8}, Cint), ih, name, id)
+	ccall((:IupTreeGetInt, iup), Cint, (Ptr{Ihandle}, Ptr{UInt8}, Cint), ih, name, id)
 end
 function IupTreeGetFloat(ih::Ptr{Ihandle}, name::String, id::Int)
-	ccall((:IupTreeGetFloat, iup), Cfloat, (Ptr{Ihandle}, Ptr{Uint8}, Cint), ih, name, id)
+	ccall((:IupTreeGetFloat, iup), Cfloat, (Ptr{Ihandle}, Ptr{UInt8}, Cint), ih, name, id)
 end
 function IupGetActionName()
-	ccall((:IupGetActionName, iup), Ptr{Uint8}, (), )
+	ccall((:IupGetActionName, iup), Ptr{UInt8}, (), )
 end
 function IupMapFont(iupfont::String)
-	ccall((:IupMapFont, iup), Ptr{Uint8}, (Ptr{Uint8},), iupfont)
+	ccall((:IupMapFont, iup), Ptr{UInt8}, (Ptr{UInt8},), iupfont)
 end
 function IupUnMapFont(driverfont::String)
-	ccall((:IupUnMapFont, iup), Ptr{Uint8}, (Ptr{Uint8},), driverfont)
+	ccall((:IupUnMapFont, iup), Ptr{UInt8}, (Ptr{UInt8},), driverfont)
 end
 function IupFileDlg()
 	ccall((:IupFileDlg, iup), Ptr{Ihandle}, (), )
@@ -624,34 +624,34 @@ function IupProgressDlg()
 	ccall((:IupProgressDlg, iup), Ptr{Ihandle}, (), )
 end
 function IupGetFile(arq::String)
-	ccall((:IupGetFile, iup), Cint, (Ptr{Uint8},), arq)
+	ccall((:IupGetFile, iup), Cint, (Ptr{UInt8},), arq)
 end
 function IupMessage(title::String, msg::String)
-	ccall((:IupMessage, iup), Void, (Ptr{Uint8}, Ptr{Uint8}), title, msg)
+	ccall((:IupMessage, iup), Void, (Ptr{UInt8}, Ptr{UInt8}), title, msg)
 end
-function IupMessage(title::String, msg::Ptr{Uint8})
-	ccall((:IupMessage, iup), Void, (Ptr{Uint8}, Ptr{Uint8}), title, msg)
+function IupMessage(title::String, msg::Ptr{UInt8})
+	ccall((:IupMessage, iup), Void, (Ptr{UInt8}, Ptr{UInt8}), title, msg)
 end
 
 function IupAlarm(title::String, msg::String, b1::String, b2=C_NULL, b3=C_NULL)
 	# Should I test that if b2 or b3 are given but are not strings?
-	ccall((:IupAlarm, iup), Cint, (Ptr{Uint8}, Ptr{Uint8}, Ptr{Uint8}, Ptr{Uint8}, Ptr{Uint8}), title, msg, b1, b2, b3)
+	ccall((:IupAlarm, iup), Cint, (Ptr{UInt8}, Ptr{UInt8}, Ptr{UInt8}, Ptr{UInt8}, Ptr{UInt8}), title, msg, b1, b2, b3)
 end
 
-function IupListDialog(_type::Int, title::String, size::Int, list::Ptr{Ptr{Uint8}}, op::Int, max_col::Int,
+function IupListDialog(_type::Int, title::String, size::Int, list::Ptr{Ptr{UInt8}}, op::Int, max_col::Int,
 		max_lin::Int, marks::Ptr{Int})
-	ccall((:IupListDialog, iup), Cint, (Cint, Ptr{Uint8}, Cint, Ptr{Ptr{Uint8}}, Cint, Cint, Cint, Ptr{Cint}),
+	ccall((:IupListDialog, iup), Cint, (Cint, Ptr{UInt8}, Cint, Ptr{Ptr{UInt8}}, Cint, Cint, Cint, Ptr{Cint}),
 		_type, title, size, list, op, max_col, max_lin, marks)
 end
 function IupGetText(title::String, text::String)
-	ccall((:IupGetText, iup), Cint, (Ptr{Uint8}, Ptr{Uint8}), title, text)
+	ccall((:IupGetText, iup), Cint, (Ptr{UInt8}, Ptr{UInt8}), title, text)
 end
 function IupGetColor(x::Int, y::Int, r::Ptr{Cuchar}, g::Ptr{Cuchar}, b::Ptr{Cuchar})
 	ccall((:IupGetColor, iup), Cint, (Cint, Cint, Ptr{Cuchar}, Ptr{Cuchar}, Ptr{Cuchar}), x, y, r, g, b)
 end
 function IupGetParamv(title::String, action::Iparamcb, user_data::Ptr{Void}, format::String, param_count::Int,
 		param_extra::Int, param_data::Ptr{Ptr{Void}})
-	ccall((:IupGetParamv, iup), Cint, (Ptr{Uint8}, Iparamcb, Ptr{Void}, Ptr{Uint8}, Cint, Cint, Ptr{Ptr{Void}}),
+	ccall((:IupGetParamv, iup), Cint, (Ptr{UInt8}, Iparamcb, Ptr{Void}, Ptr{UInt8}, Cint, Cint, Ptr{Ptr{Void}}),
 		title, action, user_data, format, param_count, param_extra, param_data)
 end
 function IupLayoutDialog(dialog::Ptr{Ihandle})
@@ -673,7 +673,7 @@ type GtkFileChooserDialog <: GtkDialogI
         npairs = div(n, 2)
         if !haskey(GtkFileChooserDialogDict, npairs)
             # Build a function expression that makes ccall with explicit args of correct types
-            ctypeexpr = Expr(:tuple,Ptr{Uint8},Ptr{Void},Cint,ntuple(n,i->isodd(i) ? Ptr{Uint8} : Cint)...,Ptr{Void})
+            ctypeexpr = Expr(:tuple,Ptr{UInt8},Ptr{Void},Cint,ntuple(n,i->isodd(i) ? Ptr{UInt8} : Cint)...,Ptr{Void})
             argnameexpr = Expr(:tuple,:title,:parent,:action,Expr(:...,:button_text_response))
             argvalexpr = tuple(:title,:(anonp(parent)),:action,ntuple(n,i->:(button_text_response[$i]))...,:C_NULL)
             ex = Expr(:function, argnameexpr, Expr(:ccall,

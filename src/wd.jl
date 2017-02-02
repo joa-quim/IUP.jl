@@ -1,7 +1,7 @@
 # Julia wrapper for header: /Volumes/BOOTCAMP/programs/compa_libs/iup/include/wd.h
 # Automatically generated using Clang.jl wrap_c, version 0.0.0
 
-@windows? (const libwd_ = "cd") : (const libwd_ = "libcd")  # Name of IUP shared lib.
+@static is_windows()? (const libwd_ = "cd") : (const libwd_ = "libcd")  # Name of IUP shared lib.
 
 # These used to be in wd_h.jl (meanwhile removed)
 const wdVectorTextTransform = cdVectorTextTransform
@@ -91,7 +91,7 @@ function wdCanvasChord(canvas::Ptr{cdCanvas}, xc::Cdouble, yc::Cdouble, w::Cdoub
   ccall( (:wdCanvasChord, libwd_), Void, (Ptr{cdCanvas}, Cdouble, Cdouble, Cdouble, Cdouble, Cdouble, Cdouble), canvas, xc, yc, w, h, angle1, angle2)
 end
 function wdCanvasText(canvas::Ptr{cdCanvas}, x::Cdouble, y::Cdouble, s::String)
-  ccall( (:wdCanvasText, libwd_), Void, (Ptr{cdCanvas}, Cdouble, Cdouble, Ptr{Uint8}), canvas, x, y, s)
+  ccall( (:wdCanvasText, libwd_), Void, (Ptr{cdCanvas}, Cdouble, Cdouble, Ptr{UInt8}), canvas, x, y, s)
 end
 function wdCanvasPutImageRect(canvas::Ptr{cdCanvas}, image::Ptr{Cint}, x::Cdouble, y::Cdouble, xmin::Integer, xmax::Integer, ymin::Integer, ymax::Integer)
   ccall( (:wdCanvasPutImageRect, libwd_), Void, (Ptr{cdCanvas}, Ptr{Cint}, Cdouble, Cdouble, Cint, Cint, Cint, Cint), canvas, image, x, y, xmin, xmax, ymin, ymax)
@@ -112,10 +112,10 @@ function wdCanvasLineWidth(canvas::Ptr{cdCanvas}, width::Cdouble)
   ccall( (:wdCanvasLineWidth, libwd_), Cdouble, (Ptr{cdCanvas}, Cdouble), canvas, width)
 end
 function wdCanvasFont(canvas::Ptr{cdCanvas}, type_face::String, style::Integer, size::Cdouble)
-  ccall( (:wdCanvasFont, libwd_), Cint, (Ptr{cdCanvas}, Ptr{Uint8}, Cint, Cdouble), canvas, type_face, style, size)
+  ccall( (:wdCanvasFont, libwd_), Cint, (Ptr{cdCanvas}, Ptr{UInt8}, Cint, Cdouble), canvas, type_face, style, size)
 end
 function wdCanvasGetFont(canvas::Ptr{cdCanvas}, type_face::String, style::Ptr{Cint}, size::Ptr{Cdouble})
-  ccall( (:wdCanvasGetFont, libwd_), Void, (Ptr{cdCanvas}, Ptr{Uint8}, Ptr{Cint}, Ptr{Cdouble}), canvas, type_face, style, size)
+  ccall( (:wdCanvasGetFont, libwd_), Void, (Ptr{cdCanvas}, Ptr{UInt8}, Ptr{Cint}, Ptr{Cdouble}), canvas, type_face, style, size)
 end
 function wdCanvasMarkSize(canvas::Ptr{cdCanvas}, size::Cdouble)
   ccall( (:wdCanvasMarkSize, libwd_), Cdouble, (Ptr{cdCanvas}, Cdouble), canvas, size)
@@ -124,13 +124,13 @@ function wdCanvasGetFontDim(canvas::Ptr{cdCanvas}, max_width::Ptr{Cdouble}, heig
   ccall( (:wdCanvasGetFontDim, libwd_), Void, (Ptr{cdCanvas}, Ptr{Cdouble}, Ptr{Cdouble}, Ptr{Cdouble}, Ptr{Cdouble}), canvas, max_width, height, ascent, descent)
 end
 function wdCanvasGetTextSize(canvas::Ptr{cdCanvas}, s::String, width::Ptr{Cdouble}, height::Ptr{Cdouble})
-  ccall( (:wdCanvasGetTextSize, libwd_), Void, (Ptr{cdCanvas}, Ptr{Uint8}, Ptr{Cdouble}, Ptr{Cdouble}), canvas, s, width, height)
+  ccall( (:wdCanvasGetTextSize, libwd_), Void, (Ptr{cdCanvas}, Ptr{UInt8}, Ptr{Cdouble}, Ptr{Cdouble}), canvas, s, width, height)
 end
 function wdCanvasGetTextBox(canvas::Ptr{cdCanvas}, x::Cdouble, y::Cdouble, s::String, xmin::Ptr{Cdouble}, xmax::Ptr{Cdouble}, ymin::Ptr{Cdouble}, ymax::Ptr{Cdouble})
-  ccall( (:wdCanvasGetTextBox, libwd_), Void, (Ptr{cdCanvas}, Cdouble, Cdouble, Ptr{Uint8}, Ptr{Cdouble}, Ptr{Cdouble}, Ptr{Cdouble}, Ptr{Cdouble}), canvas, x, y, s, xmin, xmax, ymin, ymax)
+  ccall( (:wdCanvasGetTextBox, libwd_), Void, (Ptr{cdCanvas}, Cdouble, Cdouble, Ptr{UInt8}, Ptr{Cdouble}, Ptr{Cdouble}, Ptr{Cdouble}, Ptr{Cdouble}), canvas, x, y, s, xmin, xmax, ymin, ymax)
 end
 function wdCanvasGetTextBounds(canvas::Ptr{cdCanvas}, x::Cdouble, y::Cdouble, s::String, rect::Ptr{Cdouble})
-  ccall( (:wdCanvasGetTextBounds, libwd_), Void, (Ptr{cdCanvas}, Cdouble, Cdouble, Ptr{Uint8}, Ptr{Cdouble}), canvas, x, y, s, rect)
+  ccall( (:wdCanvasGetTextBounds, libwd_), Void, (Ptr{cdCanvas}, Cdouble, Cdouble, Ptr{UInt8}, Ptr{Cdouble}), canvas, x, y, s, rect)
 end
 function wdCanvasStipple(canvas::Ptr{cdCanvas}, w::Integer, h::Integer, fgbg::Ptr{Cuchar}, w_mm::Cdouble, h_mm::Cdouble)
   ccall( (:wdCanvasStipple, libwd_), Void, (Ptr{cdCanvas}, Cint, Cint, Ptr{Cuchar}, Cdouble, Cdouble), canvas, w, h, fgbg, w_mm, h_mm)
@@ -142,25 +142,25 @@ function wdCanvasVectorTextDirection(canvas::Ptr{cdCanvas}, x1::Cdouble, y1::Cdo
   ccall( (:wdCanvasVectorTextDirection, libwd_), Void, (Ptr{cdCanvas}, Cdouble, Cdouble, Cdouble, Cdouble), canvas, x1, y1, x2, y2)
 end
 function wdCanvasVectorTextSize(canvas::Ptr{cdCanvas}, size_x::Cdouble, size_y::Cdouble, s::String)
-  ccall( (:wdCanvasVectorTextSize, libwd_), Void, (Ptr{cdCanvas}, Cdouble, Cdouble, Ptr{Uint8}), canvas, size_x, size_y, s)
+  ccall( (:wdCanvasVectorTextSize, libwd_), Void, (Ptr{cdCanvas}, Cdouble, Cdouble, Ptr{UInt8}), canvas, size_x, size_y, s)
 end
 function wdCanvasGetVectorTextSize(canvas::Ptr{cdCanvas}, s::String, x::Ptr{Cdouble}, y::Ptr{Cdouble})
-  ccall( (:wdCanvasGetVectorTextSize, libwd_), Void, (Ptr{cdCanvas}, Ptr{Uint8}, Ptr{Cdouble}, Ptr{Cdouble}), canvas, s, x, y)
+  ccall( (:wdCanvasGetVectorTextSize, libwd_), Void, (Ptr{cdCanvas}, Ptr{UInt8}, Ptr{Cdouble}, Ptr{Cdouble}), canvas, s, x, y)
 end
 function wdCanvasVectorCharSize(canvas::Ptr{cdCanvas}, size::Cdouble)
   ccall( (:wdCanvasVectorCharSize, libwd_), Cdouble, (Ptr{cdCanvas}, Cdouble), canvas, size)
 end
 function wdCanvasVectorText(canvas::Ptr{cdCanvas}, x::Cdouble, y::Cdouble, s::String)
-  ccall( (:wdCanvasVectorText, libwd_), Void, (Ptr{cdCanvas}, Cdouble, Cdouble, Ptr{Uint8}), canvas, x, y, s)
+  ccall( (:wdCanvasVectorText, libwd_), Void, (Ptr{cdCanvas}, Cdouble, Cdouble, Ptr{UInt8}), canvas, x, y, s)
 end
 function wdCanvasMultiLineVectorText(canvas::Ptr{cdCanvas}, x::Cdouble, y::Cdouble, s::String)
-  ccall( (:wdCanvasMultiLineVectorText, libwd_), Void, (Ptr{cdCanvas}, Cdouble, Cdouble, Ptr{Uint8}), canvas, x, y, s)
+  ccall( (:wdCanvasMultiLineVectorText, libwd_), Void, (Ptr{cdCanvas}, Cdouble, Cdouble, Ptr{UInt8}), canvas, x, y, s)
 end
 function wdCanvasGetVectorTextBounds(canvas::Ptr{cdCanvas}, s::String, x::Cdouble, y::Cdouble, rect::Ptr{Cdouble})
-  ccall( (:wdCanvasGetVectorTextBounds, libwd_), Void, (Ptr{cdCanvas}, Ptr{Uint8}, Cdouble, Cdouble, Ptr{Cdouble}), canvas, s, x, y, rect)
+  ccall( (:wdCanvasGetVectorTextBounds, libwd_), Void, (Ptr{cdCanvas}, Ptr{UInt8}, Cdouble, Cdouble, Ptr{Cdouble}), canvas, s, x, y, rect)
 end
 function wdCanvasGetVectorTextBox(canvas::Ptr{cdCanvas}, x::Cdouble, y::Cdouble, s::String, xmin::Ptr{Cdouble}, xmax::Ptr{Cdouble}, ymin::Ptr{Cdouble}, ymax::Ptr{Cdouble})
-  ccall( (:wdCanvasGetVectorTextBox, libwd_), Void, (Ptr{cdCanvas}, Cdouble, Cdouble, Ptr{Uint8}, Ptr{Cdouble}, Ptr{Cdouble}, Ptr{Cdouble}, Ptr{Cdouble}), canvas, x, y, s, xmin, xmax, ymin, ymax)
+  ccall( (:wdCanvasGetVectorTextBox, libwd_), Void, (Ptr{cdCanvas}, Cdouble, Cdouble, Ptr{UInt8}, Ptr{Cdouble}, Ptr{Cdouble}, Ptr{Cdouble}, Ptr{Cdouble}), canvas, x, y, s, xmin, xmax, ymin, ymax)
 end
 function wdWindow(xmin::Cdouble, xmax::Cdouble, ymin::Cdouble, ymax::Cdouble)
   ccall( (:wdWindow, libwd_), Void, (Cdouble, Cdouble, Cdouble, Cdouble), xmin, xmax, ymin, ymax)
@@ -232,7 +232,7 @@ function wdChord(xc::Cdouble, yc::Cdouble, w::Cdouble, h::Cdouble, angle1::Cdoub
   ccall( (:wdChord, libwd_), Void, (Cdouble, Cdouble, Cdouble, Cdouble, Cdouble, Cdouble), xc, yc, w, h, angle1, angle2)
 end
 function wdText(x::Cdouble, y::Cdouble, s::String)
-  ccall( (:wdText, libwd_), Void, (Cdouble, Cdouble, Ptr{Uint8}), x, y, s)
+  ccall( (:wdText, libwd_), Void, (Cdouble, Cdouble, Ptr{UInt8}), x, y, s)
 end
 function wdPutImageRect(image::Ptr{Cint}, x::Cdouble, y::Cdouble, xmin::Integer, xmax::Integer, ymin::Integer, ymax::Integer)
   ccall( (:wdPutImageRect, libwd_), Void, (Ptr{Cint}, Cdouble, Cdouble, Cint, Cint, Cint, Cint), image, x, y, xmin, xmax, ymin, ymax)
@@ -265,13 +265,13 @@ function wdFontDim(max_width::Ptr{Cdouble}, height::Ptr{Cdouble}, ascent::Ptr{Cd
   ccall( (:wdFontDim, libwd_), Void, (Ptr{Cdouble}, Ptr{Cdouble}, Ptr{Cdouble}, Ptr{Cdouble}), max_width, height, ascent, descent)
 end
 function wdTextSize(s::String, width::Ptr{Cdouble}, height::Ptr{Cdouble})
-  ccall( (:wdTextSize, libwd_), Void, (Ptr{Uint8}, Ptr{Cdouble}, Ptr{Cdouble}), s, width, height)
+  ccall( (:wdTextSize, libwd_), Void, (Ptr{UInt8}, Ptr{Cdouble}, Ptr{Cdouble}), s, width, height)
 end
 function wdTextBox(x::Cdouble, y::Cdouble, s::String, xmin::Ptr{Cdouble}, xmax::Ptr{Cdouble}, ymin::Ptr{Cdouble}, ymax::Ptr{Cdouble})
-  ccall( (:wdTextBox, libwd_), Void, (Cdouble, Cdouble, Ptr{Uint8}, Ptr{Cdouble}, Ptr{Cdouble}, Ptr{Cdouble}, Ptr{Cdouble}), x, y, s, xmin, xmax, ymin, ymax)
+  ccall( (:wdTextBox, libwd_), Void, (Cdouble, Cdouble, Ptr{UInt8}, Ptr{Cdouble}, Ptr{Cdouble}, Ptr{Cdouble}, Ptr{Cdouble}), x, y, s, xmin, xmax, ymin, ymax)
 end
 function wdTextBounds(x::Cdouble, y::Cdouble, s::String, rect::Ptr{Cdouble})
-  ccall( (:wdTextBounds, libwd_), Void, (Cdouble, Cdouble, Ptr{Uint8}, Ptr{Cdouble}), x, y, s, rect)
+  ccall( (:wdTextBounds, libwd_), Void, (Cdouble, Cdouble, Ptr{UInt8}, Ptr{Cdouble}), x, y, s, rect)
 end
 function wdStipple(w::Integer, h::Integer, stipple::Ptr{Cuchar}, w_mm::Cdouble, h_mm::Cdouble)
   ccall( (:wdStipple, libwd_), Void, (Cint, Cint, Ptr{Cuchar}, Cdouble, Cdouble), w, h, stipple, w_mm, h_mm)
@@ -283,20 +283,20 @@ function wdVectorTextDirection(x1::Cdouble, y1::Cdouble, x2::Cdouble, y2::Cdoubl
   ccall( (:wdVectorTextDirection, libwd_), Void, (Cdouble, Cdouble, Cdouble, Cdouble), x1, y1, x2, y2)
 end
 function wdVectorTextSize(size_x::Cdouble, size_y::Cdouble, s::String)
-  ccall( (:wdVectorTextSize, libwd_), Void, (Cdouble, Cdouble, Ptr{Uint8}), size_x, size_y, s)
+  ccall( (:wdVectorTextSize, libwd_), Void, (Cdouble, Cdouble, Ptr{UInt8}), size_x, size_y, s)
 end
 function wdGetVectorTextSize(s::String, x::Ptr{Cdouble}, y::Ptr{Cdouble})
-  ccall( (:wdGetVectorTextSize, libwd_), Void, (Ptr{Uint8}, Ptr{Cdouble}, Ptr{Cdouble}), s, x, y)
+  ccall( (:wdGetVectorTextSize, libwd_), Void, (Ptr{UInt8}, Ptr{Cdouble}, Ptr{Cdouble}), s, x, y)
 end
 function wdVectorCharSize(size::Cdouble)
   ccall( (:wdVectorCharSize, libwd_), Cdouble, (Cdouble,), size)
 end
 function wdVectorText(x::Cdouble, y::Cdouble, s::String)
-  ccall( (:wdVectorText, libwd_), Void, (Cdouble, Cdouble, Ptr{Uint8}), x, y, s)
+  ccall( (:wdVectorText, libwd_), Void, (Cdouble, Cdouble, Ptr{UInt8}), x, y, s)
 end
 function wdMultiLineVectorText(x::Cdouble, y::Cdouble, s::String)
-  ccall( (:wdMultiLineVectorText, libwd_), Void, (Cdouble, Cdouble, Ptr{Uint8}), x, y, s)
+  ccall( (:wdMultiLineVectorText, libwd_), Void, (Cdouble, Cdouble, Ptr{UInt8}), x, y, s)
 end
 function wdGetVectorTextBounds(s::String, x::Cdouble, y::Cdouble, rect::Ptr{Cdouble})
-  ccall( (:wdGetVectorTextBounds, libwd_), Void, (Ptr{Uint8}, Cdouble, Cdouble, Ptr{Cdouble}), s, x, y, rect)
+  ccall( (:wdGetVectorTextBounds, libwd_), Void, (Ptr{UInt8}, Cdouble, Cdouble, Ptr{Cdouble}), s, x, y, rect)
 end

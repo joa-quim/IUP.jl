@@ -368,12 +368,12 @@ function imcdCanvasPutImage(_canvas, _image, _x, _y, _w, _h, _xmin, _xmax, _ymin
 	end
 	const IM_RGB = 0		# Redefining here to not have to import it from libim.h (Ghrrr)
 	if (_image.color_space == IM_RGB)
-		data = [convert(Ptr{Uint8}, unsafe_load(_image.data,1)),
-			convert(Ptr{Uint8}, unsafe_load(_image.data,2)),
-			convert(Ptr{Uint8}, unsafe_load(_image.data,3))]
+		data = [convert(Ptr{UInt8}, unsafe_load(_image.data,1)),
+			convert(Ptr{UInt8}, unsafe_load(_image.data,2)),
+			convert(Ptr{UInt8}, unsafe_load(_image.data,3))]
 
 		if (_image.has_alpha != 0)
-			alfa = convert(Ptr{Uint8}, unsafe_load(_image.data,4))
+			alfa = convert(Ptr{UInt8}, unsafe_load(_image.data,4))
 			cdCanvasPutImageRectRGBA(_canvas, _image.width, _image.height, data[1], data[2],
 			                         data[3], alfa, _x, _y, _w, _h, _xmin, _xmax, _ymin, _ymax)
 		else
@@ -381,7 +381,7 @@ function imcdCanvasPutImage(_canvas, _image, _x, _y, _w, _h, _xmin, _xmax, _ymin
 			                        data[3], _x, _y, _w, _h, _xmin, _xmax, _ymin, _ymax)
 		end
 	else
-		data = [convert(Ptr{Uint8}, unsafe_load(_image.data,1))]
+		data = [convert(Ptr{UInt8}, unsafe_load(_image.data,1))]
 		cdCanvasPutImageRectMap(_canvas, _image.width, _image.height, data[1], _image.palette,
 		                        _x, _y, _w, _h, _xmin, _xmax, _ymin, _ymax)
 	end

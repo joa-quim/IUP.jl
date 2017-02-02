@@ -65,7 +65,7 @@ function WindowButtonDownFcn(canvas::Ptr{Ihandle}, f::Function)
 	# The interface for the callback function is described in IUP docs under BUTTON_CB
 	# int function(Ihandle* ih, int button, int pressed, int x, int y, char* status); [in C]
 	# Warning: the macros that make use of the status variable are not yet implemented
-	IupSetCallback(canvas, "BUTTON_CB", cfunction(f, Int, (Ptr{Ihandle}, Char, Cint, Cint, Cint, Ptr{Uint8})))
+	IupSetCallback(canvas, "BUTTON_CB", cfunction(f, Int, (Ptr{Ihandle}, Char, Cint, Cint, Cint, Ptr{UInt8})))
 end
 
 # -------------------------------------------------------------------------------
@@ -74,7 +74,7 @@ function WindowButtonMotionFcn(canvas::Ptr{Ihandle}, f::Function)
 	# The interface for the callback function is described in IUP docs under MOTION_CB
 	# int function(Ihandle *ih, int x, int y, char *status); [in C]
 	# Warning: the macros that make use of the status variable are not yet implemented
-	IupSetCallback(canvas, "MOTION_CB", cfunction(f, Int, (Ptr{Ihandle}, Cint, Cint, Ptr{Uint8})))
+	IupSetCallback(canvas, "MOTION_CB", cfunction(f, Int, (Ptr{Ihandle}, Cint, Cint, Ptr{UInt8})))
 end
 
 # -------------------------------------------------------------------------------

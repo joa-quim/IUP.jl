@@ -1,15 +1,15 @@
 # Julia wrapper for header: /Volumes/BOOTCAMP/programs/compa_libs/iup/include/iupim.h
 # Automatically generated using Clang.jl wrap_c, version 0.0.0
 
-@windows? (const libiupim_ = "iupim") : (const libiupim_ = "libiupim")  # Name of shared lib.
+@static is_windows()? (const libiupim_ = "iupim") : (const libiupim_ = "libiupim")  # Name of shared lib.
 
 typealias Ihandle Void
 
 function IupLoadImage(file_name::String)
-	ccall((:IupLoadImage, libiupim_), Ptr{Ihandle}, (Ptr{Uint8},), file_name)
+	ccall((:IupLoadImage, libiupim_), Ptr{Ihandle}, (Ptr{UInt8},), file_name)
 end
 function IupSaveImage(ih::Ptr{Ihandle}, file_name::String, format::String)
-	ccall((:IupSaveImage, libiupim_), Cint, (Ptr{Ihandle}, Ptr{Uint8}, Ptr{Uint8}), ih, file_name, format)
+	ccall((:IupSaveImage, libiupim_), Cint, (Ptr{Ihandle}, Ptr{UInt8}, Ptr{UInt8}), ih, file_name, format)
 end
 
 function IupGetNativeHandleImage(handle::Ptr{Void})

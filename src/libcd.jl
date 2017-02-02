@@ -1,7 +1,7 @@
 # Julia wrapper for header: /Volumes/BOOTCAMP/programs/compa_libs/iup/cd/include/cd.h
 # Automatically generated using Clang.jl wrap_c, version 0.0.0
 
-@windows? (const libcd_ = "cd") : (const libcd_ = "libcd")  # Name of IUP shared lib.
+@static is_windows()? (const libcd_ = "cd") : (const libcd_ = "libcd")  # Name of IUP shared lib.
 
 
 function cdBaseDriver()
@@ -42,41 +42,41 @@ end
 function cdNormalizeLimits(w::Integer, h::Integer, xmin::Ptr{Cint}, xmax::Ptr{Cint}, ymin::Ptr{Cint}, ymax::Ptr{Cint})
   ccall( (:cdNormalizeLimits, libcd_), Void, (Cint, Cint, Ptr{Cint}, Ptr{Cint}, Ptr{Cint}, Ptr{Cint}), w, h, xmin, xmax, ymin, ymax)
 end
-function cdGetFileName(strdata::Ptr{Uint8}, filename::Ptr{Uint8})
-  ccall( (:cdGetFileName, libcd_), Cint, (Ptr{Uint8}, Ptr{Uint8}), strdata, filename)
+function cdGetFileName(strdata::Ptr{UInt8}, filename::Ptr{UInt8})
+  ccall( (:cdGetFileName, libcd_), Cint, (Ptr{UInt8}, Ptr{UInt8}), strdata, filename)
 end
-function cdStrEqualNoCase(str1::Ptr{Uint8}, str2::Ptr{Uint8})
-  ccall( (:cdStrEqualNoCase, libcd_), Cint, (Ptr{Uint8}, Ptr{Uint8}), str1, str2)
+function cdStrEqualNoCase(str1::Ptr{UInt8}, str2::Ptr{UInt8})
+  ccall( (:cdStrEqualNoCase, libcd_), Cint, (Ptr{UInt8}, Ptr{UInt8}), str1, str2)
 end
-function cdStrEqualNoCasePartial(str1::Ptr{Uint8}, str2::Ptr{Uint8})
-  ccall( (:cdStrEqualNoCasePartial, libcd_), Cint, (Ptr{Uint8}, Ptr{Uint8}), str1, str2)
+function cdStrEqualNoCasePartial(str1::Ptr{UInt8}, str2::Ptr{UInt8})
+  ccall( (:cdStrEqualNoCasePartial, libcd_), Cint, (Ptr{UInt8}, Ptr{UInt8}), str1, str2)
 end
-function cdStrLineCount(str::Ptr{Uint8})
-  ccall( (:cdStrLineCount, libcd_), Cint, (Ptr{Uint8},), str)
+function cdStrLineCount(str::Ptr{UInt8})
+  ccall( (:cdStrLineCount, libcd_), Cint, (Ptr{UInt8},), str)
 end
-function cdStrDup(str::Ptr{Uint8})
-  ccall( (:cdStrDup, libcd_), Ptr{Uint8}, (Ptr{Uint8},), str)
+function cdStrDup(str::Ptr{UInt8})
+  ccall( (:cdStrDup, libcd_), Ptr{UInt8}, (Ptr{UInt8},), str)
 end
-function cdStrDupN(str::Ptr{Uint8}, len::Integer)
-  ccall( (:cdStrDupN, libcd_), Ptr{Uint8}, (Ptr{Uint8}, Cint), str, len)
+function cdStrDupN(str::Ptr{UInt8}, len::Integer)
+  ccall( (:cdStrDupN, libcd_), Ptr{UInt8}, (Ptr{UInt8}, Cint), str, len)
 end
-function cdStrIsAscii(str::Ptr{Uint8})
-  ccall( (:cdStrIsAscii, libcd_), Cint, (Ptr{Uint8},), str)
+function cdStrIsAscii(str::Ptr{UInt8})
+  ccall( (:cdStrIsAscii, libcd_), Cint, (Ptr{UInt8},), str)
 end
 function cdSetPaperSize(size::Integer, w_pt::Ptr{Cdouble}, h_pt::Ptr{Cdouble})
   ccall( (:cdSetPaperSize, libcd_), Void, (Cint, Ptr{Cdouble}, Ptr{Cdouble}), size, w_pt, h_pt)
 end
-function cdGetFontFileName(type_face::Ptr{Uint8}, filename::Ptr{Uint8})
-  ccall( (:cdGetFontFileName, libcd_), Cint, (Ptr{Uint8}, Ptr{Uint8}), type_face, filename)
+function cdGetFontFileName(type_face::Ptr{UInt8}, filename::Ptr{UInt8})
+  ccall( (:cdGetFontFileName, libcd_), Cint, (Ptr{UInt8}, Ptr{UInt8}), type_face, filename)
 end
-function cdGetFontFileNameDefault(type_face::Ptr{Uint8}, style::Integer, filename::Ptr{Uint8})
-  ccall( (:cdGetFontFileNameDefault, libcd_), Cint, (Ptr{Uint8}, Cint, Ptr{Uint8}), type_face, style, filename)
+function cdGetFontFileNameDefault(type_face::Ptr{UInt8}, style::Integer, filename::Ptr{UInt8})
+  ccall( (:cdGetFontFileNameDefault, libcd_), Cint, (Ptr{UInt8}, Cint, Ptr{UInt8}), type_face, style, filename)
 end
-function cdGetFontFileNameSystem(type_face::Ptr{Uint8}, style::Integer, filename::Ptr{Uint8})
-  ccall( (:cdGetFontFileNameSystem, libcd_), Cint, (Ptr{Uint8}, Cint, Ptr{Uint8}), type_face, style, filename)
+function cdGetFontFileNameSystem(type_face::Ptr{UInt8}, style::Integer, filename::Ptr{UInt8})
+  ccall( (:cdGetFontFileNameSystem, libcd_), Cint, (Ptr{UInt8}, Cint, Ptr{UInt8}), type_face, style, filename)
 end
-function cdStrTmpFileName(filename::Ptr{Uint8})
-  ccall( (:cdStrTmpFileName, libcd_), Cint, (Ptr{Uint8},), filename)
+function cdStrTmpFileName(filename::Ptr{UInt8})
+  ccall( (:cdStrTmpFileName, libcd_), Cint, (Ptr{UInt8},), filename)
 end
 function cdCanvasPoly(canvas::Ptr{Cint}, mode::Integer, points::Ptr{cdPoint}, n::Integer)
   ccall( (:cdCanvasPoly, libcd_), Void, (Ptr{Cint}, Cint, Ptr{cdPoint}, Cint), canvas, mode, points, n)
@@ -129,14 +129,14 @@ end
 function cdfMovePoint(x::Ptr{Cdouble}, y::Ptr{Cdouble}, dx::Cdouble, dy::Cdouble, sin_theta::Cdouble, cos_theta::Cdouble)
   ccall( (:cdfMovePoint, libcd_), Void, (Ptr{Cdouble}, Ptr{Cdouble}, Cdouble, Cdouble, Cdouble, Cdouble), x, y, dx, dy, sin_theta, cos_theta)
 end
-function cdParsePangoFont(nativefont::Ptr{Uint8}, type_face::Ptr{Uint8}, style::Ptr{Cint}, size::Ptr{Cint})
-  ccall( (:cdParsePangoFont, libcd_), Cint, (Ptr{Uint8}, Ptr{Uint8}, Ptr{Cint}, Ptr{Cint}), nativefont, type_face, style, size)
+function cdParsePangoFont(nativefont::Ptr{UInt8}, type_face::Ptr{UInt8}, style::Ptr{Cint}, size::Ptr{Cint})
+  ccall( (:cdParsePangoFont, libcd_), Cint, (Ptr{UInt8}, Ptr{UInt8}, Ptr{Cint}, Ptr{Cint}), nativefont, type_face, style, size)
 end
-function cdParseIupWinFont(nativefont::Ptr{Uint8}, type_face::Ptr{Uint8}, style::Ptr{Cint}, size::Ptr{Cint})
-  ccall( (:cdParseIupWinFont, libcd_), Cint, (Ptr{Uint8}, Ptr{Uint8}, Ptr{Cint}, Ptr{Cint}), nativefont, type_face, style, size)
+function cdParseIupWinFont(nativefont::Ptr{UInt8}, type_face::Ptr{UInt8}, style::Ptr{Cint}, size::Ptr{Cint})
+  ccall( (:cdParseIupWinFont, libcd_), Cint, (Ptr{UInt8}, Ptr{UInt8}, Ptr{Cint}, Ptr{Cint}), nativefont, type_face, style, size)
 end
-function cdParseXWinFont(nativefont::Ptr{Uint8}, type_face::Ptr{Uint8}, style::Ptr{Cint}, size::Ptr{Cint})
-  ccall( (:cdParseXWinFont, libcd_), Cint, (Ptr{Uint8}, Ptr{Uint8}, Ptr{Cint}, Ptr{Cint}), nativefont, type_face, style, size)
+function cdParseXWinFont(nativefont::Ptr{UInt8}, type_face::Ptr{UInt8}, style::Ptr{Cint}, size::Ptr{Cint})
+  ccall( (:cdParseXWinFont, libcd_), Cint, (Ptr{UInt8}, Ptr{UInt8}, Ptr{Cint}, Ptr{Cint}), nativefont, type_face, style, size)
 end
 function cdGetFontSizePixels(canvas::Ptr{Cint}, size::Integer)
   ccall( (:cdGetFontSizePixels, libcd_), Cint, (Ptr{Cint}, Cint), canvas, size)
@@ -147,8 +147,8 @@ end
 function cdgetfontdimEX(ctxcanvas::Ptr{Void}, max_width::Ptr{Cint}, height::Ptr{Cint}, ascent::Ptr{Cint}, descent::Ptr{Cint})
   ccall( (:cdgetfontdimEX, libcd_), Void, (Ptr{Void}, Ptr{Cint}, Ptr{Cint}, Ptr{Cint}, Ptr{Cint}), ctxcanvas, max_width, height, ascent, descent)
 end
-function cdgettextsizeEX(ctxcanvas::Ptr{Void}, s::Ptr{Uint8}, len::Integer, width::Ptr{Cint}, height::Ptr{Cint})
-  ccall( (:cdgettextsizeEX, libcd_), Void, (Ptr{Void}, Ptr{Uint8}, Cint, Ptr{Cint}, Ptr{Cint}), ctxcanvas, s, len, width, height)
+function cdgettextsizeEX(ctxcanvas::Ptr{Void}, s::Ptr{UInt8}, len::Integer, width::Ptr{Cint}, height::Ptr{Cint})
+  ccall( (:cdgettextsizeEX, libcd_), Void, (Ptr{Void}, Ptr{UInt8}, Cint, Ptr{Cint}, Ptr{Cint}), ctxcanvas, s, len, width, height)
 end
 function cdZeroOrderInterpolation(width::Integer, height::Integer, map::Ptr{Cuchar}, xl::Cdouble, yl::Cdouble)
   ccall( (:cdZeroOrderInterpolation, libcd_), Cuchar, (Cint, Cint, Ptr{Cuchar}, Cdouble, Cdouble), width, height, map, xl, yl)
@@ -183,17 +183,17 @@ end
 function cdSimInitText(simulation::Ptr{Void})
   ccall( (:cdSimInitText, libcd_), Void, (Ptr{Void},), simulation)
 end
-function cdSimTextFT(ctxcanvas::Ptr{Void}, x::Integer, y::Integer, s::Ptr{Uint8}, len::Integer)
-  ccall( (:cdSimTextFT, libcd_), Void, (Ptr{Void}, Cint, Cint, Ptr{Uint8}, Cint), ctxcanvas, x, y, s, len)
+function cdSimTextFT(ctxcanvas::Ptr{Void}, x::Integer, y::Integer, s::Ptr{UInt8}, len::Integer)
+  ccall( (:cdSimTextFT, libcd_), Void, (Ptr{Void}, Cint, Cint, Ptr{UInt8}, Cint), ctxcanvas, x, y, s, len)
 end
-function cdSimFontFT(ctxcanvas::Ptr{Void}, type_face::Ptr{Uint8}, style::Integer, size::Integer)
-  ccall( (:cdSimFontFT, libcd_), Cint, (Ptr{Void}, Ptr{Uint8}, Cint, Cint), ctxcanvas, type_face, style, size)
+function cdSimFontFT(ctxcanvas::Ptr{Void}, type_face::Ptr{UInt8}, style::Integer, size::Integer)
+  ccall( (:cdSimFontFT, libcd_), Cint, (Ptr{Void}, Ptr{UInt8}, Cint, Cint), ctxcanvas, type_face, style, size)
 end
 function cdSimGetFontDimFT(ctxcanvas::Ptr{Void}, max_width::Ptr{Cint}, height::Ptr{Cint}, ascent::Ptr{Cint}, descent::Ptr{Cint})
   ccall( (:cdSimGetFontDimFT, libcd_), Void, (Ptr{Void}, Ptr{Cint}, Ptr{Cint}, Ptr{Cint}, Ptr{Cint}), ctxcanvas, max_width, height, ascent, descent)
 end
-function cdSimGetTextSizeFT(ctxcanvas::Ptr{Void}, s::Ptr{Uint8}, len::Integer, width::Ptr{Cint}, height::Ptr{Cint})
-  ccall( (:cdSimGetTextSizeFT, libcd_), Void, (Ptr{Void}, Ptr{Uint8}, Cint, Ptr{Cint}, Ptr{Cint}), ctxcanvas, s, len, width, height)
+function cdSimGetTextSizeFT(ctxcanvas::Ptr{Void}, s::Ptr{UInt8}, len::Integer, width::Ptr{Cint}, height::Ptr{Cint})
+  ccall( (:cdSimGetTextSizeFT, libcd_), Void, (Ptr{Void}, Ptr{UInt8}, Cint, Ptr{Cint}, Ptr{Cint}), ctxcanvas, s, len, width, height)
 end
 function cdSimMark(canvas::Ptr{Cint}, x::Integer, y::Integer)
   ccall( (:cdSimMark, libcd_), Void, (Ptr{Cint}, Cint, Cint), canvas, x, y)
@@ -259,10 +259,10 @@ function cdfSimPolyPath(canvas::Ptr{Cint}, points::Ptr{cdfPoint}, n::Integer)
   ccall( (:cdfSimPolyPath, libcd_), Void, (Ptr{Cint}, Ptr{cdfPoint}, Cint), canvas, points, n)
 end
 function cdVersion()
-  ccall( (:cdVersion, libcd_), Ptr{Uint8}, (), )
+  ccall( (:cdVersion, libcd_), Ptr{UInt8}, (), )
 end
 function cdVersionDate()
-  ccall( (:cdVersionDate, libcd_), Ptr{Uint8}, (), )
+  ccall( (:cdVersionDate, libcd_), Ptr{UInt8}, (), )
 end
 function cdVersionNumber()
   ccall( (:cdVersionNumber, libcd_), Cint, (), )
@@ -270,7 +270,7 @@ end
 function cdCreateCanvas(context::Ptr{cdContext}, data::Ptr{Void})
   ccall( (:cdCreateCanvas, libcd_), Ptr{cdCanvas}, (Ptr{cdContext}, Ptr{Void}), context, data)
 end
-function cdCreateCanvas(context::Ptr{cdContext}, data::Ptr{Uint8})
+function cdCreateCanvas(context::Ptr{cdContext}, data::Ptr{UInt8})
   ccall( (:cdCreateCanvas, libcd_), Ptr{cdCanvas}, (Ptr{cdContext}, Ptr{Void}), context, data)
 end
 function cdKillCanvas(canvas::Ptr{cdCanvas})
@@ -325,10 +325,10 @@ function cdReleaseState(state::Ptr{cdCanvas})
   ccall( (:cdReleaseState, libcd_), Void, (Ptr{cdCanvas},), state)
 end
 function cdCanvasSetAttribute(canvas::Ptr{cdCanvas}, name, data)
-  ccall( (:cdCanvasSetAttribute, libcd_), Void, (Ptr{cdCanvas}, Ptr{Uint8}, Ptr{Uint8}), canvas, name, data)
+  ccall( (:cdCanvasSetAttribute, libcd_), Void, (Ptr{cdCanvas}, Ptr{UInt8}, Ptr{UInt8}), canvas, name, data)
 end
-function cdCanvasGetAttribute(canvas::Ptr{cdCanvas}, name::Ptr{Uint8})
-  ccall( (:cdCanvasGetAttribute, libcd_), Ptr{Uint8}, (Ptr{cdCanvas}, Ptr{Uint8}), canvas, name)
+function cdCanvasGetAttribute(canvas::Ptr{cdCanvas}, name::Ptr{UInt8})
+  ccall( (:cdCanvasGetAttribute, libcd_), Ptr{UInt8}, (Ptr{cdCanvas}, Ptr{UInt8}), canvas, name)
 end
 function cdCanvasPlay(canvas::Ptr{cdCanvas}, context::Ptr{cdContext}, xmin::Integer, xmax::Integer, ymin::Integer, ymax::Integer, data::Ptr{Void})
   ccall( (:cdCanvasPlay, libcd_), Cint, (Ptr{cdCanvas}, Ptr{cdContext}, Cint, Cint, Cint, Cint, Ptr{Void}), canvas, context, xmin, xmax, ymin, ymax, data)
@@ -465,11 +465,11 @@ end
 function cdCanvasChord(canvas::Ptr{cdCanvas}, xc::Integer, yc::Integer, w::Integer, h::Integer, angle1::Cdouble, angle2::Cdouble)
   ccall( (:cdCanvasChord, libcd_), Void, (Ptr{cdCanvas}, Cint, Cint, Cint, Cint, Cdouble, Cdouble), canvas, xc, yc, w, h, angle1, angle2)
 end
-function cdCanvasText(canvas::Ptr{cdCanvas}, x::Integer, y::Integer, s::Ptr{Uint8})
-    ccall( (:cdCanvasText, libcd_), Void, (Ptr{cdCanvas}, Cint, Cint, Ptr{Uint8}), canvas, x, y, s)
+function cdCanvasText(canvas::Ptr{cdCanvas}, x::Integer, y::Integer, s::Ptr{UInt8})
+    ccall( (:cdCanvasText, libcd_), Void, (Ptr{cdCanvas}, Cint, Cint, Ptr{UInt8}), canvas, x, y, s)
 end
 function cdCanvasText(canvas::Ptr{cdCanvas}, x::Integer, y::Integer, s::String)
-    ccall( (:cdCanvasText, libcd_), Void, (Ptr{cdCanvas}, Cint, Cint, Ptr{Uint8}), canvas, x, y, s)
+    ccall( (:cdCanvasText, libcd_), Void, (Ptr{cdCanvas}, Cint, Cint, Ptr{UInt8}), canvas, x, y, s)
 end
 function cdfCanvasLine(canvas::Ptr{cdCanvas}, x1::Cdouble, y1::Cdouble, x2::Cdouble, y2::Cdouble)
   ccall( (:cdfCanvasLine, libcd_), Void, (Ptr{cdCanvas}, Cdouble, Cdouble, Cdouble, Cdouble), canvas, x1, y1, x2, y2)
@@ -492,8 +492,8 @@ end
 function cdfCanvasChord(canvas::Ptr{cdCanvas}, xc::Cdouble, yc::Cdouble, w::Cdouble, h::Cdouble, angle1::Cdouble, angle2::Cdouble)
   ccall( (:cdfCanvasChord, libcd_), Void, (Ptr{cdCanvas}, Cdouble, Cdouble, Cdouble, Cdouble, Cdouble, Cdouble), canvas, xc, yc, w, h, angle1, angle2)
 end
-function cdfCanvasText(canvas::Ptr{cdCanvas}, x::Cdouble, y::Cdouble, s::Ptr{Uint8})
-  ccall( (:cdfCanvasText, libcd_), Void, (Ptr{cdCanvas}, Cdouble, Cdouble, Ptr{Uint8}), canvas, x, y, s)
+function cdfCanvasText(canvas::Ptr{cdCanvas}, x::Cdouble, y::Cdouble, s::Ptr{UInt8})
+  ccall( (:cdfCanvasText, libcd_), Void, (Ptr{cdCanvas}, Cdouble, Cdouble, Ptr{UInt8}), canvas, x, y, s)
 end
 function cdCanvasSetBackground(canvas::Ptr{cdCanvas}, color::Integer)
   ccall( (:cdCanvasSetBackground, libcd_), Void, (Ptr{cdCanvas}, Clong), canvas, color)
@@ -549,17 +549,17 @@ end
 function cdCanvasFillMode(canvas::Ptr{cdCanvas}, mode::Integer)
   ccall( (:cdCanvasFillMode, libcd_), Cint, (Ptr{cdCanvas}, Cint), canvas, mode)
 end
-function cdCanvasFont(canvas::Ptr{cdCanvas}, type_face::Ptr{Uint8}, style::Integer, size::Integer)
-  ccall( (:cdCanvasFont, libcd_), Cint, (Ptr{cdCanvas}, Ptr{Uint8}, Cint, Cint), canvas, type_face, style, size)
+function cdCanvasFont(canvas::Ptr{cdCanvas}, type_face::Ptr{UInt8}, style::Integer, size::Integer)
+  ccall( (:cdCanvasFont, libcd_), Cint, (Ptr{cdCanvas}, Ptr{UInt8}, Cint, Cint), canvas, type_face, style, size)
 end
 function cdCanvasFont(canvas::Ptr{cdCanvas}, type_face::Ptr{Void}, style::Integer, size::Integer)
-  ccall( (:cdCanvasFont, libcd_), Cint, (Ptr{cdCanvas}, Ptr{Uint8}, Cint, Cint), canvas, type_face, style, size)
+  ccall( (:cdCanvasFont, libcd_), Cint, (Ptr{cdCanvas}, Ptr{UInt8}, Cint, Cint), canvas, type_face, style, size)
 end
-function cdCanvasGetFont(canvas::Ptr{cdCanvas}, type_face::Ptr{Uint8}, style::Ptr{Cint}, size::Ptr{Cint})
-  ccall( (:cdCanvasGetFont, libcd_), Void, (Ptr{cdCanvas}, Ptr{Uint8}, Ptr{Cint}, Ptr{Cint}), canvas, type_face, style, size)
+function cdCanvasGetFont(canvas::Ptr{cdCanvas}, type_face::Ptr{UInt8}, style::Ptr{Cint}, size::Ptr{Cint})
+  ccall( (:cdCanvasGetFont, libcd_), Void, (Ptr{cdCanvas}, Ptr{UInt8}, Ptr{Cint}, Ptr{Cint}), canvas, type_face, style, size)
 end
-function cdCanvasNativeFont(canvas::Ptr{cdCanvas}, font::Ptr{Uint8})
-  ccall( (:cdCanvasNativeFont, libcd_), Ptr{Uint8}, (Ptr{cdCanvas}, Ptr{Uint8}), canvas, font)
+function cdCanvasNativeFont(canvas::Ptr{cdCanvas}, font::Ptr{UInt8})
+  ccall( (:cdCanvasNativeFont, libcd_), Ptr{UInt8}, (Ptr{cdCanvas}, Ptr{UInt8}), canvas, font)
 end
 function cdCanvasTextAlignment(canvas::Ptr{cdCanvas}, alignment::Integer)
   ccall( (:cdCanvasTextAlignment, libcd_), Cint, (Ptr{cdCanvas}, Cint), canvas, alignment)
@@ -573,14 +573,14 @@ end
 function cdCanvasMarkSize(canvas::Ptr{cdCanvas}, size::Integer)
   ccall( (:cdCanvasMarkSize, libcd_), Cint, (Ptr{cdCanvas}, Cint), canvas, size)
 end
-function cdCanvasVectorText(canvas::Ptr{cdCanvas}, x::Integer, y::Integer, s::Ptr{Uint8})
-  ccall( (:cdCanvasVectorText, libcd_), Void, (Ptr{cdCanvas}, Cint, Cint, Ptr{Uint8}), canvas, x, y, s)
+function cdCanvasVectorText(canvas::Ptr{cdCanvas}, x::Integer, y::Integer, s::Ptr{UInt8})
+  ccall( (:cdCanvasVectorText, libcd_), Void, (Ptr{cdCanvas}, Cint, Cint, Ptr{UInt8}), canvas, x, y, s)
 end
-function cdCanvasMultiLineVectorText(canvas::Ptr{cdCanvas}, x::Integer, y::Integer, s::Ptr{Uint8})
-  ccall( (:cdCanvasMultiLineVectorText, libcd_), Void, (Ptr{cdCanvas}, Cint, Cint, Ptr{Uint8}), canvas, x, y, s)
+function cdCanvasMultiLineVectorText(canvas::Ptr{cdCanvas}, x::Integer, y::Integer, s::Ptr{UInt8})
+  ccall( (:cdCanvasMultiLineVectorText, libcd_), Void, (Ptr{cdCanvas}, Cint, Cint, Ptr{UInt8}), canvas, x, y, s)
 end
-function cdCanvasVectorFont(canvas::Ptr{cdCanvas}, filename::Ptr{Uint8})
-  ccall( (:cdCanvasVectorFont, libcd_), Ptr{Uint8}, (Ptr{cdCanvas}, Ptr{Uint8}), canvas, filename)
+function cdCanvasVectorFont(canvas::Ptr{cdCanvas}, filename::Ptr{UInt8})
+  ccall( (:cdCanvasVectorFont, libcd_), Ptr{UInt8}, (Ptr{cdCanvas}, Ptr{UInt8}), canvas, filename)
 end
 function cdCanvasVectorTextDirection(canvas::Ptr{cdCanvas}, x1::Integer, y1::Integer, x2::Integer, y2::Integer)
   ccall( (:cdCanvasVectorTextDirection, libcd_), Void, (Ptr{cdCanvas}, Cint, Cint, Cint, Cint), canvas, x1, y1, x2, y2)
@@ -588,8 +588,8 @@ end
 function cdCanvasVectorTextTransform(canvas::Ptr{cdCanvas}, matrix::Ptr{Cdouble})
   ccall( (:cdCanvasVectorTextTransform, libcd_), Ptr{Cdouble}, (Ptr{cdCanvas}, Ptr{Cdouble}), canvas, matrix)
 end
-function cdCanvasVectorTextSize(canvas::Ptr{cdCanvas}, size_x::Integer, size_y::Integer, s::Ptr{Uint8})
-  ccall( (:cdCanvasVectorTextSize, libcd_), Void, (Ptr{cdCanvas}, Cint, Cint, Ptr{Uint8}), canvas, size_x, size_y, s)
+function cdCanvasVectorTextSize(canvas::Ptr{cdCanvas}, size_x::Integer, size_y::Integer, s::Ptr{UInt8})
+  ccall( (:cdCanvasVectorTextSize, libcd_), Void, (Ptr{cdCanvas}, Cint, Cint, Ptr{UInt8}), canvas, size_x, size_y, s)
 end
 function cdCanvasVectorCharSize(canvas::Ptr{cdCanvas}, size::Integer)
   ccall( (:cdCanvasVectorCharSize, libcd_), Cint, (Ptr{cdCanvas}, Cint), canvas, size)
@@ -600,50 +600,50 @@ end
 function cdCanvasGetVectorFontSize(canvas::Ptr{cdCanvas}, size_x::Ptr{Cdouble}, size_y::Ptr{Cdouble})
   ccall( (:cdCanvasGetVectorFontSize, libcd_), Void, (Ptr{cdCanvas}, Ptr{Cdouble}, Ptr{Cdouble}), canvas, size_x, size_y)
 end
-function cdCanvasGetVectorTextSize(canvas::Ptr{cdCanvas}, s::Ptr{Uint8}, x::Ptr{Cint}, y::Ptr{Cint})
-  ccall( (:cdCanvasGetVectorTextSize, libcd_), Void, (Ptr{cdCanvas}, Ptr{Uint8}, Ptr{Cint}, Ptr{Cint}), canvas, s, x, y)
+function cdCanvasGetVectorTextSize(canvas::Ptr{cdCanvas}, s::Ptr{UInt8}, x::Ptr{Cint}, y::Ptr{Cint})
+  ccall( (:cdCanvasGetVectorTextSize, libcd_), Void, (Ptr{cdCanvas}, Ptr{UInt8}, Ptr{Cint}, Ptr{Cint}), canvas, s, x, y)
 end
-function cdCanvasGetVectorTextBounds(canvas::Ptr{cdCanvas}, s::Ptr{Uint8}, x::Integer, y::Integer, rect::Ptr{Cint})
-  ccall( (:cdCanvasGetVectorTextBounds, libcd_), Void, (Ptr{cdCanvas}, Ptr{Uint8}, Cint, Cint, Ptr{Cint}), canvas, s, x, y, rect)
+function cdCanvasGetVectorTextBounds(canvas::Ptr{cdCanvas}, s::Ptr{UInt8}, x::Integer, y::Integer, rect::Ptr{Cint})
+  ccall( (:cdCanvasGetVectorTextBounds, libcd_), Void, (Ptr{cdCanvas}, Ptr{UInt8}, Cint, Cint, Ptr{Cint}), canvas, s, x, y, rect)
 end
-function cdCanvasGetVectorTextBox(canvas::Ptr{cdCanvas}, x::Integer, y::Integer, s::Ptr{Uint8}, xmin::Ptr{Cint}, xmax::Ptr{Cint}, ymin::Ptr{Cint}, ymax::Ptr{Cint})
-  ccall( (:cdCanvasGetVectorTextBox, libcd_), Void, (Ptr{cdCanvas}, Cint, Cint, Ptr{Uint8}, Ptr{Cint}, Ptr{Cint}, Ptr{Cint}, Ptr{Cint}), canvas, x, y, s, xmin, xmax, ymin, ymax)
+function cdCanvasGetVectorTextBox(canvas::Ptr{cdCanvas}, x::Integer, y::Integer, s::Ptr{UInt8}, xmin::Ptr{Cint}, xmax::Ptr{Cint}, ymin::Ptr{Cint}, ymax::Ptr{Cint})
+  ccall( (:cdCanvasGetVectorTextBox, libcd_), Void, (Ptr{cdCanvas}, Cint, Cint, Ptr{UInt8}, Ptr{Cint}, Ptr{Cint}, Ptr{Cint}, Ptr{Cint}), canvas, x, y, s, xmin, xmax, ymin, ymax)
 end
 function cdfCanvasVectorTextDirection(canvas::Ptr{cdCanvas}, x1::Cdouble, y1::Cdouble, x2::Cdouble, y2::Cdouble)
   ccall( (:cdfCanvasVectorTextDirection, libcd_), Void, (Ptr{cdCanvas}, Cdouble, Cdouble, Cdouble, Cdouble), canvas, x1, y1, x2, y2)
 end
-function cdfCanvasVectorTextSize(canvas::Ptr{cdCanvas}, size_x::Cdouble, size_y::Cdouble, s::Ptr{Uint8})
-  ccall( (:cdfCanvasVectorTextSize, libcd_), Void, (Ptr{cdCanvas}, Cdouble, Cdouble, Ptr{Uint8}), canvas, size_x, size_y, s)
+function cdfCanvasVectorTextSize(canvas::Ptr{cdCanvas}, size_x::Cdouble, size_y::Cdouble, s::Ptr{UInt8})
+  ccall( (:cdfCanvasVectorTextSize, libcd_), Void, (Ptr{cdCanvas}, Cdouble, Cdouble, Ptr{UInt8}), canvas, size_x, size_y, s)
 end
-function cdfCanvasGetVectorTextSize(canvas::Ptr{cdCanvas}, s::Ptr{Uint8}, x::Ptr{Cdouble}, y::Ptr{Cdouble})
-  ccall( (:cdfCanvasGetVectorTextSize, libcd_), Void, (Ptr{cdCanvas}, Ptr{Uint8}, Ptr{Cdouble}, Ptr{Cdouble}), canvas, s, x, y)
+function cdfCanvasGetVectorTextSize(canvas::Ptr{cdCanvas}, s::Ptr{UInt8}, x::Ptr{Cdouble}, y::Ptr{Cdouble})
+  ccall( (:cdfCanvasGetVectorTextSize, libcd_), Void, (Ptr{cdCanvas}, Ptr{UInt8}, Ptr{Cdouble}, Ptr{Cdouble}), canvas, s, x, y)
 end
 function cdfCanvasVectorCharSize(canvas::Ptr{cdCanvas}, size::Cdouble)
   ccall( (:cdfCanvasVectorCharSize, libcd_), Cdouble, (Ptr{cdCanvas}, Cdouble), canvas, size)
 end
-function cdfCanvasVectorText(canvas::Ptr{cdCanvas}, x::Cdouble, y::Cdouble, s::Ptr{Uint8})
-  ccall( (:cdfCanvasVectorText, libcd_), Void, (Ptr{cdCanvas}, Cdouble, Cdouble, Ptr{Uint8}), canvas, x, y, s)
+function cdfCanvasVectorText(canvas::Ptr{cdCanvas}, x::Cdouble, y::Cdouble, s::Ptr{UInt8})
+  ccall( (:cdfCanvasVectorText, libcd_), Void, (Ptr{cdCanvas}, Cdouble, Cdouble, Ptr{UInt8}), canvas, x, y, s)
 end
-function cdfCanvasMultiLineVectorText(canvas::Ptr{cdCanvas}, x::Cdouble, y::Cdouble, s::Ptr{Uint8})
-  ccall( (:cdfCanvasMultiLineVectorText, libcd_), Void, (Ptr{cdCanvas}, Cdouble, Cdouble, Ptr{Uint8}), canvas, x, y, s)
+function cdfCanvasMultiLineVectorText(canvas::Ptr{cdCanvas}, x::Cdouble, y::Cdouble, s::Ptr{UInt8})
+  ccall( (:cdfCanvasMultiLineVectorText, libcd_), Void, (Ptr{cdCanvas}, Cdouble, Cdouble, Ptr{UInt8}), canvas, x, y, s)
 end
-function cdfCanvasGetVectorTextBounds(canvas::Ptr{cdCanvas}, s::Ptr{Uint8}, x::Cdouble, y::Cdouble, rect::Ptr{Cdouble})
-  ccall( (:cdfCanvasGetVectorTextBounds, libcd_), Void, (Ptr{cdCanvas}, Ptr{Uint8}, Cdouble, Cdouble, Ptr{Cdouble}), canvas, s, x, y, rect)
+function cdfCanvasGetVectorTextBounds(canvas::Ptr{cdCanvas}, s::Ptr{UInt8}, x::Cdouble, y::Cdouble, rect::Ptr{Cdouble})
+  ccall( (:cdfCanvasGetVectorTextBounds, libcd_), Void, (Ptr{cdCanvas}, Ptr{UInt8}, Cdouble, Cdouble, Ptr{Cdouble}), canvas, s, x, y, rect)
 end
-function cdfCanvasGetVectorTextBox(canvas::Ptr{cdCanvas}, x::Cdouble, y::Cdouble, s::Ptr{Uint8}, xmin::Ptr{Cdouble}, xmax::Ptr{Cdouble}, ymin::Ptr{Cdouble}, ymax::Ptr{Cdouble})
-  ccall( (:cdfCanvasGetVectorTextBox, libcd_), Void, (Ptr{cdCanvas}, Cdouble, Cdouble, Ptr{Uint8}, Ptr{Cdouble}, Ptr{Cdouble}, Ptr{Cdouble}, Ptr{Cdouble}), canvas, x, y, s, xmin, xmax, ymin, ymax)
+function cdfCanvasGetVectorTextBox(canvas::Ptr{cdCanvas}, x::Cdouble, y::Cdouble, s::Ptr{UInt8}, xmin::Ptr{Cdouble}, xmax::Ptr{Cdouble}, ymin::Ptr{Cdouble}, ymax::Ptr{Cdouble})
+  ccall( (:cdfCanvasGetVectorTextBox, libcd_), Void, (Ptr{cdCanvas}, Cdouble, Cdouble, Ptr{UInt8}, Ptr{Cdouble}, Ptr{Cdouble}, Ptr{Cdouble}, Ptr{Cdouble}), canvas, x, y, s, xmin, xmax, ymin, ymax)
 end
 function cdCanvasGetFontDim(canvas::Ptr{cdCanvas}, max_width::Ptr{Cint}, height::Ptr{Cint}, ascent::Ptr{Cint}, descent::Ptr{Cint})
   ccall( (:cdCanvasGetFontDim, libcd_), Void, (Ptr{cdCanvas}, Ptr{Cint}, Ptr{Cint}, Ptr{Cint}, Ptr{Cint}), canvas, max_width, height, ascent, descent)
 end
-function cdCanvasGetTextSize(canvas::Ptr{cdCanvas}, s::Ptr{Uint8}, width::Ptr{Cint}, height::Ptr{Cint})
-  ccall( (:cdCanvasGetTextSize, libcd_), Void, (Ptr{cdCanvas}, Ptr{Uint8}, Ptr{Cint}, Ptr{Cint}), canvas, s, width, height)
+function cdCanvasGetTextSize(canvas::Ptr{cdCanvas}, s::Ptr{UInt8}, width::Ptr{Cint}, height::Ptr{Cint})
+  ccall( (:cdCanvasGetTextSize, libcd_), Void, (Ptr{cdCanvas}, Ptr{UInt8}, Ptr{Cint}, Ptr{Cint}), canvas, s, width, height)
 end
-function cdCanvasGetTextBox(canvas::Ptr{cdCanvas}, x::Integer, y::Integer, s::Ptr{Uint8}, xmin::Ptr{Cint}, xmax::Ptr{Cint}, ymin::Ptr{Cint}, ymax::Ptr{Cint})
-  ccall( (:cdCanvasGetTextBox, libcd_), Void, (Ptr{cdCanvas}, Cint, Cint, Ptr{Uint8}, Ptr{Cint}, Ptr{Cint}, Ptr{Cint}, Ptr{Cint}), canvas, x, y, s, xmin, xmax, ymin, ymax)
+function cdCanvasGetTextBox(canvas::Ptr{cdCanvas}, x::Integer, y::Integer, s::Ptr{UInt8}, xmin::Ptr{Cint}, xmax::Ptr{Cint}, ymin::Ptr{Cint}, ymax::Ptr{Cint})
+  ccall( (:cdCanvasGetTextBox, libcd_), Void, (Ptr{cdCanvas}, Cint, Cint, Ptr{UInt8}, Ptr{Cint}, Ptr{Cint}, Ptr{Cint}, Ptr{Cint}), canvas, x, y, s, xmin, xmax, ymin, ymax)
 end
-function cdCanvasGetTextBounds(canvas::Ptr{cdCanvas}, x::Integer, y::Integer, s::Ptr{Uint8}, rect::Ptr{Cint})
-  ccall( (:cdCanvasGetTextBounds, libcd_), Void, (Ptr{cdCanvas}, Cint, Cint, Ptr{Uint8}, Ptr{Cint}), canvas, x, y, s, rect)
+function cdCanvasGetTextBounds(canvas::Ptr{cdCanvas}, x::Integer, y::Integer, s::Ptr{UInt8}, rect::Ptr{Cint})
+  ccall( (:cdCanvasGetTextBounds, libcd_), Void, (Ptr{cdCanvas}, Cint, Cint, Ptr{UInt8}, Ptr{Cint}), canvas, x, y, s, rect)
 end
 function cdCanvasGetColorPlanes(canvas::Ptr{cdCanvas})
   ccall( (:cdCanvasGetColorPlanes, libcd_), Cint, (Ptr{cdCanvas},), canvas)
@@ -735,11 +735,11 @@ end
 function cdRestoreState(state::Ptr{cdCanvas})
   ccall( (:cdRestoreState, libcd_), Void, (Ptr{cdCanvas},), state)
 end
-function cdSetAttribute(name::Ptr{Uint8}, data::Ptr{Uint8})
-  ccall( (:cdSetAttribute, libcd_), Void, (Ptr{Uint8}, Ptr{Uint8}), name, data)
+function cdSetAttribute(name::Ptr{UInt8}, data::Ptr{UInt8})
+  ccall( (:cdSetAttribute, libcd_), Void, (Ptr{UInt8}, Ptr{UInt8}), name, data)
 end
-function cdGetAttribute(name::Ptr{Uint8})
-  ccall( (:cdGetAttribute, libcd_), Ptr{Uint8}, (Ptr{Uint8},), name)
+function cdGetAttribute(name::Ptr{UInt8})
+  ccall( (:cdGetAttribute, libcd_), Ptr{UInt8}, (Ptr{UInt8},), name)
 end
 function cdGetContext(canvas::Ptr{cdCanvas})
   ccall( (:cdGetContext, libcd_), Ptr{cdContext}, (Ptr{cdCanvas},), canvas)
@@ -822,8 +822,8 @@ end
 function cdChord(xc::Integer, yc::Integer, w::Integer, h::Integer, angle1::Cdouble, angle2::Cdouble)
   ccall( (:cdChord, libcd_), Void, (Cint, Cint, Cint, Cint, Cdouble, Cdouble), xc, yc, w, h, angle1, angle2)
 end
-function cdText(x::Integer, y::Integer, s::Ptr{Uint8})
-  ccall( (:cdText, libcd_), Void, (Cint, Cint, Ptr{Uint8}), x, y, s)
+function cdText(x::Integer, y::Integer, s::Ptr{UInt8})
+  ccall( (:cdText, libcd_), Void, (Cint, Cint, Ptr{UInt8}), x, y, s)
 end
 function cdBackground(color::Clong)
   ccall( (:cdBackground, libcd_), Clong, (Clong,), color)
@@ -879,8 +879,8 @@ end
 function cdGetFont(type_face::Ptr{Cint}, style::Ptr{Cint}, size::Ptr{Cint})
   ccall( (:cdGetFont, libcd_), Void, (Ptr{Cint}, Ptr{Cint}, Ptr{Cint}), type_face, style, size)
 end
-function cdNativeFont(font::Ptr{Uint8})
-  ccall( (:cdNativeFont, libcd_), Ptr{Uint8}, (Ptr{Uint8},), font)
+function cdNativeFont(font::Ptr{UInt8})
+  ccall( (:cdNativeFont, libcd_), Ptr{UInt8}, (Ptr{UInt8},), font)
 end
 function cdTextAlignment(alignment::Integer)
   ccall( (:cdTextAlignment, libcd_), Cint, (Cint,), alignment)
@@ -894,11 +894,11 @@ end
 function cdMarkSize(size::Integer)
   ccall( (:cdMarkSize, libcd_), Cint, (Cint,), size)
 end
-function cdVectorText(x::Integer, y::Integer, s::Ptr{Uint8})
-  ccall( (:cdVectorText, libcd_), Void, (Cint, Cint, Ptr{Uint8}), x, y, s)
+function cdVectorText(x::Integer, y::Integer, s::Ptr{UInt8})
+  ccall( (:cdVectorText, libcd_), Void, (Cint, Cint, Ptr{UInt8}), x, y, s)
 end
-function cdMultiLineVectorText(x::Integer, y::Integer, s::Ptr{Uint8})
-  ccall( (:cdMultiLineVectorText, libcd_), Void, (Cint, Cint, Ptr{Uint8}), x, y, s)
+function cdMultiLineVectorText(x::Integer, y::Integer, s::Ptr{UInt8})
+  ccall( (:cdMultiLineVectorText, libcd_), Void, (Cint, Cint, Ptr{UInt8}), x, y, s)
 end
 function cdVectorTextDirection(x1::Integer, y1::Integer, x2::Integer, y2::Integer)
   ccall( (:cdVectorTextDirection, libcd_), Void, (Cint, Cint, Cint, Cint), x1, y1, x2, y2)
@@ -906,29 +906,29 @@ end
 function cdVectorTextTransform(matrix::Ptr{Cdouble})
   ccall( (:cdVectorTextTransform, libcd_), Ptr{Cdouble}, (Ptr{Cdouble},), matrix)
 end
-function cdVectorTextSize(size_x::Integer, size_y::Integer, s::Ptr{Uint8})
-  ccall( (:cdVectorTextSize, libcd_), Void, (Cint, Cint, Ptr{Uint8}), size_x, size_y, s)
+function cdVectorTextSize(size_x::Integer, size_y::Integer, s::Ptr{UInt8})
+  ccall( (:cdVectorTextSize, libcd_), Void, (Cint, Cint, Ptr{UInt8}), size_x, size_y, s)
 end
 function cdVectorCharSize(size::Integer)
   ccall( (:cdVectorCharSize, libcd_), Cint, (Cint,), size)
 end
-function cdGetVectorTextSize(s::Ptr{Uint8}, x::Ptr{Cint}, y::Ptr{Cint})
-  ccall( (:cdGetVectorTextSize, libcd_), Void, (Ptr{Uint8}, Ptr{Cint}, Ptr{Cint}), s, x, y)
+function cdGetVectorTextSize(s::Ptr{UInt8}, x::Ptr{Cint}, y::Ptr{Cint})
+  ccall( (:cdGetVectorTextSize, libcd_), Void, (Ptr{UInt8}, Ptr{Cint}, Ptr{Cint}), s, x, y)
 end
-function cdGetVectorTextBounds(s::Ptr{Uint8}, x::Integer, y::Integer, rect::Ptr{Cint})
-  ccall( (:cdGetVectorTextBounds, libcd_), Void, (Ptr{Uint8}, Cint, Cint, Ptr{Cint}), s, x, y, rect)
+function cdGetVectorTextBounds(s::Ptr{UInt8}, x::Integer, y::Integer, rect::Ptr{Cint})
+  ccall( (:cdGetVectorTextBounds, libcd_), Void, (Ptr{UInt8}, Cint, Cint, Ptr{Cint}), s, x, y, rect)
 end
 function cdFontDim(max_width::Ptr{Cint}, height::Ptr{Cint}, ascent::Ptr{Cint}, descent::Ptr{Cint})
   ccall( (:cdFontDim, libcd_), Void, (Ptr{Cint}, Ptr{Cint}, Ptr{Cint}, Ptr{Cint}), max_width, height, ascent, descent)
 end
-function cdTextSize(s::Ptr{Uint8}, width::Ptr{Cint}, height::Ptr{Cint})
-  ccall( (:cdTextSize, libcd_), Void, (Ptr{Uint8}, Ptr{Cint}, Ptr{Cint}), s, width, height)
+function cdTextSize(s::Ptr{UInt8}, width::Ptr{Cint}, height::Ptr{Cint})
+  ccall( (:cdTextSize, libcd_), Void, (Ptr{UInt8}, Ptr{Cint}, Ptr{Cint}), s, width, height)
 end
-function cdTextBox(x::Integer, y::Integer, s::Ptr{Uint8}, xmin::Ptr{Cint}, xmax::Ptr{Cint}, ymin::Ptr{Cint}, ymax::Ptr{Cint})
-  ccall( (:cdTextBox, libcd_), Void, (Cint, Cint, Ptr{Uint8}, Ptr{Cint}, Ptr{Cint}, Ptr{Cint}, Ptr{Cint}), x, y, s, xmin, xmax, ymin, ymax)
+function cdTextBox(x::Integer, y::Integer, s::Ptr{UInt8}, xmin::Ptr{Cint}, xmax::Ptr{Cint}, ymin::Ptr{Cint}, ymax::Ptr{Cint})
+  ccall( (:cdTextBox, libcd_), Void, (Cint, Cint, Ptr{UInt8}, Ptr{Cint}, Ptr{Cint}, Ptr{Cint}, Ptr{Cint}), x, y, s, xmin, xmax, ymin, ymax)
 end
-function cdTextBounds(x::Integer, y::Integer, s::Ptr{Uint8}, rect::Ptr{Cint})
-  ccall( (:cdTextBounds, libcd_), Void, (Cint, Cint, Ptr{Uint8}, Ptr{Cint}), x, y, s, rect)
+function cdTextBounds(x::Integer, y::Integer, s::Ptr{UInt8}, rect::Ptr{Cint})
+  ccall( (:cdTextBounds, libcd_), Void, (Cint, Cint, Ptr{UInt8}, Ptr{Cint}), x, y, s, rect)
 end
 function cdGetColorPlanes()
   ccall( (:cdGetColorPlanes, libcd_), Cint, (), )

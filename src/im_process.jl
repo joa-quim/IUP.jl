@@ -1,20 +1,20 @@
 # Julia wrapper for header: /Volumes/BOOTCAMP/programs/compa_libs/libim_process_/include/libim_process_.h
 # Automatically generated using Clang.jl wrap_c, version 0.0.0
 
-@windows? (const liblibim_process__ = "libim_process_") : (const liblibim_process__ = "liblibim_process_")  # Name of shared lib.
+@static is_windows()? (const liblibim_process__ = "libim_process_") : (const liblibim_process__ = "liblibim_process_")  # Name of shared lib.
 
 
-function imProcessUnaryPointOp(src_image::Ptr{imImage}, dst_image::Ptr{imImage}, func::imUnaryPointOpFunc, params::Ptr{Cfloat}, userdata::Ptr{Void}, op_name::Ptr{Uint8})
-  ccall( (:imProcessUnaryPointOp, libim_process_), Cint, (Ptr{imImage}, Ptr{imImage}, imUnaryPointOpFunc, Ptr{Cfloat}, Ptr{Void}, Ptr{Uint8}), src_image, dst_image, func, params, userdata, op_name)
+function imProcessUnaryPointOp(src_image::Ptr{imImage}, dst_image::Ptr{imImage}, func::imUnaryPointOpFunc, params::Ptr{Cfloat}, userdata::Ptr{Void}, op_name::Ptr{UInt8})
+  ccall( (:imProcessUnaryPointOp, libim_process_), Cint, (Ptr{imImage}, Ptr{imImage}, imUnaryPointOpFunc, Ptr{Cfloat}, Ptr{Void}, Ptr{UInt8}), src_image, dst_image, func, params, userdata, op_name)
 end
-function imProcessUnaryPointColorOp(src_image::Ptr{imImage}, dst_image::Ptr{imImage}, func::imUnaryPointColorOpFunc, params::Ptr{Cfloat}, userdata::Ptr{Void}, op_name::Ptr{Uint8})
-  ccall( (:imProcessUnaryPointColorOp, libim_process_), Cint, (Ptr{imImage}, Ptr{imImage}, imUnaryPointColorOpFunc, Ptr{Cfloat}, Ptr{Void}, Ptr{Uint8}), src_image, dst_image, func, params, userdata, op_name)
+function imProcessUnaryPointColorOp(src_image::Ptr{imImage}, dst_image::Ptr{imImage}, func::imUnaryPointColorOpFunc, params::Ptr{Cfloat}, userdata::Ptr{Void}, op_name::Ptr{UInt8})
+  ccall( (:imProcessUnaryPointColorOp, libim_process_), Cint, (Ptr{imImage}, Ptr{imImage}, imUnaryPointColorOpFunc, Ptr{Cfloat}, Ptr{Void}, Ptr{UInt8}), src_image, dst_image, func, params, userdata, op_name)
 end
-function imProcessMultiPointOp(src_image::Ptr{Ptr{imImage}}, src_count::Cint, dst_image::Ptr{imImage}, func::imMultiPointOpFunc, params::Ptr{Cfloat}, userdata::Ptr{Void}, op_name::Ptr{Uint8})
-  ccall( (:imProcessMultiPointOp, libim_process_), Cint, (Ptr{Ptr{imImage}}, Cint, Ptr{imImage}, imMultiPointOpFunc, Ptr{Cfloat}, Ptr{Void}, Ptr{Uint8}), src_image, src_count, dst_image, func, params, userdata, op_name)
+function imProcessMultiPointOp(src_image::Ptr{Ptr{imImage}}, src_count::Cint, dst_image::Ptr{imImage}, func::imMultiPointOpFunc, params::Ptr{Cfloat}, userdata::Ptr{Void}, op_name::Ptr{UInt8})
+  ccall( (:imProcessMultiPointOp, libim_process_), Cint, (Ptr{Ptr{imImage}}, Cint, Ptr{imImage}, imMultiPointOpFunc, Ptr{Cfloat}, Ptr{Void}, Ptr{UInt8}), src_image, src_count, dst_image, func, params, userdata, op_name)
 end
-function imProcessMultiPointColorOp(src_image::Ptr{Ptr{imImage}}, src_count::Cint, dst_image::Ptr{imImage}, func::imMultiPointColorOpFunc, params::Ptr{Cfloat}, userdata::Ptr{Void}, op_name::Ptr{Uint8})
-  ccall( (:imProcessMultiPointColorOp, libim_process_), Cint, (Ptr{Ptr{imImage}}, Cint, Ptr{imImage}, imMultiPointColorOpFunc, Ptr{Cfloat}, Ptr{Void}, Ptr{Uint8}), src_image, src_count, dst_image, func, params, userdata, op_name)
+function imProcessMultiPointColorOp(src_image::Ptr{Ptr{imImage}}, src_count::Cint, dst_image::Ptr{imImage}, func::imMultiPointColorOpFunc, params::Ptr{Cfloat}, userdata::Ptr{Void}, op_name::Ptr{UInt8})
+  ccall( (:imProcessMultiPointColorOp, libim_process_), Cint, (Ptr{Ptr{imImage}}, Cint, Ptr{imImage}, imMultiPointColorOpFunc, Ptr{Cfloat}, Ptr{Void}, Ptr{UInt8}), src_image, src_count, dst_image, func, params, userdata, op_name)
 end
 function imProcessUnArithmeticOp(src_image::Ptr{imImage}, dst_image::Ptr{imImage}, op::Cint)
   ccall( (:imProcessUnArithmeticOp, libim_process_), Void, (Ptr{imImage}, Ptr{imImage}, Cint), src_image, dst_image, op)
@@ -100,11 +100,11 @@ end
 function imProcessBitPlane(src_image::Ptr{imImage}, dst_image::Ptr{imImage}, plane::Cint, do_reset::Cint)
   ccall( (:imProcessBitPlane, libim_process_), Void, (Ptr{imImage}, Ptr{imImage}, Cint, Cint), src_image, dst_image, plane, do_reset)
 end
-function imProcessRenderOp(image::Ptr{imImage}, render_func::imRenderFunc, render_name::Ptr{Uint8}, params::Ptr{Cfloat}, plus::Cint)
-  ccall( (:imProcessRenderOp, libim_process_), Cint, (Ptr{imImage}, imRenderFunc, Ptr{Uint8}, Ptr{Cfloat}, Cint), image, render_func, render_name, params, plus)
+function imProcessRenderOp(image::Ptr{imImage}, render_func::imRenderFunc, render_name::Ptr{UInt8}, params::Ptr{Cfloat}, plus::Cint)
+  ccall( (:imProcessRenderOp, libim_process_), Cint, (Ptr{imImage}, imRenderFunc, Ptr{UInt8}, Ptr{Cfloat}, Cint), image, render_func, render_name, params, plus)
 end
-function imProcessRenderCondOp(image::Ptr{imImage}, render_cond_func::imRenderCondFunc, render_name::Ptr{Uint8}, params::Ptr{Cfloat})
-  ccall( (:imProcessRenderCondOp, libim_process_), Cint, (Ptr{imImage}, imRenderCondFunc, Ptr{Uint8}, Ptr{Cfloat}), image, render_cond_func, render_name, params)
+function imProcessRenderCondOp(image::Ptr{imImage}, render_cond_func::imRenderCondFunc, render_name::Ptr{UInt8}, params::Ptr{Cfloat})
+  ccall( (:imProcessRenderCondOp, libim_process_), Cint, (Ptr{imImage}, imRenderCondFunc, Ptr{UInt8}, Ptr{Cfloat}), image, render_cond_func, render_name, params)
 end
 function imProcessRenderAddSpeckleNoise(src_image::Ptr{imImage}, dst_image::Ptr{imImage}, percent::Cfloat)
   ccall( (:imProcessRenderAddSpeckleNoise, libim_process_), Cint, (Ptr{imImage}, Ptr{imImage}, Cfloat), src_image, dst_image, percent)

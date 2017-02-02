@@ -1,7 +1,7 @@
 # Julia wrapper for header: /Volumes/BOOTCAMP/programs/compa_libs/libim_convert_/include/im_convert.h
 # Automatically generated using Clang.jl wrap_c, version 0.0.0
 
-@windows? (const libim_convert_ = "im") : (const libim_convert_ = "libim")  # Name of IM shared lib.
+@static is_windows()? (const libim_convert_ = "im") : (const libim_convert_ = "libim")  # Name of IM shared lib.
 
 
 function imImageCreate(width::Cint, height::Cint, color_space::Cint, data_type::Cint)
@@ -49,14 +49,14 @@ end
 function imImageClone(image::Ptr{imImage})
   ccall( (:imImageClone, libim_convert_), Ptr{imImage}, (Ptr{imImage},), image)
 end
-function imImageSetAttribute(image::Ptr{imImage}, attrib::Ptr{Uint8}, data_type::Cint, count::Cint, data::Ptr{Void})
-  ccall( (:imImageSetAttribute, libim_convert_), Void, (Ptr{imImage}, Ptr{Uint8}, Cint, Cint, Ptr{Void}), image, attrib, data_type, count, data)
+function imImageSetAttribute(image::Ptr{imImage}, attrib::Ptr{UInt8}, data_type::Cint, count::Cint, data::Ptr{Void})
+  ccall( (:imImageSetAttribute, libim_convert_), Void, (Ptr{imImage}, Ptr{UInt8}, Cint, Cint, Ptr{Void}), image, attrib, data_type, count, data)
 end
-function imImageGetAttribute(image::Ptr{imImage}, attrib::Ptr{Uint8}, data_type::Ptr{Cint}, count::Ptr{Cint})
-  ccall( (:imImageGetAttribute, libim_convert_), Ptr{Void}, (Ptr{imImage}, Ptr{Uint8}, Ptr{Cint}, Ptr{Cint}), image, attrib, data_type, count)
+function imImageGetAttribute(image::Ptr{imImage}, attrib::Ptr{UInt8}, data_type::Ptr{Cint}, count::Ptr{Cint})
+  ccall( (:imImageGetAttribute, libim_convert_), Ptr{Void}, (Ptr{imImage}, Ptr{UInt8}, Ptr{Cint}, Ptr{Cint}), image, attrib, data_type, count)
 end
-function imImageGetAttributeList(image::Ptr{imImage}, attrib::Ptr{Ptr{Uint8}}, attrib_count::Ptr{Cint})
-  ccall( (:imImageGetAttributeList, libim_convert_), Void, (Ptr{imImage}, Ptr{Ptr{Uint8}}, Ptr{Cint}), image, attrib, attrib_count)
+function imImageGetAttributeList(image::Ptr{imImage}, attrib::Ptr{Ptr{UInt8}}, attrib_count::Ptr{Cint})
+  ccall( (:imImageGetAttributeList, libim_convert_), Void, (Ptr{imImage}, Ptr{Ptr{UInt8}}, Ptr{Cint}), image, attrib, attrib_count)
 end
 function imImageClear(image::Ptr{imImage})
   ccall( (:imImageClear, libim_convert_), Void, (Ptr{imImage},), image)
@@ -115,17 +115,17 @@ end
 function imFileSaveImage(ifile::Ptr{Cint}, image::Ptr{imImage})
   ccall( (:imFileSaveImage, libim_convert_), Cint, (Ptr{Cint}, Ptr{imImage}), ifile, image)
 end
-function imFileImageLoad(file_name::Ptr{Uint8}, index::Cint, error::Ptr{Cint})
-  ccall( (:imFileImageLoad, libim_convert_), Ptr{imImage}, (Ptr{Uint8}, Cint, Ptr{Cint}), file_name, index, error)
+function imFileImageLoad(file_name::Ptr{UInt8}, index::Cint, error::Ptr{Cint})
+  ccall( (:imFileImageLoad, libim_convert_), Ptr{imImage}, (Ptr{UInt8}, Cint, Ptr{Cint}), file_name, index, error)
 end
-function imFileImageLoadBitmap(file_name::Ptr{Uint8}, index::Cint, error::Ptr{Cint})
-  ccall( (:imFileImageLoadBitmap, libim_convert_), Ptr{imImage}, (Ptr{Uint8}, Cint, Ptr{Cint}), file_name, index, error)
+function imFileImageLoadBitmap(file_name::Ptr{UInt8}, index::Cint, error::Ptr{Cint})
+  ccall( (:imFileImageLoadBitmap, libim_convert_), Ptr{imImage}, (Ptr{UInt8}, Cint, Ptr{Cint}), file_name, index, error)
 end
-function imFileImageLoadRegion(file_name::Ptr{Uint8}, index::Cint, bitmap::Cint, error::Ptr{Cint}, xmin::Cint, xmax::Cint, ymin::Cint, ymax::Cint, width::Cint, height::Cint)
-  ccall( (:imFileImageLoadRegion, libim_convert_), Ptr{imImage}, (Ptr{Uint8}, Cint, Cint, Ptr{Cint}, Cint, Cint, Cint, Cint, Cint, Cint), file_name, index, bitmap, error, xmin, xmax, ymin, ymax, width, height)
+function imFileImageLoadRegion(file_name::Ptr{UInt8}, index::Cint, bitmap::Cint, error::Ptr{Cint}, xmin::Cint, xmax::Cint, ymin::Cint, ymax::Cint, width::Cint, height::Cint)
+  ccall( (:imFileImageLoadRegion, libim_convert_), Ptr{imImage}, (Ptr{UInt8}, Cint, Cint, Ptr{Cint}, Cint, Cint, Cint, Cint, Cint, Cint), file_name, index, bitmap, error, xmin, xmax, ymin, ymax, width, height)
 end
-function imFileImageSave(file_name::Ptr{Uint8}, format::Ptr{Uint8}, image::Ptr{imImage})
-  ccall( (:imFileImageSave, libim_convert_), Cint, (Ptr{Uint8}, Ptr{Uint8}, Ptr{imImage}), file_name, format, image)
+function imFileImageSave(file_name::Ptr{UInt8}, format::Ptr{UInt8}, image::Ptr{imImage})
+  ccall( (:imFileImageSave, libim_convert_), Cint, (Ptr{UInt8}, Ptr{UInt8}, Ptr{imImage}), file_name, format, image)
 end
 function imConvertDataType(src_image::Ptr{imImage}, dst_image::Ptr{imImage}, cpx2real::Cint, gamma::Cfloat, abssolute::Cint, cast_mode::Cint)
   ccall( (:imConvertDataType, libim_convert_), Cint, (Ptr{imImage}, Ptr{imImage}, Cint, Cfloat, Cint, Cint), src_image, dst_image, cpx2real, gamma, abssolute, cast_mode)
