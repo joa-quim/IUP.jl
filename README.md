@@ -6,7 +6,7 @@ GUI building, using the [IUP library](http://www.tecgraf.puc-rio.br/iup/)
 
 Prior to using this library, you must install `IUP` on your computer. You will need both the `IUP` and the two subsidiary libs `IM`  and `CD`.
 
-  http://sourceforge.net/projects/iup/files/3.14/
+  http://sourceforge.net/projects/iup/files/3.21/
 <br>
   http://sourceforge.net/projects/imtoolkit/files/
 <br>
