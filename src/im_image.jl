@@ -55,9 +55,18 @@ end
 function imImageGetAttribute(image::Ptr{imImage}, attrib::String, data_type::Ptr{Int}, count::Ptr{Int})
   ccall( (:imImageGetAttribute, libim_image_), Ptr{Void}, (Ptr{imImage}, Ptr{UInt8}, Ptr{Cint}, Ptr{Cint}), image, attrib, data_type, count)
 end
-function imImageGetAttributeList(image::Ptr{imImage}, attrib::Ptr{Ptr{UInt8}}, attrib_count::Ptr{Int})
-  ccall( (:imImageGetAttributeList, libim_image_), Void, (Ptr{imImage}, Ptr{Ptr{UInt8}}, Ptr{Cint}), image, attrib, attrib_count)
+function imImageGetAttribInteger(image::Ptr{imImage}, attrib::String, index::Integer)
+  ccall( (:imImageGetAttribInteger, libim_image_), Ptr{Void}, (Ptr{imImage}, Ptr{UInt8}, Ptr{Cint}), image, attrib, index)
 end
+function imImageGetAttribReal(image::Ptr{imImage}, attrib::String, index::Integer)
+  ccall( (:imImageGetAttribReal, libim_image_), Ptr{Void}, (Ptr{imImage}, Ptr{UInt8}, Ptr{Cint}), image, attrib, index)
+end
+function imImageGetAttribString(image::Ptr{imImage}, attrib::Ptr{UInt8})
+  ccall( (:imImageGetAttribString, libim_image_), Ptr{UInt8}, (Ptr{imImage}, Ptr{UInt8}), image, attrib)
+endo
+function imImageGetAttributeList(image::Ptr{imImage}, attrib::Ptr{Ptr{UInt8}}, attrib_count::Ptr{Int})
+  ccall( (:imImageGetAttributeList, libim_image_), Void, (Ptr{imImage}, Ptr{Ptr{UInt8}}, Cint), image, attrib, attrib_count)
+endo
 function imImageClear(image::Ptr{imImage})
   ccall( (:imImageClear, libim_image_), Void, (Ptr{imImage},), image)
 end
