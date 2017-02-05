@@ -63,10 +63,10 @@ function imImageGetAttribReal(image::Ptr{imImage}, attrib::String, index::Intege
 end
 function imImageGetAttribString(image::Ptr{imImage}, attrib::Ptr{UInt8})
   ccall( (:imImageGetAttribString, libim_image_), Ptr{UInt8}, (Ptr{imImage}, Ptr{UInt8}), image, attrib)
-endo
+end
 function imImageGetAttributeList(image::Ptr{imImage}, attrib::Ptr{Ptr{UInt8}}, attrib_count::Ptr{Int})
   ccall( (:imImageGetAttributeList, libim_image_), Void, (Ptr{imImage}, Ptr{Ptr{UInt8}}, Cint), image, attrib, attrib_count)
-endo
+end
 function imImageClear(image::Ptr{imImage})
   ccall( (:imImageClear, libim_image_), Void, (Ptr{imImage},), image)
 end
